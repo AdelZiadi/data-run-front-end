@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (campaign()) {
+      <div>
+        <h2 data-cy="campaignDetailsHeading"><span appTranslate="dataRunClientApp.campaign.detail.title">Campaign</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ campaign()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaign.campaignCode">Campaign Code</span></dt>
+          <dd>
+            <span>{{ campaign()!.campaignCode }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaign.campaignStartedDate">Campaign Started Date</span></dt>
+          <dd>
+            <span>{{ campaign()!.campaignStartedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaign.campaignDays">Campaign Days</span></dt>
+          <dd>
+            <span>{{ campaign()!.campaignDays }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaign.campaignYear">Campaign Year</span></dt>
+          <dd>
+            <span>{{ campaign()!.campaignYear }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaign.campaignNote">Campaign Note</span></dt>
+          <dd>
+            <span>{{ campaign()!.campaignNote }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaign.enabled">Enabled</span></dt>
+          <dd>
+            <span>{{ campaign()!.enabled }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaign.campaignType">Campaign Type</span></dt>
+          <dd>
+            @if (campaign()!.campaignType) {
+              <div>
+                <a [routerLink]="['/campaign-type', campaign()!.campaignType?.id, 'view']">{{ campaign()!.campaignType?.campaignType }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/campaign', campaign()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

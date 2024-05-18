@@ -1,0 +1,25 @@
+{
+  "dataRunClientApp": {
+    "campaignType": {
+      "home": {
+        "title": "Campaign Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Campaign Type",
+        "createOrEditLabel": "Create or edit a Campaign Type",
+        "notFound": "No Campaign Types found"
+      },
+      "created": "A new Campaign Type is created with identifier {{ param }}",
+      "updated": "A Campaign Type is updated with identifier {{ param }}",
+      "deleted": "A Campaign Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Campaign Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Campaign Type"
+      },
+      "id": "ID",
+      "campaignType": "Campaign Type",
+      "description": "Description"
+    }
+  }
+}

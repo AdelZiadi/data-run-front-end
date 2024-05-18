@@ -1,0 +1,19 @@
+{
+  "annotations": {
+    "changelogDate": "20240518014153"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "campaignType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CampaignType",
+  "relationships": []
+}

@@ -1,0 +1,30 @@
+@if (campaignType) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(campaignType.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="campaignTypeDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
+
+      <span class="btn btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()"></span>
+    </div>
+
+    <div class="modal-body">
+      <app-alert-error></app-alert-error>
+      <p
+        id="app-delete-campaignType-heading"
+        appTranslate="dataRunClientApp.campaignType.delete.question"
+        [translateValues]="{ id: campaignType.id }"
+      >
+        Are you sure you want to delete Campaign Type {{ campaignType.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="app-confirm-delete-campaignType" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span appTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

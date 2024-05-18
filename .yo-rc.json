@@ -1,0 +1,25 @@
+{
+  "generator-jhipster": {
+    "autoCrlf": true,
+    "baseName": "dataRunClient",
+    "clientFramework": "angular",
+    "clientTestFrameworks": [],
+    "clientTheme": "none",
+    "creationTimestamp": 1715995953168,
+    "devServerPort": 4200,
+    "enableTranslation": true,
+    "entities": ["Campaign", "CampaignType"],
+    "jhiPrefix": "app",
+    "jhipsterVersion": "8.4.0",
+    "languages": ["en", "ar-ly"],
+    "lastLiquibaseTimestamp": 1715996513000,
+    "microfrontend": null,
+    "microfrontends": [],
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "skipCommitHook": true,
+    "skipServer": true,
+    "testFrameworks": [],
+    "withAdminUi": true
+  }
+}

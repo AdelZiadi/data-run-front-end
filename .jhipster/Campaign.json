@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20240518014152"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "campaignCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "campaignStartedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "campaignDays",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "campaignYear",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "campaignNote",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Campaign",
+  "relationships": [
+    {
+      "otherEntityField": "campaignType",
+      "otherEntityName": "campaignType",
+      "relationshipName": "campaignType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

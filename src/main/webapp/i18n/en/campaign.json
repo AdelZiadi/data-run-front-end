@@ -1,0 +1,30 @@
+{
+  "dataRunClientApp": {
+    "campaign": {
+      "home": {
+        "title": "Campaigns",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Campaign",
+        "createOrEditLabel": "Create or edit a Campaign",
+        "notFound": "No Campaigns found"
+      },
+      "created": "A new Campaign is created with identifier {{ param }}",
+      "updated": "A Campaign is updated with identifier {{ param }}",
+      "deleted": "A Campaign is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Campaign {{ id }}?"
+      },
+      "detail": {
+        "title": "Campaign"
+      },
+      "id": "ID",
+      "campaignCode": "Campaign Code",
+      "campaignStartedDate": "Campaign Started Date",
+      "campaignDays": "Campaign Days",
+      "campaignYear": "Campaign Year",
+      "campaignNote": "Campaign Note",
+      "enabled": "Enabled",
+      "campaignType": "Campaign Type"
+    }
+  }
+}

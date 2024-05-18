@@ -1,0 +1,183 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-campaign-heading" data-cy="CampaignCreateUpdateHeading" appTranslate="dataRunClientApp.campaign.home.createOrEditLabel">
+        Create or edit a Campaign
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.campaign.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_campaignCode" appTranslate="dataRunClientApp.campaign.campaignCode">Campaign Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="campaignCode"
+            id="field_campaignCode"
+            data-cy="campaignCode"
+            formControlName="campaignCode"
+          />
+          @if (editForm.get('campaignCode')!.invalid && (editForm.get('campaignCode')!.dirty || editForm.get('campaignCode')!.touched)) {
+            <div>
+              @if (editForm.get('campaignCode')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_campaignStartedDate" appTranslate="dataRunClientApp.campaign.campaignStartedDate"
+            >Campaign Started Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_campaignStartedDate"
+              data-cy="campaignStartedDate"
+              type="datetime-local"
+              class="form-control"
+              name="campaignStartedDate"
+              formControlName="campaignStartedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('campaignStartedDate')!.invalid &&
+            (editForm.get('campaignStartedDate')!.dirty || editForm.get('campaignStartedDate')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('campaignStartedDate')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('campaignStartedDate')?.errors?.datetimelocal"
+                appTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_campaignDays" appTranslate="dataRunClientApp.campaign.campaignDays">Campaign Days</label>
+          <input
+            type="number"
+            class="form-control"
+            name="campaignDays"
+            id="field_campaignDays"
+            data-cy="campaignDays"
+            formControlName="campaignDays"
+          />
+          @if (editForm.get('campaignDays')!.invalid && (editForm.get('campaignDays')!.dirty || editForm.get('campaignDays')!.touched)) {
+            <div>
+              @if (editForm.get('campaignDays')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('campaignDays')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_campaignYear" appTranslate="dataRunClientApp.campaign.campaignYear">Campaign Year</label>
+          <input
+            type="number"
+            class="form-control"
+            name="campaignYear"
+            id="field_campaignYear"
+            data-cy="campaignYear"
+            formControlName="campaignYear"
+          />
+          @if (editForm.get('campaignYear')!.invalid && (editForm.get('campaignYear')!.dirty || editForm.get('campaignYear')!.touched)) {
+            <div>
+              @if (editForm.get('campaignYear')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('campaignYear')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_campaignNote" appTranslate="dataRunClientApp.campaign.campaignNote">Campaign Note</label>
+          <input
+            type="text"
+            class="form-control"
+            name="campaignNote"
+            id="field_campaignNote"
+            data-cy="campaignNote"
+            formControlName="campaignNote"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_enabled" appTranslate="dataRunClientApp.campaign.enabled">Enabled</label>
+          <input type="checkbox" class="form-check" name="enabled" id="field_enabled" data-cy="enabled" formControlName="enabled" />
+          @if (editForm.get('enabled')!.invalid && (editForm.get('enabled')!.dirty || editForm.get('enabled')!.touched)) {
+            <div>
+              @if (editForm.get('enabled')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_campaignType" appTranslate="dataRunClientApp.campaign.campaignType">Campaign Type</label>
+          <select
+            class="form-control"
+            id="field_campaignType"
+            data-cy="campaignType"
+            name="campaignType"
+            formControlName="campaignType"
+            [compareWith]="compareCampaignType"
+          >
+            <option [ngValue]="null"></option>
+            @for (campaignTypeOption of campaignTypesSharedCollection; track $index) {
+              <option [ngValue]="campaignTypeOption">{{ campaignTypeOption.campaignType }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

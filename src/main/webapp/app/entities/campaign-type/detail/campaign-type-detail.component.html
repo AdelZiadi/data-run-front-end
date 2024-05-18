@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (campaignType()) {
+      <div>
+        <h2 data-cy="campaignTypeDetailsHeading"><span appTranslate="dataRunClientApp.campaignType.detail.title">Campaign Type</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ campaignType()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaignType.campaignType">Campaign Type</span></dt>
+          <dd>
+            <span>{{ campaignType()!.campaignType }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.campaignType.description">Description</span></dt>
+          <dd>
+            <span>{{ campaignType()!.description }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/campaign-type', campaignType()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,134 @@
+// Define Enums
+enum EntryTypeEnum {
+  DISPENSED
+  RETURNED
+  RECEIVED
+  CLOSINGBALANCE
+  INITIALBALANCE
+}
+
+enum SettlementEnum {
+  RESIDENTS
+  IDPSCAMP
+}
+
+enum SurveyTypeEnum {
+  ACTUALREPORT
+  TESTREPORT
+}
+
+enum PublicLocationType {
+  DISTRICT
+  SUBDISTRICT
+  SUBVILLAGE
+}
+
+// Define Entities
+entity Campaign {
+  campaignCode String required 
+  campaignStartedDate Instant required
+  campaignDays Integer min(0)
+  campaignYear Integer min(0)
+  campaignNote String 
+  enabled Boolean required
+}
+
+entity CampaignType {
+  campaignType String required unique
+  description String
+}
+
+
+entity ProgressStatus {
+  progressStatusLabel String
+}
+
+entity ReviewTeam {
+  progressOrname String
+  progressOrUser String
+}
+
+entity Team {
+  teamLeader String
+  teamNo Long required
+  teamNote String
+  teamMobile String
+  teamNoOfTeamWorkers Integer
+  mobility String
+}
+
+entity Warehouse {
+  whName String
+  description String
+  gpsCoordinate String
+  supervisorName String
+  whNo Long required
+  supervisorMobile String
+}
+
+entity WarehouseItem {
+  itemName String
+  itemDescription String
+}
+
+entity WarehouseTransaction {
+  imovUid String
+  transactionDate Integer required
+  phaseNo Integer
+  entryType String required
+  quantity Integer required min(0)
+  notes String maxlength(2000)
+  personName String maxlength(2000)
+  workDayId Integer
+  submissionTime Instant
+  submissionId Long
+  deleted Boolean
+  submissionUuid String
+}
+
+// Define Relationships
+relationship ManyToOne {
+  Campaign { campaignType (campaignType)} to CampaignType
+}
+
+relationship ManyToOne {
+  Team { campaign (campaignCode)} to Campaign 
+}
+
+relationship ManyToOne {
+  Team { operationRoom (progressOrname)} to ReviewTeam 
+}
+
+relationship ManyToOne {
+  Team { warehouse (whName)} to Warehouse 
+}
+
+relationship ManyToOne {
+  Warehouse { campaign (campaignCode)} to Campaign 
+}
+
+relationship ManyToOne {
+  WarehouseTransaction { item (itemName)} to WarehouseItem 
+}
+
+relationship ManyToOne {
+  WarehouseTransaction { sourceWarehouse (whName)} to Warehouse 
+}
+
+relationship ManyToOne {
+  WarehouseTransaction { team (teamNo)} to Team 
+}
+
+relationship ManyToOne {
+  WarehouseTransaction { warehouse (whName) required} to Warehouse 
+}
+
+relationship ManyToOne {
+  WarehouseTransaction { campaign (campaignCode)} to Campaign
+}
+
+relationship ManyToOne {
+  Team{userInfo(login)} to User with builtInEntity
+}
+
+paginate TeamAssignment, WarehouseTransaction with pagination
