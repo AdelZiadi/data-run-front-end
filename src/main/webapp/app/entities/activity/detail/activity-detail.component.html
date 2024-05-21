@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (activity()) {
+      <div>
+        <h2 data-cy="activityDetailsHeading"><span appTranslate="dataRunClientApp.activity.detail.title">Activity</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ activity()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.uid">Uid</span></dt>
+          <dd>
+            <span>{{ activity()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.code">Code</span></dt>
+          <dd>
+            <span>{{ activity()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.name">Name</span></dt>
+          <dd>
+            <span>{{ activity()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ activity()!.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ activity()!.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.active">Active</span></dt>
+          <dd>
+            <span>{{ activity()!.active }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.displayed">Displayed</span></dt>
+          <dd>
+            <span>{{ activity()!.displayed }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.order">Order</span></dt>
+          <dd>
+            <span>{{ activity()!.order }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.activity.project">Project</span></dt>
+          <dd>
+            @if (activity()!.project) {
+              <div>
+                <a [routerLink]="['/project', activity()!.project?.id, 'view']">{{ activity()!.project?.name }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/activity', activity()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
