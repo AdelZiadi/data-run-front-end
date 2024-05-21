@@ -34,7 +34,6 @@
     "webapp:test": "npm run test --"
   },
   "config": {
-    "backend_port": 8080,
     "default_environment": "prod"
   },
   "dependencies": {
@@ -53,8 +52,6 @@
     "@ngx-translate/core": "15.0.0",
     "@ngx-translate/http-loader": "8.0.0",
     "@popperjs/core": "2.11.8",
-    "ag-grid-angular": "^31.3.2",
-    "ag-grid-community": "^31.3.2",
     "bootstrap": "5.3.3",
     "dayjs": "1.11.11",
     "ngx-infinite-scroll": "17.0.0",

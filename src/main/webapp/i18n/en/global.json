@@ -8,9 +8,7 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority",
-        "campaign": "Campaign",
-        "campaignType": "Campaign Type"
+        "adminAuthority": "Authority"
       },
       "account": {
         "main": "Account",

@@ -14,7 +14,7 @@
     "creationTimestamp": 1715995953168,
     "devServerPort": 4200,
     "enableTranslation": true,
-    "entities": ["Campaign", "CampaignType"],
+    "entities": [],
     "jhiPrefix": "app",
     "jhipsterVersion": "8.4.0",
     "languages": ["en", "ar-ly"],
