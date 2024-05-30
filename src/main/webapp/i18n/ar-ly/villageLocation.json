@@ -1,0 +1,45 @@
+{
+  "dataRunClientApp": {
+    "villageLocation": {
+      "home": {
+        "title": "Village Locations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Village Location",
+        "createOrEditLabel": "Create or edit a Village Location",
+        "notFound": "No Village Locations found"
+      },
+      "created": "A new Village Location is created with identifier {{ param }}",
+      "updated": "A Village Location is updated with identifier {{ param }}",
+      "deleted": "A Village Location is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Village Location {{ id }}?"
+      },
+      "detail": {
+        "title": "Village Location"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "mappingStatus": "Mapping Status",
+      "districtCode": "District Code",
+      "villageUid": "Village Uid",
+      "subdistrictName": "Subdistrict Name",
+      "villageName": "Village Name",
+      "subvillageName": "Subvillage Name",
+      "urbanRuralId": "Urban Rural Id",
+      "urbanRural": "Urban Rural",
+      "settlement": "Settlement",
+      "pop2004": "Pop 2004",
+      "pop2022": "Pop 2022",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "ppcCodeGis": "Ppc Code Gis",
+      "level": "Level",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

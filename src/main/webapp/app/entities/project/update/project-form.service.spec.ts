@@ -23,10 +23,11 @@ describe('Project Form Service', () => {
             uid: expect.any(Object),
             code: expect.any(Object),
             name: expect.any(Object),
-            created: expect.any(Object),
-            lastUpdated: expect.any(Object),
             displayed: expect.any(Object),
-            order: expect.any(Object),
+            createdBy: expect.any(Object),
+            createdDate: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
+            lastModifiedDate: expect.any(Object),
           }),
         );
       });
@@ -40,10 +41,11 @@ describe('Project Form Service', () => {
             uid: expect.any(Object),
             code: expect.any(Object),
             name: expect.any(Object),
-            created: expect.any(Object),
-            lastUpdated: expect.any(Object),
             displayed: expect.any(Object),
-            order: expect.any(Object),
+            createdBy: expect.any(Object),
+            createdDate: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
+            lastModifiedDate: expect.any(Object),
           }),
         );
       });

@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reviewTeam()) {
+      <div>
+        <h2 data-cy="reviewTeamDetailsHeading"><span appTranslate="dataRunClientApp.reviewTeam.detail.title">Review Team</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.uid">Uid</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.code">Code</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.name">Name</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.user">User</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.user }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.reviewTeam.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ reviewTeam()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/review-team', reviewTeam()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

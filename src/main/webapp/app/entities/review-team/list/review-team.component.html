@@ -1,0 +1,142 @@
+<div>
+  <h2 id="page-heading" data-cy="ReviewTeamHeading">
+    <span appTranslate="dataRunClientApp.reviewTeam.home.title">Review Teams</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.reviewTeam.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-review-team"
+        [routerLink]="['/review-team/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.reviewTeam.home.createLabel">Create a new Review Team</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (reviewTeams?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.reviewTeam.home.notFound">No Review Teams found</span>
+    </div>
+  }
+
+  @if (reviewTeams && reviewTeams.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="user">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.user">User</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.reviewTeam.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reviewTeam of reviewTeams; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/review-team', reviewTeam.id, 'view']">{{ reviewTeam.id }}</a>
+              </td>
+              <td>{{ reviewTeam.uid }}</td>
+              <td>{{ reviewTeam.code }}</td>
+              <td>{{ reviewTeam.name }}</td>
+              <td>{{ reviewTeam.user }}</td>
+              <td>{{ reviewTeam.createdBy }}</td>
+              <td>{{ reviewTeam.createdDate | formatMediumDatetime }}</td>
+              <td>{{ reviewTeam.lastModifiedBy }}</td>
+              <td>{{ reviewTeam.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/review-team', reviewTeam.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/review-team', reviewTeam.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(reviewTeam)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

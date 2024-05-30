@@ -1,0 +1,186 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-patient-info-heading"
+        data-cy="PatientInfoCreateUpdateHeading"
+        appTranslate="dataRunClientApp.patientInfo.home.createOrEditLabel"
+      >
+        Create or edit a Patient Info
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.patientInfo.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.patientInfo.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.patientInfo.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.patientInfo.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_age" appTranslate="dataRunClientApp.patientInfo.age">Age</label>
+          <input type="number" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
+          @if (editForm.get('age')!.invalid && (editForm.get('age')!.dirty || editForm.get('age')!.touched)) {
+            <div>
+              @if (editForm.get('age')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '1' }"
+                  >This field should be at least 1.</small
+                >
+              }
+              @if (editForm.get('age')?.errors?.max) {
+                <small class="form-text text-danger" appTranslate="entity.validation.max" [translateValues]="{ max: '140' }"
+                  >This field cannot be more than 140.</small
+                >
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('age')?.errors?.number" appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_gender" appTranslate="dataRunClientApp.patientInfo.gender">Gender</label>
+          <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+            <option [ngValue]="null">{{ 'dataRunClientApp.Gender.null' | translate }}</option>
+            @for (gender of genderValues; track $index) {
+              <option [value]="gender">{{ 'dataRunClientApp.Gender.' + gender | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @if (editForm.controls.createdBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.patientInfo.createdBy">Created By</label>
+            <input
+              type="text"
+              class="form-control"
+              name="createdBy"
+              id="field_createdBy"
+              data-cy="createdBy"
+              formControlName="createdBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.createdDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.patientInfo.createdDate">Created Date</label>
+            <div class="d-flex">
+              <input
+                id="field_createdDate"
+                data-cy="createdDate"
+                type="datetime-local"
+                class="form-control"
+                name="createdDate"
+                formControlName="createdDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.patientInfo.lastModifiedBy"
+              >Last Modified By</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="lastModifiedBy"
+              id="field_lastModifiedBy"
+              data-cy="lastModifiedBy"
+              formControlName="lastModifiedBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.patientInfo.lastModifiedDate"
+              >Last Modified Date</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_lastModifiedDate"
+                data-cy="lastModifiedDate"
+                type="datetime-local"
+                class="form-control"
+                name="lastModifiedDate"
+                formControlName="lastModifiedDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_location" appTranslate="dataRunClientApp.patientInfo.location">Location</label>
+          <select
+            class="form-control"
+            id="field_location"
+            data-cy="location"
+            name="location"
+            formControlName="location"
+            [compareWith]="compareAssignment"
+          >
+            <option [ngValue]="null"></option>
+            @for (assignmentOption of assignmentsSharedCollection; track $index) {
+              <option [ngValue]="assignmentOption">{{ assignmentOption.code }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

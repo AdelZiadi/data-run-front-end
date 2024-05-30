@@ -10,7 +10,17 @@
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
         "adminAuthority": "Authority",
         "project": "Project",
-        "activity": "Activity"
+        "activity": "Activity",
+        "villageLocation": "Village Location",
+        "assignment": "Assignment",
+        "progressStatus": "Progress Status",
+        "reviewTeam": "Review Team",
+        "team": "Team",
+        "warehouse": "Warehouse",
+        "warehouseItem": "Warehouse Item",
+        "chvRegister": "Chv Register",
+        "patientInfo": "Patient Info",
+        "chvSession": "Chv Session"
       },
       "account": {
         "main": "Account",

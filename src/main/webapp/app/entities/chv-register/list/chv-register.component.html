@@ -1,0 +1,261 @@
+<div>
+  <h2 id="page-heading" data-cy="ChvRegisterHeading">
+    <span appTranslate="dataRunClientApp.chvRegister.home.title">Chv Registers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.chvRegister.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chv-register"
+        [routerLink]="['/chv-register/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.chvRegister.home.createLabel">Create a new Chv Register</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (chvRegisters?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.chvRegister.home.notFound">No Chv Registers found</span>
+    </div>
+  }
+
+  @if (chvRegisters && chvRegisters.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="visitDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.visitDate">Visit Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="pregnant">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.pregnant">Pregnant</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="testResult">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.testResult">Test Result</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="detectionType">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.detectionType">Detection Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="severity">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.severity">Severity</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="treatment">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.treatment">Treatment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="comment">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.comment">Comment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="startEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.startEntryTime">Start Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="deleted">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="patient.name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.patient">Patient</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="team.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.team">Team</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (chvRegister of chvRegisters; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/chv-register', chvRegister.id, 'view']">{{ chvRegister.id }}</a>
+              </td>
+              <td>{{ chvRegister.uid }}</td>
+              <td>{{ chvRegister.code }}</td>
+              <td>{{ chvRegister.name }}</td>
+              <td>{{ chvRegister.visitDate | formatMediumDatetime }}</td>
+              <td>{{ chvRegister.pregnant }}</td>
+              <td [appTranslate]="'dataRunClientApp.MTestResult.' + (chvRegister.testResult ?? 'null')">
+                {{
+                  { null: '', NEGATIVE: 'NEGATIVE', PF: 'PF', PV: 'PV', MIX: 'MIX', INVALID: 'INVALID' }[chvRegister.testResult ?? 'null']
+                }}
+              </td>
+              <td [appTranslate]="'dataRunClientApp.MDetectionType.' + (chvRegister.detectionType ?? 'null')">
+                {{ { null: '', REACTIVE: 'REACTIVE', ACTIVE: 'ACTIVE' }[chvRegister.detectionType ?? 'null'] }}
+              </td>
+              <td [appTranslate]="'dataRunClientApp.MSeverity.' + (chvRegister.severity ?? 'null')">
+                {{ { null: '', SIMPLE: 'SIMPLE', SEVERE: 'SEVERE' }[chvRegister.severity ?? 'null'] }}
+              </td>
+              <td [appTranslate]="'dataRunClientApp.MTreatment.' + (chvRegister.treatment ?? 'null')">
+                {{ { null: '', TREATED: 'TREATED', FIRSTDOSE: 'FIRSTDOSE', REFERAL: 'REFERAL' }[chvRegister.treatment ?? 'null'] }}
+              </td>
+              <td>{{ chvRegister.comment }}</td>
+              <td>{{ chvRegister.startEntryTime | formatMediumDatetime }}</td>
+              <td>{{ chvRegister.deleted }}</td>
+              <td>{{ chvRegister.createdBy }}</td>
+              <td>{{ chvRegister.createdDate | formatMediumDatetime }}</td>
+              <td>{{ chvRegister.lastModifiedBy }}</td>
+              <td>{{ chvRegister.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (chvRegister.patient) {
+                  <div>
+                    <a [routerLink]="['/patient-info', chvRegister.patient.id, 'view']">{{ chvRegister.patient.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (chvRegister.team) {
+                  <div>
+                    <a [routerLink]="['/team', chvRegister.team.id, 'view']">{{ chvRegister.team.code }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/chv-register', chvRegister.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/chv-register', chvRegister.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(chvRegister)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (chvRegisters && chvRegisters.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

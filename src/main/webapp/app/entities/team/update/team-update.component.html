@@ -1,0 +1,232 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-team-heading" data-cy="TeamCreateUpdateHeading" appTranslate="dataRunClientApp.team.home.createOrEditLabel">
+        Create or edit a Team
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.team.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.team.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.team.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)) {
+            <div>
+              @if (editForm.get('code')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.team.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" appTranslate="dataRunClientApp.team.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_mobile" appTranslate="dataRunClientApp.team.mobile">Mobile</label>
+          <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_workers" appTranslate="dataRunClientApp.team.workers">Workers</label>
+          <input type="number" class="form-control" name="workers" id="field_workers" data-cy="workers" formControlName="workers" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_mobility" appTranslate="dataRunClientApp.team.mobility">Mobility</label>
+          <input type="text" class="form-control" name="mobility" id="field_mobility" data-cy="mobility" formControlName="mobility" />
+        </div>
+
+        @if (editForm.controls.createdBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.team.createdBy">Created By</label>
+            <input
+              type="text"
+              class="form-control"
+              name="createdBy"
+              id="field_createdBy"
+              data-cy="createdBy"
+              formControlName="createdBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.createdDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.team.createdDate">Created Date</label>
+            <div class="d-flex">
+              <input
+                id="field_createdDate"
+                data-cy="createdDate"
+                type="datetime-local"
+                class="form-control"
+                name="createdDate"
+                formControlName="createdDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.team.lastModifiedBy"
+              >Last Modified By</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="lastModifiedBy"
+              id="field_lastModifiedBy"
+              data-cy="lastModifiedBy"
+              formControlName="lastModifiedBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.team.lastModifiedDate"
+              >Last Modified Date</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_lastModifiedDate"
+                data-cy="lastModifiedDate"
+                type="datetime-local"
+                class="form-control"
+                name="lastModifiedDate"
+                formControlName="lastModifiedDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_activity" appTranslate="dataRunClientApp.team.activity">Activity</label>
+          <select
+            class="form-control"
+            id="field_activity"
+            data-cy="activity"
+            name="activity"
+            formControlName="activity"
+            [compareWith]="compareActivity"
+          >
+            <option [ngValue]="null"></option>
+            @for (activityOption of activitiesSharedCollection; track $index) {
+              <option [ngValue]="activityOption">{{ activityOption.code }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_operationRoom" appTranslate="dataRunClientApp.team.operationRoom">Operation Room</label>
+          <select
+            class="form-control"
+            id="field_operationRoom"
+            data-cy="operationRoom"
+            name="operationRoom"
+            formControlName="operationRoom"
+            [compareWith]="compareReviewTeam"
+          >
+            <option [ngValue]="null"></option>
+            @for (reviewTeamOption of reviewTeamsSharedCollection; track $index) {
+              <option [ngValue]="reviewTeamOption">{{ reviewTeamOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_warehouse" appTranslate="dataRunClientApp.team.warehouse">Warehouse</label>
+          <select
+            class="form-control"
+            id="field_warehouse"
+            data-cy="warehouse"
+            name="warehouse"
+            formControlName="warehouse"
+            [compareWith]="compareWarehouse"
+          >
+            <option [ngValue]="null"></option>
+            @for (warehouseOption of warehousesSharedCollection; track $index) {
+              <option [ngValue]="warehouseOption">{{ warehouseOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_userInfo" appTranslate="dataRunClientApp.team.userInfo">User Info</label>
+          <select
+            class="form-control"
+            id="field_userInfo"
+            data-cy="userInfo"
+            name="userInfo"
+            formControlName="userInfo"
+            [compareWith]="compareUser"
+          >
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

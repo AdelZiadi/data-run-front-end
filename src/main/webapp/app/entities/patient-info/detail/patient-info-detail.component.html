@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (patientInfo()) {
+      <div>
+        <h2 data-cy="patientInfoDetailsHeading"><span appTranslate="dataRunClientApp.patientInfo.detail.title">Patient Info</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.uid">Uid</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.code">Code</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.name">Name</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.age">Age</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.age }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.gender">Gender</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.Gender.' + (patientInfo()!.gender ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[patientInfo()!.gender ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ patientInfo()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.patientInfo.location">Location</span></dt>
+          <dd>
+            @if (patientInfo()!.location) {
+              <div>
+                <a [routerLink]="['/assignment', patientInfo()!.location?.id, 'view']">{{ patientInfo()!.location?.code }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/patient-info', patientInfo()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

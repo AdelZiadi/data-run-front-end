@@ -1,0 +1,41 @@
+{
+  "dataRunClientApp": {
+    "chvRegister": {
+      "home": {
+        "title": "Chv Registers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chv Register",
+        "createOrEditLabel": "Create or edit a Chv Register",
+        "notFound": "No Chv Registers found"
+      },
+      "created": "A new Chv Register is created with identifier {{ param }}",
+      "updated": "A Chv Register is updated with identifier {{ param }}",
+      "deleted": "A Chv Register is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chv Register {{ id }}?"
+      },
+      "detail": {
+        "title": "Chv Register"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "visitDate": "Visit Date",
+      "pregnant": "Pregnant",
+      "testResult": "Test Result",
+      "detectionType": "Detection Type",
+      "severity": "Severity",
+      "treatment": "Treatment",
+      "comment": "Comment",
+      "startEntryTime": "Start Entry Time",
+      "deleted": "Deleted",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "patient": "Patient",
+      "team": "Team"
+    }
+  }
+}

@@ -1,0 +1,285 @@
+<div>
+  <h2 id="page-heading" data-cy="VillageLocationHeading">
+    <span appTranslate="dataRunClientApp.villageLocation.home.title">Village Locations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.villageLocation.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-village-location"
+        [routerLink]="['/village-location/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.villageLocation.home.createLabel">Create a new Village Location</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (villageLocations?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.villageLocation.home.notFound">No Village Locations found</span>
+    </div>
+  }
+
+  @if (villageLocations && villageLocations.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="mappingStatus">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.mappingStatus">Mapping Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="districtCode">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.districtCode">District Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="villageUid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.villageUid">Village Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="subdistrictName">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.subdistrictName">Subdistrict Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="villageName">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.villageName">Village Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="subvillageName">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.subvillageName">Subvillage Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="urbanRuralId">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.urbanRuralId">Urban Rural Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="urbanRural">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.urbanRural">Urban Rural</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="settlement">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.settlement">Settlement</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="pop2004">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.pop2004">Pop 2004</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="pop2022">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.pop2022">Pop 2022</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="longitude">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.longitude">Longitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="latitude">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.latitude">Latitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="ppcCodeGis">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.ppcCodeGis">Ppc Code Gis</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="level">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.level">Level</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.villageLocation.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (villageLocation of villageLocations; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/village-location', villageLocation.id, 'view']">{{ villageLocation.id }}</a>
+              </td>
+              <td>{{ villageLocation.uid }}</td>
+              <td>{{ villageLocation.code }}</td>
+              <td>{{ villageLocation.name }}</td>
+              <td>{{ villageLocation.mappingStatus }}</td>
+              <td>{{ villageLocation.districtCode }}</td>
+              <td>{{ villageLocation.villageUid }}</td>
+              <td>{{ villageLocation.subdistrictName }}</td>
+              <td>{{ villageLocation.villageName }}</td>
+              <td>{{ villageLocation.subvillageName }}</td>
+              <td>{{ villageLocation.urbanRuralId }}</td>
+              <td>{{ villageLocation.urbanRural }}</td>
+              <td>{{ villageLocation.settlement }}</td>
+              <td>{{ villageLocation.pop2004 }}</td>
+              <td>{{ villageLocation.pop2022 }}</td>
+              <td>{{ villageLocation.longitude }}</td>
+              <td>{{ villageLocation.latitude }}</td>
+              <td>{{ villageLocation.ppcCodeGis }}</td>
+              <td [appTranslate]="'dataRunClientApp.PublicLocationType.' + (villageLocation.level ?? 'null')">
+                {{
+                  { null: '', DISTRICT: 'DISTRICT', SUBDISTRICT: 'SUBDISTRICT', SUBVILLAGE: 'SUBVILLAGE' }[villageLocation.level ?? 'null']
+                }}
+              </td>
+              <td>{{ villageLocation.createdBy }}</td>
+              <td>{{ villageLocation.createdDate | formatMediumDatetime }}</td>
+              <td>{{ villageLocation.lastModifiedBy }}</td>
+              <td>{{ villageLocation.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/village-location', villageLocation.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/village-location', villageLocation.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(villageLocation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (villageLocations && villageLocations.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

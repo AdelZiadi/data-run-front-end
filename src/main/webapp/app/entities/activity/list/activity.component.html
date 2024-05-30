@@ -84,16 +84,30 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="displayed">
+            <th scope="col" appSortBy="createdBy">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.activity.displayed">Displayed</span>
+                <span appTranslate="dataRunClientApp.activity.createdBy">Created By</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="order">
+            <th scope="col" appSortBy="createdDate">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.activity.order">Order</span>
+                <span appTranslate="dataRunClientApp.activity.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.activity.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.activity.lastModifiedDate">Last Modified Date</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -119,8 +133,10 @@
               <td>{{ activity.startDate | formatMediumDatetime }}</td>
               <td>{{ activity.endDate | formatMediumDatetime }}</td>
               <td>{{ activity.active }}</td>
-              <td>{{ activity.displayed }}</td>
-              <td>{{ activity.order }}</td>
+              <td>{{ activity.createdBy }}</td>
+              <td>{{ activity.createdDate | formatMediumDatetime }}</td>
+              <td>{{ activity.lastModifiedBy }}</td>
+              <td>{{ activity.lastModifiedDate | formatMediumDatetime }}</td>
               <td>
                 @if (activity.project) {
                   <div>

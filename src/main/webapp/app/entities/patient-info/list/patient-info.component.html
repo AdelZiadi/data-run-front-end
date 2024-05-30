@@ -1,0 +1,184 @@
+<div>
+  <h2 id="page-heading" data-cy="PatientInfoHeading">
+    <span appTranslate="dataRunClientApp.patientInfo.home.title">Patient Infos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.patientInfo.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-patient-info"
+        [routerLink]="['/patient-info/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.patientInfo.home.createLabel">Create a new Patient Info</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (patientInfos?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.patientInfo.home.notFound">No Patient Infos found</span>
+    </div>
+  }
+
+  @if (patientInfos && patientInfos.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="age">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.age">Age</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="gender">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="location.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.patientInfo.location">Location</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (patientInfo of patientInfos; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/patient-info', patientInfo.id, 'view']">{{ patientInfo.id }}</a>
+              </td>
+              <td>{{ patientInfo.uid }}</td>
+              <td>{{ patientInfo.code }}</td>
+              <td>{{ patientInfo.name }}</td>
+              <td>{{ patientInfo.age }}</td>
+              <td [appTranslate]="'dataRunClientApp.Gender.' + (patientInfo.gender ?? 'null')">
+                {{ { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[patientInfo.gender ?? 'null'] }}
+              </td>
+              <td>{{ patientInfo.createdBy }}</td>
+              <td>{{ patientInfo.createdDate | formatMediumDatetime }}</td>
+              <td>{{ patientInfo.lastModifiedBy }}</td>
+              <td>{{ patientInfo.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (patientInfo.location) {
+                  <div>
+                    <a [routerLink]="['/assignment', patientInfo.location.id, 'view']">{{ patientInfo.location.code }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/patient-info', patientInfo.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/patient-info', patientInfo.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(patientInfo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (patientInfos && patientInfos.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

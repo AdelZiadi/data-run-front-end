@@ -1,0 +1,269 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-chv-register-heading"
+        data-cy="ChvRegisterCreateUpdateHeading"
+        appTranslate="dataRunClientApp.chvRegister.home.createOrEditLabel"
+      >
+        Create or edit a Chv Register
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.chvRegister.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.chvRegister.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.chvRegister.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.chvRegister.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_visitDate" appTranslate="dataRunClientApp.chvRegister.visitDate">Visit Date</label>
+          <div class="d-flex">
+            <input
+              id="field_visitDate"
+              data-cy="visitDate"
+              type="datetime-local"
+              class="form-control"
+              name="visitDate"
+              formControlName="visitDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('visitDate')!.invalid && (editForm.get('visitDate')!.dirty || editForm.get('visitDate')!.touched)) {
+            <div>
+              @if (editForm.get('visitDate')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('visitDate')?.errors?.datetimelocal"
+                appTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pregnant" appTranslate="dataRunClientApp.chvRegister.pregnant">Pregnant</label>
+          <input type="checkbox" class="form-check" name="pregnant" id="field_pregnant" data-cy="pregnant" formControlName="pregnant" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_testResult" appTranslate="dataRunClientApp.chvRegister.testResult">Test Result</label>
+          <select class="form-control" name="testResult" formControlName="testResult" id="field_testResult" data-cy="testResult">
+            <option [ngValue]="null">{{ 'dataRunClientApp.MTestResult.null' | translate }}</option>
+            @for (mTestResult of mTestResultValues; track $index) {
+              <option [value]="mTestResult">{{ 'dataRunClientApp.MTestResult.' + mTestResult | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_detectionType" appTranslate="dataRunClientApp.chvRegister.detectionType"
+            >Detection Type</label
+          >
+          <select
+            class="form-control"
+            name="detectionType"
+            formControlName="detectionType"
+            id="field_detectionType"
+            data-cy="detectionType"
+          >
+            <option [ngValue]="null">{{ 'dataRunClientApp.MDetectionType.null' | translate }}</option>
+            @for (mDetectionType of mDetectionTypeValues; track $index) {
+              <option [value]="mDetectionType">{{ 'dataRunClientApp.MDetectionType.' + mDetectionType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_severity" appTranslate="dataRunClientApp.chvRegister.severity">Severity</label>
+          <select class="form-control" name="severity" formControlName="severity" id="field_severity" data-cy="severity">
+            <option [ngValue]="null">{{ 'dataRunClientApp.MSeverity.null' | translate }}</option>
+            @for (mSeverity of mSeverityValues; track $index) {
+              <option [value]="mSeverity">{{ 'dataRunClientApp.MSeverity.' + mSeverity | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_treatment" appTranslate="dataRunClientApp.chvRegister.treatment">Treatment</label>
+          <select class="form-control" name="treatment" formControlName="treatment" id="field_treatment" data-cy="treatment">
+            <option [ngValue]="null">{{ 'dataRunClientApp.MTreatment.null' | translate }}</option>
+            @for (mTreatment of mTreatmentValues; track $index) {
+              <option [value]="mTreatment">{{ 'dataRunClientApp.MTreatment.' + mTreatment | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_comment" appTranslate="dataRunClientApp.chvRegister.comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startEntryTime" appTranslate="dataRunClientApp.chvRegister.startEntryTime"
+            >Start Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startEntryTime"
+              data-cy="startEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="startEntryTime"
+              formControlName="startEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deleted" appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</label>
+          <input type="checkbox" class="form-check" name="deleted" id="field_deleted" data-cy="deleted" formControlName="deleted" />
+        </div>
+
+        @if (editForm.controls.createdBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.chvRegister.createdBy">Created By</label>
+            <input
+              type="text"
+              class="form-control"
+              name="createdBy"
+              id="field_createdBy"
+              data-cy="createdBy"
+              formControlName="createdBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.createdDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.chvRegister.createdDate">Created Date</label>
+            <div class="d-flex">
+              <input
+                id="field_createdDate"
+                data-cy="createdDate"
+                type="datetime-local"
+                class="form-control"
+                name="createdDate"
+                formControlName="createdDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.chvRegister.lastModifiedBy"
+              >Last Modified By</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="lastModifiedBy"
+              id="field_lastModifiedBy"
+              data-cy="lastModifiedBy"
+              formControlName="lastModifiedBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.chvRegister.lastModifiedDate"
+              >Last Modified Date</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_lastModifiedDate"
+                data-cy="lastModifiedDate"
+                type="datetime-local"
+                class="form-control"
+                name="lastModifiedDate"
+                formControlName="lastModifiedDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_patient" appTranslate="dataRunClientApp.chvRegister.patient">Patient</label>
+          <select
+            class="form-control"
+            id="field_patient"
+            data-cy="patient"
+            name="patient"
+            formControlName="patient"
+            [compareWith]="comparePatientInfo"
+          >
+            <option [ngValue]="null"></option>
+            @for (patientInfoOption of patientInfosSharedCollection; track $index) {
+              <option [ngValue]="patientInfoOption">{{ patientInfoOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_team" appTranslate="dataRunClientApp.chvRegister.team">Team</label>
+          <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team" [compareWith]="compareTeam">
+            <option [ngValue]="null"></option>
+            @for (teamOption of teamsSharedCollection; track $index) {
+              <option [ngValue]="teamOption">{{ teamOption.code }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,319 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-assignment-heading"
+        data-cy="AssignmentCreateUpdateHeading"
+        appTranslate="dataRunClientApp.assignment.home.createOrEditLabel"
+      >
+        Create or edit a Assignment
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.assignment.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.assignment.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.assignment.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phaseNo" appTranslate="dataRunClientApp.assignment.phaseNo">Phase No</label>
+          <input type="number" class="form-control" name="phaseNo" id="field_phaseNo" data-cy="phaseNo" formControlName="phaseNo" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_districtCode" appTranslate="dataRunClientApp.assignment.districtCode">District Code</label>
+          <input
+            type="number"
+            class="form-control"
+            name="districtCode"
+            id="field_districtCode"
+            data-cy="districtCode"
+            formControlName="districtCode"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_gov" appTranslate="dataRunClientApp.assignment.gov">Gov</label>
+          <input type="text" class="form-control" name="gov" id="field_gov" data-cy="gov" formControlName="gov" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_district" appTranslate="dataRunClientApp.assignment.district">District</label>
+          <input type="text" class="form-control" name="district" id="field_district" data-cy="district" formControlName="district" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_subdistrict" appTranslate="dataRunClientApp.assignment.subdistrict">Subdistrict</label>
+          <input
+            type="text"
+            class="form-control"
+            name="subdistrict"
+            id="field_subdistrict"
+            data-cy="subdistrict"
+            formControlName="subdistrict"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_village" appTranslate="dataRunClientApp.assignment.village">Village</label>
+          <input type="text" class="form-control" name="village" id="field_village" data-cy="village" formControlName="village" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_subvillage" appTranslate="dataRunClientApp.assignment.subvillage">Subvillage</label>
+          <input
+            type="text"
+            class="form-control"
+            name="subvillage"
+            id="field_subvillage"
+            data-cy="subvillage"
+            formControlName="subvillage"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.assignment.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dayId" appTranslate="dataRunClientApp.assignment.dayId">Day Id</label>
+          <input type="number" class="form-control" name="dayId" id="field_dayId" data-cy="dayId" formControlName="dayId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_population" appTranslate="dataRunClientApp.assignment.population">Population</label>
+          <input
+            type="number"
+            class="form-control"
+            name="population"
+            id="field_population"
+            data-cy="population"
+            formControlName="population"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_itnsPlanned" appTranslate="dataRunClientApp.assignment.itnsPlanned">Itns Planned</label>
+          <input
+            type="number"
+            class="form-control"
+            name="itnsPlanned"
+            id="field_itnsPlanned"
+            data-cy="itnsPlanned"
+            formControlName="itnsPlanned"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_targetType" appTranslate="dataRunClientApp.assignment.targetType">Target Type</label>
+          <input
+            type="number"
+            class="form-control"
+            name="targetType"
+            id="field_targetType"
+            data-cy="targetType"
+            formControlName="targetType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_longitude" appTranslate="dataRunClientApp.assignment.longitude">Longitude</label>
+          <input type="number" class="form-control" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_latitude" appTranslate="dataRunClientApp.assignment.latitude">Latitude</label>
+          <input type="number" class="form-control" name="latitude" id="field_latitude" data-cy="latitude" formControlName="latitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" appTranslate="dataRunClientApp.assignment.startDate">Start Date</label>
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @if (editForm.controls.createdBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.assignment.createdBy">Created By</label>
+            <input
+              type="text"
+              class="form-control"
+              name="createdBy"
+              id="field_createdBy"
+              data-cy="createdBy"
+              formControlName="createdBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.createdDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.assignment.createdDate">Created Date</label>
+            <div class="d-flex">
+              <input
+                id="field_createdDate"
+                data-cy="createdDate"
+                type="datetime-local"
+                class="form-control"
+                name="createdDate"
+                formControlName="createdDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.assignment.lastModifiedBy"
+              >Last Modified By</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="lastModifiedBy"
+              id="field_lastModifiedBy"
+              data-cy="lastModifiedBy"
+              formControlName="lastModifiedBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.assignment.lastModifiedDate"
+              >Last Modified Date</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_lastModifiedDate"
+                data-cy="lastModifiedDate"
+                type="datetime-local"
+                class="form-control"
+                name="lastModifiedDate"
+                formControlName="lastModifiedDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_activity" appTranslate="dataRunClientApp.assignment.activity">Activity</label>
+          <select
+            class="form-control"
+            id="field_activity"
+            data-cy="activity"
+            name="activity"
+            formControlName="activity"
+            [compareWith]="compareActivity"
+          >
+            <option [ngValue]="null"></option>
+            @for (activityOption of activitiesSharedCollection; track $index) {
+              <option [ngValue]="activityOption">{{ activityOption.code }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_organisationUnit" appTranslate="dataRunClientApp.assignment.organisationUnit"
+            >Organisation Unit</label
+          >
+          <select
+            class="form-control"
+            id="field_organisationUnit"
+            data-cy="organisationUnit"
+            name="organisationUnit"
+            formControlName="organisationUnit"
+            [compareWith]="compareVillageLocation"
+          >
+            <option [ngValue]="null"></option>
+            @for (villageLocationOption of villageLocationsSharedCollection; track $index) {
+              <option [ngValue]="villageLocationOption">{{ villageLocationOption.code }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_team" appTranslate="dataRunClientApp.assignment.team">Team</label>
+          <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team" [compareWith]="compareTeam">
+            <option [ngValue]="null"></option>
+            @for (teamOption of teamsSharedCollection; track $index) {
+              <option [ngValue]="teamOption">{{ teamOption.code }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_warehouse" appTranslate="dataRunClientApp.assignment.warehouse">Warehouse</label>
+          <select
+            class="form-control"
+            id="field_warehouse"
+            data-cy="warehouse"
+            name="warehouse"
+            formControlName="warehouse"
+            [compareWith]="compareWarehouse"
+          >
+            <option [ngValue]="null"></option>
+            @for (warehouseOption of warehousesSharedCollection; track $index) {
+              <option [ngValue]="warehouseOption">{{ warehouseOption.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

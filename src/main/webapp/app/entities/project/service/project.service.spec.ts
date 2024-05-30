@@ -8,8 +8,8 @@ import { ProjectService, RestProject } from './project.service';
 
 const requireRestSample: RestProject = {
   ...sampleWithRequiredData,
-  created: sampleWithRequiredData.created?.toJSON(),
-  lastUpdated: sampleWithRequiredData.lastUpdated?.toJSON(),
+  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
+  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('Project Service', () => {

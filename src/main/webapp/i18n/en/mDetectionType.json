@@ -1,0 +1,9 @@
+{
+  "dataRunClientApp": {
+    "MDetectionType": {
+      "null": "",
+      "REACTIVE": "REACTIVE",
+      "ACTIVE": "ACTIVE"
+    }
+  }
+}

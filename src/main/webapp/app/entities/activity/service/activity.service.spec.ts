@@ -10,6 +10,8 @@ const requireRestSample: RestActivity = {
   ...sampleWithRequiredData,
   startDate: sampleWithRequiredData.startDate?.toJSON(),
   endDate: sampleWithRequiredData.endDate?.toJSON(),
+  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
+  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('Activity Service', () => {

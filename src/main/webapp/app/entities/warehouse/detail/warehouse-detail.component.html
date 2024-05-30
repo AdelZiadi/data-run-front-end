@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (warehouse()) {
+      <div>
+        <h2 data-cy="warehouseDetailsHeading"><span appTranslate="dataRunClientApp.warehouse.detail.title">Warehouse</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ warehouse()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.uid">Uid</span></dt>
+          <dd>
+            <span>{{ warehouse()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.code">Code</span></dt>
+          <dd>
+            <span>{{ warehouse()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.name">Name</span></dt>
+          <dd>
+            <span>{{ warehouse()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.description">Description</span></dt>
+          <dd>
+            <span>{{ warehouse()!.description }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.gpsCoordinate">Gps Coordinate</span></dt>
+          <dd>
+            <span>{{ warehouse()!.gpsCoordinate }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.supervisor">Supervisor</span></dt>
+          <dd>
+            <span>{{ warehouse()!.supervisor }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.supervisorMobile">Supervisor Mobile</span></dt>
+          <dd>
+            <span>{{ warehouse()!.supervisorMobile }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ warehouse()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ warehouse()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ warehouse()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ warehouse()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouse.activity">Activity</span></dt>
+          <dd>
+            @if (warehouse()!.activity) {
+              <div>
+                <a [routerLink]="['/activity', warehouse()!.activity?.id, 'view']">{{ warehouse()!.activity?.code }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/warehouse', warehouse()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -19,26 +19,27 @@ type ProjectFormGroupInput = IProject | PartialWithRequiredKeyOf<NewProject>;
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IProject | NewProject> = Omit<T, 'created' | 'lastUpdated'> & {
-  created?: string | null;
-  lastUpdated?: string | null;
+type FormValueOf<T extends IProject | NewProject> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
+  createdDate?: string | null;
+  lastModifiedDate?: string | null;
 };
 
 type ProjectFormRawValue = FormValueOf<IProject>;
 
 type NewProjectFormRawValue = FormValueOf<NewProject>;
 
-type ProjectFormDefaults = Pick<NewProject, 'id' | 'created' | 'lastUpdated' | 'displayed'>;
+type ProjectFormDefaults = Pick<NewProject, 'id' | 'displayed' | 'createdDate' | 'lastModifiedDate'>;
 
 type ProjectFormGroupContent = {
   id: FormControl<ProjectFormRawValue['id'] | NewProject['id']>;
   uid: FormControl<ProjectFormRawValue['uid']>;
   code: FormControl<ProjectFormRawValue['code']>;
   name: FormControl<ProjectFormRawValue['name']>;
-  created: FormControl<ProjectFormRawValue['created']>;
-  lastUpdated: FormControl<ProjectFormRawValue['lastUpdated']>;
   displayed: FormControl<ProjectFormRawValue['displayed']>;
-  order: FormControl<ProjectFormRawValue['order']>;
+  createdBy: FormControl<ProjectFormRawValue['createdBy']>;
+  createdDate: FormControl<ProjectFormRawValue['createdDate']>;
+  lastModifiedBy: FormControl<ProjectFormRawValue['lastModifiedBy']>;
+  lastModifiedDate: FormControl<ProjectFormRawValue['lastModifiedDate']>;
 };
 
 export type ProjectFormGroup = FormGroup<ProjectFormGroupContent>;
@@ -63,10 +64,11 @@ export class ProjectFormService {
       }),
       code: new FormControl(projectRawValue.code),
       name: new FormControl(projectRawValue.name),
-      created: new FormControl(projectRawValue.created),
-      lastUpdated: new FormControl(projectRawValue.lastUpdated),
       displayed: new FormControl(projectRawValue.displayed),
-      order: new FormControl(projectRawValue.order),
+      createdBy: new FormControl(projectRawValue.createdBy),
+      createdDate: new FormControl(projectRawValue.createdDate),
+      lastModifiedBy: new FormControl(projectRawValue.lastModifiedBy),
+      lastModifiedDate: new FormControl(projectRawValue.lastModifiedDate),
     });
   }
 
@@ -89,17 +91,17 @@ export class ProjectFormService {
 
     return {
       id: null,
-      created: currentTime,
-      lastUpdated: currentTime,
       displayed: false,
+      createdDate: currentTime,
+      lastModifiedDate: currentTime,
     };
   }
 
   private convertProjectRawValueToProject(rawProject: ProjectFormRawValue | NewProjectFormRawValue): IProject | NewProject {
     return {
       ...rawProject,
-      created: dayjs(rawProject.created, DATE_TIME_FORMAT),
-      lastUpdated: dayjs(rawProject.lastUpdated, DATE_TIME_FORMAT),
+      createdDate: dayjs(rawProject.createdDate, DATE_TIME_FORMAT),
+      lastModifiedDate: dayjs(rawProject.lastModifiedDate, DATE_TIME_FORMAT),
     };
   }
 
@@ -108,8 +110,8 @@ export class ProjectFormService {
   ): ProjectFormRawValue | PartialWithRequiredKeyOf<NewProjectFormRawValue> {
     return {
       ...project,
-      created: project.created ? project.created.format(DATE_TIME_FORMAT) : undefined,
-      lastUpdated: project.lastUpdated ? project.lastUpdated.format(DATE_TIME_FORMAT) : undefined,
+      createdDate: project.createdDate ? project.createdDate.format(DATE_TIME_FORMAT) : undefined,
+      lastModifiedDate: project.lastModifiedDate ? project.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

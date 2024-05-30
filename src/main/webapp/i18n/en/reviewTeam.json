@@ -1,0 +1,31 @@
+{
+  "dataRunClientApp": {
+    "reviewTeam": {
+      "home": {
+        "title": "Review Teams",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Review Team",
+        "createOrEditLabel": "Create or edit a Review Team",
+        "notFound": "No Review Teams found"
+      },
+      "created": "A new Review Team is created with identifier {{ param }}",
+      "updated": "A Review Team is updated with identifier {{ param }}",
+      "deleted": "A Review Team is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Review Team {{ id }}?"
+      },
+      "detail": {
+        "title": "Review Team"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "user": "User",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

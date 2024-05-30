@@ -7,21 +7,23 @@ export const sampleWithRequiredData: IProject = {
 };
 
 export const sampleWithPartialData: IProject = {
-  id: 8969,
-  created: dayjs('2024-05-21T01:23'),
+  id: 17221,
   displayed: false,
-  order: 13976,
+  createdDate: dayjs('2024-05-22T13:34'),
+  lastModifiedBy: 'verdict',
+  lastModifiedDate: dayjs('2024-05-22T12:12'),
 };
 
 export const sampleWithFullData: IProject = {
-  id: 3584,
-  uid: 'meh',
-  code: 'of if',
-  name: 'vaguely lest',
-  created: dayjs('2024-05-21T13:24'),
-  lastUpdated: dayjs('2024-05-21T06:35'),
-  displayed: true,
-  order: 10558,
+  id: 13717,
+  uid: 'sick psst',
+  code: 'now oh',
+  name: 'yum',
+  displayed: false,
+  createdBy: 'instead buttonhole whitewash',
+  createdDate: dayjs('2024-05-22T03:59'),
+  lastModifiedBy: 'comestible',
+  lastModifiedDate: dayjs('2024-05-22T04:52'),
 };
 
 export const sampleWithNewData: NewProject = {

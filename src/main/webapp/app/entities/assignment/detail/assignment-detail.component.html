@@ -1,0 +1,148 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (assignment()) {
+      <div>
+        <h2 data-cy="assignmentDetailsHeading"><span appTranslate="dataRunClientApp.assignment.detail.title">Assignment</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ assignment()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.uid">Uid</span></dt>
+          <dd>
+            <span>{{ assignment()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.code">Code</span></dt>
+          <dd>
+            <span>{{ assignment()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.phaseNo">Phase No</span></dt>
+          <dd>
+            <span>{{ assignment()!.phaseNo }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.districtCode">District Code</span></dt>
+          <dd>
+            <span>{{ assignment()!.districtCode }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.gov">Gov</span></dt>
+          <dd>
+            <span>{{ assignment()!.gov }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.district">District</span></dt>
+          <dd>
+            <span>{{ assignment()!.district }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.subdistrict">Subdistrict</span></dt>
+          <dd>
+            <span>{{ assignment()!.subdistrict }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.village">Village</span></dt>
+          <dd>
+            <span>{{ assignment()!.village }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.subvillage">Subvillage</span></dt>
+          <dd>
+            <span>{{ assignment()!.subvillage }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.name">Name</span></dt>
+          <dd>
+            <span>{{ assignment()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.dayId">Day Id</span></dt>
+          <dd>
+            <span>{{ assignment()!.dayId }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.population">Population</span></dt>
+          <dd>
+            <span>{{ assignment()!.population }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.itnsPlanned">Itns Planned</span></dt>
+          <dd>
+            <span>{{ assignment()!.itnsPlanned }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.targetType">Target Type</span></dt>
+          <dd>
+            <span>{{ assignment()!.targetType }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ assignment()!.longitude }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ assignment()!.latitude }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ assignment()!.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ assignment()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ assignment()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ assignment()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ assignment()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.activity">Activity</span></dt>
+          <dd>
+            @if (assignment()!.activity) {
+              <div>
+                <a [routerLink]="['/activity', assignment()!.activity?.id, 'view']">{{ assignment()!.activity?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.organisationUnit">Organisation Unit</span></dt>
+          <dd>
+            @if (assignment()!.organisationUnit) {
+              <div>
+                <a [routerLink]="['/village-location', assignment()!.organisationUnit?.id, 'view']">{{
+                  assignment()!.organisationUnit?.code
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.team">Team</span></dt>
+          <dd>
+            @if (assignment()!.team) {
+              <div>
+                <a [routerLink]="['/team', assignment()!.team?.id, 'view']">{{ assignment()!.team?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.assignment.warehouse">Warehouse</span></dt>
+          <dd>
+            @if (assignment()!.warehouse) {
+              <div>
+                <a [routerLink]="['/warehouse', assignment()!.warehouse?.id, 'view']">{{ assignment()!.warehouse?.name }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/assignment', assignment()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

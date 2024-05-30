@@ -9,8 +9,10 @@ export interface IActivity {
   startDate?: dayjs.Dayjs | null;
   endDate?: dayjs.Dayjs | null;
   active?: boolean | null;
-  displayed?: boolean | null;
-  order?: number | null;
+  createdBy?: string | null;
+  createdDate?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
+  lastModifiedDate?: dayjs.Dayjs | null;
   project?: IProject | null;
 }
 

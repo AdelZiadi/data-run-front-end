@@ -5,10 +5,11 @@ export interface IProject {
   uid?: string | null;
   code?: string | null;
   name?: string | null;
-  created?: dayjs.Dayjs | null;
-  lastUpdated?: dayjs.Dayjs | null;
   displayed?: boolean | null;
-  order?: number | null;
+  createdBy?: string | null;
+  createdDate?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
+  lastModifiedDate?: dayjs.Dayjs | null;
 }
 
 export type NewProject = Omit<IProject, 'id'> & { id: null };

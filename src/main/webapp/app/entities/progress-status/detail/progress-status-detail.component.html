@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (progressStatus()) {
+      <div>
+        <h2 data-cy="progressStatusDetailsHeading">
+          <span appTranslate="dataRunClientApp.progressStatus.detail.title">Progress Status</span>
+        </h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.progressStatus.uid">Uid</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.progressStatus.code">Code</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.progressStatus.name">Name</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.progressStatus.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.progressStatus.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.progressStatus.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.progressStatus.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ progressStatus()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/progress-status', progressStatus()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

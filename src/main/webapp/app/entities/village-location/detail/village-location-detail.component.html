@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (villageLocation()) {
+      <div>
+        <h2 data-cy="villageLocationDetailsHeading">
+          <span appTranslate="dataRunClientApp.villageLocation.detail.title">Village Location</span>
+        </h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.uid">Uid</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.code">Code</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.name">Name</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.mappingStatus">Mapping Status</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.mappingStatus }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.districtCode">District Code</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.districtCode }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.villageUid">Village Uid</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.villageUid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.subdistrictName">Subdistrict Name</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.subdistrictName }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.villageName">Village Name</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.villageName }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.subvillageName">Subvillage Name</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.subvillageName }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.urbanRuralId">Urban Rural Id</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.urbanRuralId }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.urbanRural">Urban Rural</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.urbanRural }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.settlement">Settlement</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.settlement }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.pop2004">Pop 2004</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.pop2004 }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.pop2022">Pop 2022</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.pop2022 }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.longitude }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.latitude }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.ppcCodeGis">Ppc Code Gis</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.ppcCodeGis }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.level">Level</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.PublicLocationType.' + (villageLocation()!.level ?? 'null')">{{
+              { null: '', DISTRICT: 'DISTRICT', SUBDISTRICT: 'SUBDISTRICT', SUBVILLAGE: 'SUBVILLAGE' }[villageLocation()!.level ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.villageLocation.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ villageLocation()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/village-location', villageLocation()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

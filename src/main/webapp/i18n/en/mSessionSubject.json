@@ -1,0 +1,10 @@
+{
+  "dataRunClientApp": {
+    "MSessionSubject": {
+      "null": "",
+      "ITNs": "ITNs",
+      "BreadingSite": "BreadingSite",
+      "TRANSMISSION_PREVENTION": "TRANSMISSION_PREVENTION"
+    }
+  }
+}

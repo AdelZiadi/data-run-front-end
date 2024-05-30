@@ -11,9 +11,9 @@ import { IProject, NewProject } from '../project.model';
 
 export type PartialUpdateProject = Partial<IProject> & Pick<IProject, 'id'>;
 
-type RestOf<T extends IProject | NewProject> = Omit<T, 'created' | 'lastUpdated'> & {
-  created?: string | null;
-  lastUpdated?: string | null;
+type RestOf<T extends IProject | NewProject> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
+  createdDate?: string | null;
+  lastModifiedDate?: string | null;
 };
 
 export type RestProject = RestOf<IProject>;
@@ -101,16 +101,16 @@ export class ProjectService {
   protected convertDateFromClient<T extends IProject | NewProject | PartialUpdateProject>(project: T): RestOf<T> {
     return {
       ...project,
-      created: project.created?.toJSON() ?? null,
-      lastUpdated: project.lastUpdated?.toJSON() ?? null,
+      createdDate: project.createdDate?.toJSON() ?? null,
+      lastModifiedDate: project.lastModifiedDate?.toJSON() ?? null,
     };
   }
 
   protected convertDateFromServer(restProject: RestProject): IProject {
     return {
       ...restProject,
-      created: restProject.created ? dayjs(restProject.created) : undefined,
-      lastUpdated: restProject.lastUpdated ? dayjs(restProject.lastUpdated) : undefined,
+      createdDate: restProject.createdDate ? dayjs(restProject.createdDate) : undefined,
+      lastModifiedDate: restProject.lastModifiedDate ? dayjs(restProject.lastModifiedDate) : undefined,
     };
   }
 

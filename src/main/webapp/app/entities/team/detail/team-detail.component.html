@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (team()) {
+      <div>
+        <h2 data-cy="teamDetailsHeading"><span appTranslate="dataRunClientApp.team.detail.title">Team</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ team()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.uid">Uid</span></dt>
+          <dd>
+            <span>{{ team()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.code">Code</span></dt>
+          <dd>
+            <span>{{ team()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.name">Name</span></dt>
+          <dd>
+            <span>{{ team()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.description">Description</span></dt>
+          <dd>
+            <span>{{ team()!.description }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.mobile">Mobile</span></dt>
+          <dd>
+            <span>{{ team()!.mobile }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.workers">Workers</span></dt>
+          <dd>
+            <span>{{ team()!.workers }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.mobility">Mobility</span></dt>
+          <dd>
+            <span>{{ team()!.mobility }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ team()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ team()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ team()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ team()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.activity">Activity</span></dt>
+          <dd>
+            @if (team()!.activity) {
+              <div>
+                <a [routerLink]="['/activity', team()!.activity?.id, 'view']">{{ team()!.activity?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.operationRoom">Operation Room</span></dt>
+          <dd>
+            @if (team()!.operationRoom) {
+              <div>
+                <a [routerLink]="['/review-team', team()!.operationRoom?.id, 'view']">{{ team()!.operationRoom?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.warehouse">Warehouse</span></dt>
+          <dd>
+            @if (team()!.warehouse) {
+              <div>
+                <a [routerLink]="['/warehouse', team()!.warehouse?.id, 'view']">{{ team()!.warehouse?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.team.userInfo">User Info</span></dt>
+          <dd>
+            <span>{{ team()!.userInfo?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/team', team()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

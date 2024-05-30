@@ -1,0 +1,310 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-village-location-heading"
+        data-cy="VillageLocationCreateUpdateHeading"
+        appTranslate="dataRunClientApp.villageLocation.home.createOrEditLabel"
+      >
+        Create or edit a Village Location
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.villageLocation.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.villageLocation.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.villageLocation.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)) {
+            <div>
+              @if (editForm.get('code')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.villageLocation.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_mappingStatus" appTranslate="dataRunClientApp.villageLocation.mappingStatus"
+            >Mapping Status</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="mappingStatus"
+            id="field_mappingStatus"
+            data-cy="mappingStatus"
+            formControlName="mappingStatus"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_districtCode" appTranslate="dataRunClientApp.villageLocation.districtCode"
+            >District Code</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="districtCode"
+            id="field_districtCode"
+            data-cy="districtCode"
+            formControlName="districtCode"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_villageUid" appTranslate="dataRunClientApp.villageLocation.villageUid">Village Uid</label>
+          <input
+            type="text"
+            class="form-control"
+            name="villageUid"
+            id="field_villageUid"
+            data-cy="villageUid"
+            formControlName="villageUid"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_subdistrictName" appTranslate="dataRunClientApp.villageLocation.subdistrictName"
+            >Subdistrict Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="subdistrictName"
+            id="field_subdistrictName"
+            data-cy="subdistrictName"
+            formControlName="subdistrictName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_villageName" appTranslate="dataRunClientApp.villageLocation.villageName">Village Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="villageName"
+            id="field_villageName"
+            data-cy="villageName"
+            formControlName="villageName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_subvillageName" appTranslate="dataRunClientApp.villageLocation.subvillageName"
+            >Subvillage Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="subvillageName"
+            id="field_subvillageName"
+            data-cy="subvillageName"
+            formControlName="subvillageName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_urbanRuralId" appTranslate="dataRunClientApp.villageLocation.urbanRuralId"
+            >Urban Rural Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="urbanRuralId"
+            id="field_urbanRuralId"
+            data-cy="urbanRuralId"
+            formControlName="urbanRuralId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_urbanRural" appTranslate="dataRunClientApp.villageLocation.urbanRural">Urban Rural</label>
+          <input
+            type="text"
+            class="form-control"
+            name="urbanRural"
+            id="field_urbanRural"
+            data-cy="urbanRural"
+            formControlName="urbanRural"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_settlement" appTranslate="dataRunClientApp.villageLocation.settlement">Settlement</label>
+          <input
+            type="text"
+            class="form-control"
+            name="settlement"
+            id="field_settlement"
+            data-cy="settlement"
+            formControlName="settlement"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pop2004" appTranslate="dataRunClientApp.villageLocation.pop2004">Pop 2004</label>
+          <input type="number" class="form-control" name="pop2004" id="field_pop2004" data-cy="pop2004" formControlName="pop2004" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pop2022" appTranslate="dataRunClientApp.villageLocation.pop2022">Pop 2022</label>
+          <input type="number" class="form-control" name="pop2022" id="field_pop2022" data-cy="pop2022" formControlName="pop2022" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_longitude" appTranslate="dataRunClientApp.villageLocation.longitude">Longitude</label>
+          <input type="number" class="form-control" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_latitude" appTranslate="dataRunClientApp.villageLocation.latitude">Latitude</label>
+          <input type="number" class="form-control" name="latitude" id="field_latitude" data-cy="latitude" formControlName="latitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ppcCodeGis" appTranslate="dataRunClientApp.villageLocation.ppcCodeGis">Ppc Code Gis</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ppcCodeGis"
+            id="field_ppcCodeGis"
+            data-cy="ppcCodeGis"
+            formControlName="ppcCodeGis"
+          />
+          @if (editForm.get('ppcCodeGis')!.invalid && (editForm.get('ppcCodeGis')!.dirty || editForm.get('ppcCodeGis')!.touched)) {
+            <div>
+              @if (editForm.get('ppcCodeGis')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_level" appTranslate="dataRunClientApp.villageLocation.level">Level</label>
+          <select class="form-control" name="level" formControlName="level" id="field_level" data-cy="level">
+            <option [ngValue]="null">{{ 'dataRunClientApp.PublicLocationType.null' | translate }}</option>
+            @for (publicLocationType of publicLocationTypeValues; track $index) {
+              <option [value]="publicLocationType">{{ 'dataRunClientApp.PublicLocationType.' + publicLocationType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @if (editForm.controls.createdBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.villageLocation.createdBy">Created By</label>
+            <input
+              type="text"
+              class="form-control"
+              name="createdBy"
+              id="field_createdBy"
+              data-cy="createdBy"
+              formControlName="createdBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.createdDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.villageLocation.createdDate"
+              >Created Date</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_createdDate"
+                data-cy="createdDate"
+                type="datetime-local"
+                class="form-control"
+                name="createdDate"
+                formControlName="createdDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedBy.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.villageLocation.lastModifiedBy"
+              >Last Modified By</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="lastModifiedBy"
+              id="field_lastModifiedBy"
+              data-cy="lastModifiedBy"
+              formControlName="lastModifiedBy"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @if (editForm.controls.lastModifiedDate.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.villageLocation.lastModifiedDate"
+              >Last Modified Date</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_lastModifiedDate"
+                data-cy="lastModifiedDate"
+                type="datetime-local"
+                class="form-control"
+                name="lastModifiedDate"
+                formControlName="lastModifiedDate"
+                placeholder="YYYY-MM-DD HH:mm"
+                [readonly]="true"
+              />
+            </div>
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@if (reviewTeam) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(reviewTeam.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="reviewTeamDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
+
+      <span class="btn btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()"></span>
+    </div>
+
+    <div class="modal-body">
+      <app-alert-error></app-alert-error>
+      <p
+        id="app-delete-reviewTeam-heading"
+        appTranslate="dataRunClientApp.reviewTeam.delete.question"
+        [translateValues]="{ id: reviewTeam.id }"
+      >
+        Are you sure you want to delete Review Team {{ reviewTeam.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="app-confirm-delete-reviewTeam" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span appTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

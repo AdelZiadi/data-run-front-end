@@ -19,16 +19,18 @@ type ActivityFormGroupInput = IActivity | PartialWithRequiredKeyOf<NewActivity>;
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IActivity | NewActivity> = Omit<T, 'startDate' | 'endDate'> & {
+type FormValueOf<T extends IActivity | NewActivity> = Omit<T, 'startDate' | 'endDate' | 'createdDate' | 'lastModifiedDate'> & {
   startDate?: string | null;
   endDate?: string | null;
+  createdDate?: string | null;
+  lastModifiedDate?: string | null;
 };
 
 type ActivityFormRawValue = FormValueOf<IActivity>;
 
 type NewActivityFormRawValue = FormValueOf<NewActivity>;
 
-type ActivityFormDefaults = Pick<NewActivity, 'id' | 'startDate' | 'endDate' | 'active' | 'displayed'>;
+type ActivityFormDefaults = Pick<NewActivity, 'id' | 'startDate' | 'endDate' | 'active' | 'createdDate' | 'lastModifiedDate'>;
 
 type ActivityFormGroupContent = {
   id: FormControl<ActivityFormRawValue['id'] | NewActivity['id']>;
@@ -38,8 +40,10 @@ type ActivityFormGroupContent = {
   startDate: FormControl<ActivityFormRawValue['startDate']>;
   endDate: FormControl<ActivityFormRawValue['endDate']>;
   active: FormControl<ActivityFormRawValue['active']>;
-  displayed: FormControl<ActivityFormRawValue['displayed']>;
-  order: FormControl<ActivityFormRawValue['order']>;
+  createdBy: FormControl<ActivityFormRawValue['createdBy']>;
+  createdDate: FormControl<ActivityFormRawValue['createdDate']>;
+  lastModifiedBy: FormControl<ActivityFormRawValue['lastModifiedBy']>;
+  lastModifiedDate: FormControl<ActivityFormRawValue['lastModifiedDate']>;
   project: FormControl<ActivityFormRawValue['project']>;
 };
 
@@ -70,8 +74,10 @@ export class ActivityFormService {
       }),
       endDate: new FormControl(activityRawValue.endDate),
       active: new FormControl(activityRawValue.active),
-      displayed: new FormControl(activityRawValue.displayed),
-      order: new FormControl(activityRawValue.order),
+      createdBy: new FormControl(activityRawValue.createdBy),
+      createdDate: new FormControl(activityRawValue.createdDate),
+      lastModifiedBy: new FormControl(activityRawValue.lastModifiedBy),
+      lastModifiedDate: new FormControl(activityRawValue.lastModifiedDate),
       project: new FormControl(activityRawValue.project),
     });
   }
@@ -98,7 +104,8 @@ export class ActivityFormService {
       startDate: currentTime,
       endDate: currentTime,
       active: false,
-      displayed: false,
+      createdDate: currentTime,
+      lastModifiedDate: currentTime,
     };
   }
 
@@ -107,6 +114,8 @@ export class ActivityFormService {
       ...rawActivity,
       startDate: dayjs(rawActivity.startDate, DATE_TIME_FORMAT),
       endDate: dayjs(rawActivity.endDate, DATE_TIME_FORMAT),
+      createdDate: dayjs(rawActivity.createdDate, DATE_TIME_FORMAT),
+      lastModifiedDate: dayjs(rawActivity.lastModifiedDate, DATE_TIME_FORMAT),
     };
   }
 
@@ -117,6 +126,8 @@ export class ActivityFormService {
       ...activity,
       startDate: activity.startDate ? activity.startDate.format(DATE_TIME_FORMAT) : undefined,
       endDate: activity.endDate ? activity.endDate.format(DATE_TIME_FORMAT) : undefined,
+      createdDate: activity.createdDate ? activity.createdDate.format(DATE_TIME_FORMAT) : undefined,
+      lastModifiedDate: activity.lastModifiedDate ? activity.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

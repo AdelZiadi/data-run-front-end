@@ -1,8 +1,9 @@
 {
   "annotations": {
-    "changelogDate": "20240521135958"
+    "changelogDate": "20240522234851"
   },
   "applications": "*",
+  "enableAudit": true,
   "entityTableName": "activity",
   "fields": [
     {
@@ -34,12 +35,38 @@
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "displayed",
-      "fieldType": "Boolean"
+      "auditField": true,
+      "autoGenerate": true,
+      "columnType": "varchar(50)",
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "nullable": false,
+      "readonly": true
     },
     {
-      "fieldName": "order",
-      "fieldType": "Integer"
+      "auditField": true,
+      "autoGenerate": true,
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "nullable": false,
+      "readonly": true
+    },
+    {
+      "auditField": true,
+      "autoGenerate": true,
+      "columnType": "varchar(50)",
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "nullable": false,
+      "readonly": true
+    },
+    {
+      "auditField": true,
+      "autoGenerate": true,
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "nullable": false,
+      "readonly": true
     }
   ],
   "name": "Activity",
@@ -54,5 +81,6 @@
       "relationshipType": "many-to-one"
     }
   ],
+  "searchEngine": "no",
   "service": "serviceImpl"
 }

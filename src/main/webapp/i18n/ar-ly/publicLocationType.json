@@ -1,0 +1,10 @@
+{
+  "dataRunClientApp": {
+    "PublicLocationType": {
+      "null": "",
+      "DISTRICT": "DISTRICT",
+      "SUBDISTRICT": "SUBDISTRICT",
+      "SUBVILLAGE": "SUBVILLAGE"
+    }
+  }
+}

@@ -1,8 +1,9 @@
 {
   "annotations": {
-    "changelogDate": "20240521135957"
+    "changelogDate": "20240522234850"
   },
   "applications": "*",
+  "enableAudit": true,
   "entityTableName": "project",
   "fields": [
     {
@@ -21,20 +22,42 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "created",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "lastUpdated",
-      "fieldType": "Instant"
-    },
-    {
       "fieldName": "displayed",
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "order",
-      "fieldType": "Integer"
+      "auditField": true,
+      "autoGenerate": true,
+      "columnType": "varchar(50)",
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "nullable": false,
+      "readonly": true
+    },
+    {
+      "auditField": true,
+      "autoGenerate": true,
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "nullable": false,
+      "readonly": true
+    },
+    {
+      "auditField": true,
+      "autoGenerate": true,
+      "columnType": "varchar(50)",
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "nullable": false,
+      "readonly": true
+    },
+    {
+      "auditField": true,
+      "autoGenerate": true,
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "nullable": false,
+      "readonly": true
     }
   ],
   "name": "Project",
@@ -47,5 +70,6 @@
       "relationshipType": "one-to-many"
     }
   ],
+  "searchEngine": "no",
   "service": "serviceImpl"
 }

@@ -1,0 +1,228 @@
+<div>
+  <h2 id="page-heading" data-cy="ChvSessionHeading">
+    <span appTranslate="dataRunClientApp.chvSession.home.title">Chv Sessions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.chvSession.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chv-session"
+        [routerLink]="['/chv-session/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.chvSession.home.createLabel">Create a new Chv Session</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (chvSessions?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.chvSession.home.notFound">No Chv Sessions found</span>
+    </div>
+  }
+
+  @if (chvSessions && chvSessions.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="sessionDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.sessionDate">Session Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="subject">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.subject">Subject</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="sessions">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.sessions">Sessions</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="people">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.people">People</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="comment">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.comment">Comment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="startEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.startEntryTime">Start Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="deleted">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.deleted">Deleted</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="team.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.team">Team</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (chvSession of chvSessions; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/chv-session', chvSession.id, 'view']">{{ chvSession.id }}</a>
+              </td>
+              <td>{{ chvSession.uid }}</td>
+              <td>{{ chvSession.code }}</td>
+              <td>{{ chvSession.name }}</td>
+              <td>{{ chvSession.sessionDate | formatMediumDatetime }}</td>
+              <td [appTranslate]="'dataRunClientApp.MSessionSubject.' + (chvSession.subject ?? 'null')">
+                {{
+                  { null: '', ITNs: 'ITNs', BreadingSite: 'BreadingSite', TRANSMISSION_PREVENTION: 'TRANSMISSION_PREVENTION' }[
+                    chvSession.subject ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ chvSession.sessions }}</td>
+              <td>{{ chvSession.people }}</td>
+              <td>{{ chvSession.comment }}</td>
+              <td>{{ chvSession.startEntryTime | formatMediumDatetime }}</td>
+              <td>{{ chvSession.deleted }}</td>
+              <td>{{ chvSession.createdBy }}</td>
+              <td>{{ chvSession.createdDate | formatMediumDatetime }}</td>
+              <td>{{ chvSession.lastModifiedBy }}</td>
+              <td>{{ chvSession.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (chvSession.team) {
+                  <div>
+                    <a [routerLink]="['/team', chvSession.team.id, 'view']">{{ chvSession.team.code }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/chv-session', chvSession.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/chv-session', chvSession.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(chvSession)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (chvSessions && chvSessions.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

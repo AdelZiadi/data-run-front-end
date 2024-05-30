@@ -1,0 +1,10 @@
+{
+  "dataRunClientApp": {
+    "MTreatment": {
+      "null": "",
+      "TREATED": "TREATED",
+      "FIRSTDOSE": "FIRSTDOSE",
+      "REFERAL": "REFERAL"
+    }
+  }
+}

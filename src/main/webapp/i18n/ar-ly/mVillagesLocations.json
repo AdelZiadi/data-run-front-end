@@ -1,0 +1,41 @@
+{
+  "dataRunClientApp": {
+    "mVillagesLocations": {
+      "home": {
+        "title": "M Villages Locations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new M Villages Locations",
+        "createOrEditLabel": "Create or edit a M Villages Locations",
+        "notFound": "No M Villages Locations found"
+      },
+      "created": "A new M Villages Locations is created with identifier {{ param }}",
+      "updated": "A M Villages Locations is updated with identifier {{ param }}",
+      "deleted": "A M Villages Locations is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete M Villages Locations {{ id }}?"
+      },
+      "detail": {
+        "title": "M Villages Locations"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "mappingStatus": "Mapping Status",
+      "districtCode": "District Code",
+      "villageUid": "Village Uid",
+      "subdistrictName": "Subdistrict Name",
+      "villageName": "Village Name",
+      "subvillageName": "Subvillage Name",
+      "name": "Name",
+      "urbanRuralId": "Urban Rural Id",
+      "urbanRural": "Urban Rural",
+      "settlement": "Settlement",
+      "pop2004": "Pop 2004",
+      "pop2022": "Pop 2022",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "ppcCodeGis": "Ppc Code Gis",
+      "level": "Level"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (chvSession()) {
+      <div>
+        <h2 data-cy="chvSessionDetailsHeading"><span appTranslate="dataRunClientApp.chvSession.detail.title">Chv Session</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ chvSession()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.uid">Uid</span></dt>
+          <dd>
+            <span>{{ chvSession()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.code">Code</span></dt>
+          <dd>
+            <span>{{ chvSession()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.name">Name</span></dt>
+          <dd>
+            <span>{{ chvSession()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.sessionDate">Session Date</span></dt>
+          <dd>
+            <span>{{ chvSession()!.sessionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.subject">Subject</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.MSessionSubject.' + (chvSession()!.subject ?? 'null')">{{
+              { null: '', ITNs: 'ITNs', BreadingSite: 'BreadingSite', TRANSMISSION_PREVENTION: 'TRANSMISSION_PREVENTION' }[
+                chvSession()!.subject ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.sessions">Sessions</span></dt>
+          <dd>
+            <span>{{ chvSession()!.sessions }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.people">People</span></dt>
+          <dd>
+            <span>{{ chvSession()!.people }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.comment">Comment</span></dt>
+          <dd>
+            <span>{{ chvSession()!.comment }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.startEntryTime">Start Entry Time</span></dt>
+          <dd>
+            <span>{{ chvSession()!.startEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ chvSession()!.deleted }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ chvSession()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ chvSession()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ chvSession()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ chvSession()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.team">Team</span></dt>
+          <dd>
+            @if (chvSession()!.team) {
+              <div>
+                <a [routerLink]="['/team', chvSession()!.team?.id, 'view']">{{ chvSession()!.team?.code }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/chv-session', chvSession()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

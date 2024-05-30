@@ -1,0 +1,35 @@
+{
+  "dataRunClientApp": {
+    "warehouse": {
+      "home": {
+        "title": "Warehouses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Warehouse",
+        "createOrEditLabel": "Create or edit a Warehouse",
+        "notFound": "No Warehouses found"
+      },
+      "created": "A new Warehouse is created with identifier {{ param }}",
+      "updated": "A Warehouse is updated with identifier {{ param }}",
+      "deleted": "A Warehouse is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Warehouse {{ id }}?"
+      },
+      "detail": {
+        "title": "Warehouse"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "gpsCoordinate": "Gps Coordinate",
+      "supervisor": "Supervisor",
+      "supervisorMobile": "Supervisor Mobile",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "activity": "Activity"
+    }
+  }
+}

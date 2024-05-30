@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (chvRegister()) {
+      <div>
+        <h2 data-cy="chvRegisterDetailsHeading"><span appTranslate="dataRunClientApp.chvRegister.detail.title">Chv Register</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.uid">Uid</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.code">Code</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.name">Name</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.visitDate">Visit Date</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.visitDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.pregnant">Pregnant</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.pregnant }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.testResult">Test Result</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.MTestResult.' + (chvRegister()!.testResult ?? 'null')">{{
+              { null: '', NEGATIVE: 'NEGATIVE', PF: 'PF', PV: 'PV', MIX: 'MIX', INVALID: 'INVALID' }[chvRegister()!.testResult ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.detectionType">Detection Type</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.MDetectionType.' + (chvRegister()!.detectionType ?? 'null')">{{
+              { null: '', REACTIVE: 'REACTIVE', ACTIVE: 'ACTIVE' }[chvRegister()!.detectionType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.severity">Severity</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.MSeverity.' + (chvRegister()!.severity ?? 'null')">{{
+              { null: '', SIMPLE: 'SIMPLE', SEVERE: 'SEVERE' }[chvRegister()!.severity ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.treatment">Treatment</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.MTreatment.' + (chvRegister()!.treatment ?? 'null')">{{
+              { null: '', TREATED: 'TREATED', FIRSTDOSE: 'FIRSTDOSE', REFERAL: 'REFERAL' }[chvRegister()!.treatment ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.comment">Comment</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.comment }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.startEntryTime">Start Entry Time</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.startEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.deleted }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.createdBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.lastModifiedBy }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.patient">Patient</span></dt>
+          <dd>
+            @if (chvRegister()!.patient) {
+              <div>
+                <a [routerLink]="['/patient-info', chvRegister()!.patient?.id, 'view']">{{ chvRegister()!.patient?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.team">Team</span></dt>
+          <dd>
+            @if (chvRegister()!.team) {
+              <div>
+                <a [routerLink]="['/team', chvRegister()!.team?.id, 'view']">{{ chvRegister()!.team?.code }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/chv-register', chvRegister()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

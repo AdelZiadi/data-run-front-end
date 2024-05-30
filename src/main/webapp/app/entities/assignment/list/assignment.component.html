@@ -1,0 +1,319 @@
+<div>
+  <h2 id="page-heading" data-cy="AssignmentHeading">
+    <span appTranslate="dataRunClientApp.assignment.home.title">Assignments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.assignment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-assignment"
+        [routerLink]="['/assignment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.assignment.home.createLabel">Create a new Assignment</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (assignments?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.assignment.home.notFound">No Assignments found</span>
+    </div>
+  }
+
+  @if (assignments && assignments.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="phaseNo">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.phaseNo">Phase No</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="districtCode">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.districtCode">District Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="gov">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.gov">Gov</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="district">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.district">District</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="subdistrict">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.subdistrict">Subdistrict</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="village">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.village">Village</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="subvillage">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.subvillage">Subvillage</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="dayId">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.dayId">Day Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="population">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.population">Population</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="itnsPlanned">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.itnsPlanned">Itns Planned</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="targetType">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.targetType">Target Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="longitude">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.longitude">Longitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="latitude">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.latitude">Latitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="startDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="createdDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="activity.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.activity">Activity</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="organisationUnit.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.organisationUnit">Organisation Unit</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="team.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.team">Team</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="warehouse.name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.assignment.warehouse">Warehouse</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (assignment of assignments; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/assignment', assignment.id, 'view']">{{ assignment.id }}</a>
+              </td>
+              <td>{{ assignment.uid }}</td>
+              <td>{{ assignment.code }}</td>
+              <td>{{ assignment.phaseNo }}</td>
+              <td>{{ assignment.districtCode }}</td>
+              <td>{{ assignment.gov }}</td>
+              <td>{{ assignment.district }}</td>
+              <td>{{ assignment.subdistrict }}</td>
+              <td>{{ assignment.village }}</td>
+              <td>{{ assignment.subvillage }}</td>
+              <td>{{ assignment.name }}</td>
+              <td>{{ assignment.dayId }}</td>
+              <td>{{ assignment.population }}</td>
+              <td>{{ assignment.itnsPlanned }}</td>
+              <td>{{ assignment.targetType }}</td>
+              <td>{{ assignment.longitude }}</td>
+              <td>{{ assignment.latitude }}</td>
+              <td>{{ assignment.startDate | formatMediumDatetime }}</td>
+              <td>{{ assignment.createdBy }}</td>
+              <td>{{ assignment.createdDate | formatMediumDatetime }}</td>
+              <td>{{ assignment.lastModifiedBy }}</td>
+              <td>{{ assignment.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (assignment.activity) {
+                  <div>
+                    <a [routerLink]="['/activity', assignment.activity.id, 'view']">{{ assignment.activity.code }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (assignment.organisationUnit) {
+                  <div>
+                    <a [routerLink]="['/village-location', assignment.organisationUnit.id, 'view']">{{
+                      assignment.organisationUnit.code
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (assignment.team) {
+                  <div>
+                    <a [routerLink]="['/team', assignment.team.id, 'view']">{{ assignment.team.code }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (assignment.warehouse) {
+                  <div>
+                    <a [routerLink]="['/warehouse', assignment.warehouse.id, 'view']">{{ assignment.warehouse.name }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/assignment', assignment.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/assignment', assignment.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(assignment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (assignments && assignments.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>
