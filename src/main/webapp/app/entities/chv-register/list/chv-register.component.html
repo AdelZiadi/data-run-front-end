@@ -42,20 +42,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="uid">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.uid">Uid</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="code">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.code">Code</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" appSortBy="name">
               <div class="d-flex">
                 <span appTranslate="dataRunClientApp.chvRegister.name">Name</span>
@@ -133,20 +119,7 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="startEntryTime">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.startEntryTime">Start Entry Time</span>
 
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="finishedEntryTime">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.finishedEntryTime">Finished Entry Time</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" appSortBy="comment">
               <div class="d-flex">
                 <span appTranslate="dataRunClientApp.chvRegister.comment">Comment</span>
@@ -188,8 +161,6 @@
               <td>
                 <a [routerLink]="['/chv-register', chvRegister.id, 'view']">{{ chvRegister.id }}</a>
               </td>
-              <td>{{ chvRegister.uid }}</td>
-              <td>{{ chvRegister.code }}</td>
               <td>{{ chvRegister.name }}</td>
               <td>{{ chvRegister.locationName }}</td>
               <td>{{ chvRegister.age }}</td>
@@ -213,8 +184,6 @@
                 {{ { null: '', TREATED: 'TREATED', FIRSTDOSE: 'FIRSTDOSE', REFERAL: 'REFERAL' }[chvRegister.treatment ?? 'null'] }}
               </td>
               <td>{{ chvRegister.deleted }}</td>
-              <td>{{ chvRegister.startEntryTime | formatMediumDatetime }}</td>
-              <td>{{ chvRegister.finishedEntryTime | formatMediumDatetime }}</td>
               <td>{{ chvRegister.comment }}</td>
               <td [appTranslate]="'dataRunClientApp.SyncableStatus.' + (chvRegister.status ?? 'null')">
                 {{ { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[chvRegister.status ?? 'null'] }}
