@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import dayjs from 'dayjs/esm';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IVillageLocation, NewVillageLocation } from '../village-location.model';
 
 /**
@@ -16,44 +14,28 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type VillageLocationFormGroupInput = IVillageLocation | PartialWithRequiredKeyOf<NewVillageLocation>;
 
-/**
- * Type that converts some properties for forms.
- */
-type FormValueOf<T extends IVillageLocation | NewVillageLocation> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-type VillageLocationFormRawValue = FormValueOf<IVillageLocation>;
-
-type NewVillageLocationFormRawValue = FormValueOf<NewVillageLocation>;
-
-type VillageLocationFormDefaults = Pick<NewVillageLocation, 'id' | 'createdDate' | 'lastModifiedDate'>;
+type VillageLocationFormDefaults = Pick<NewVillageLocation, 'id'>;
 
 type VillageLocationFormGroupContent = {
-  id: FormControl<VillageLocationFormRawValue['id'] | NewVillageLocation['id']>;
-  uid: FormControl<VillageLocationFormRawValue['uid']>;
-  code: FormControl<VillageLocationFormRawValue['code']>;
-  name: FormControl<VillageLocationFormRawValue['name']>;
-  mappingStatus: FormControl<VillageLocationFormRawValue['mappingStatus']>;
-  districtCode: FormControl<VillageLocationFormRawValue['districtCode']>;
-  villageUid: FormControl<VillageLocationFormRawValue['villageUid']>;
-  subdistrictName: FormControl<VillageLocationFormRawValue['subdistrictName']>;
-  villageName: FormControl<VillageLocationFormRawValue['villageName']>;
-  subvillageName: FormControl<VillageLocationFormRawValue['subvillageName']>;
-  urbanRuralId: FormControl<VillageLocationFormRawValue['urbanRuralId']>;
-  urbanRural: FormControl<VillageLocationFormRawValue['urbanRural']>;
-  settlement: FormControl<VillageLocationFormRawValue['settlement']>;
-  pop2004: FormControl<VillageLocationFormRawValue['pop2004']>;
-  pop2022: FormControl<VillageLocationFormRawValue['pop2022']>;
-  longitude: FormControl<VillageLocationFormRawValue['longitude']>;
-  latitude: FormControl<VillageLocationFormRawValue['latitude']>;
-  ppcCodeGis: FormControl<VillageLocationFormRawValue['ppcCodeGis']>;
-  level: FormControl<VillageLocationFormRawValue['level']>;
-  createdBy: FormControl<VillageLocationFormRawValue['createdBy']>;
-  createdDate: FormControl<VillageLocationFormRawValue['createdDate']>;
-  lastModifiedBy: FormControl<VillageLocationFormRawValue['lastModifiedBy']>;
-  lastModifiedDate: FormControl<VillageLocationFormRawValue['lastModifiedDate']>;
+  id: FormControl<IVillageLocation['id'] | NewVillageLocation['id']>;
+  uid: FormControl<IVillageLocation['uid']>;
+  code: FormControl<IVillageLocation['code']>;
+  name: FormControl<IVillageLocation['name']>;
+  mappingStatus: FormControl<IVillageLocation['mappingStatus']>;
+  districtCode: FormControl<IVillageLocation['districtCode']>;
+  villageUid: FormControl<IVillageLocation['villageUid']>;
+  subdistrictName: FormControl<IVillageLocation['subdistrictName']>;
+  villageName: FormControl<IVillageLocation['villageName']>;
+  subvillageName: FormControl<IVillageLocation['subvillageName']>;
+  urbanRuralId: FormControl<IVillageLocation['urbanRuralId']>;
+  urbanRural: FormControl<IVillageLocation['urbanRural']>;
+  settlement: FormControl<IVillageLocation['settlement']>;
+  pop2004: FormControl<IVillageLocation['pop2004']>;
+  pop2022: FormControl<IVillageLocation['pop2022']>;
+  longitude: FormControl<IVillageLocation['longitude']>;
+  latitude: FormControl<IVillageLocation['latitude']>;
+  ppcCodeGis: FormControl<IVillageLocation['ppcCodeGis']>;
+  level: FormControl<IVillageLocation['level']>;
 };
 
 export type VillageLocationFormGroup = FormGroup<VillageLocationFormGroupContent>;
@@ -61,10 +43,10 @@ export type VillageLocationFormGroup = FormGroup<VillageLocationFormGroupContent
 @Injectable({ providedIn: 'root' })
 export class VillageLocationFormService {
   createVillageLocationFormGroup(villageLocation: VillageLocationFormGroupInput = { id: null }): VillageLocationFormGroup {
-    const villageLocationRawValue = this.convertVillageLocationToVillageLocationRawValue({
+    const villageLocationRawValue = {
       ...this.getFormDefaults(),
       ...villageLocation,
-    });
+    };
     return new FormGroup<VillageLocationFormGroupContent>({
       id: new FormControl(
         { value: villageLocationRawValue.id, disabled: true },
@@ -74,7 +56,7 @@ export class VillageLocationFormService {
         },
       ),
       uid: new FormControl(villageLocationRawValue.uid, {
-        validators: [Validators.maxLength(11)],
+        validators: [Validators.required, Validators.maxLength(11)],
       }),
       code: new FormControl(villageLocationRawValue.code, {
         validators: [Validators.required],
@@ -97,21 +79,15 @@ export class VillageLocationFormService {
         validators: [Validators.required],
       }),
       level: new FormControl(villageLocationRawValue.level),
-      createdBy: new FormControl(villageLocationRawValue.createdBy),
-      createdDate: new FormControl(villageLocationRawValue.createdDate),
-      lastModifiedBy: new FormControl(villageLocationRawValue.lastModifiedBy),
-      lastModifiedDate: new FormControl(villageLocationRawValue.lastModifiedDate),
     });
   }
 
   getVillageLocation(form: VillageLocationFormGroup): IVillageLocation | NewVillageLocation {
-    return this.convertVillageLocationRawValueToVillageLocation(
-      form.getRawValue() as VillageLocationFormRawValue | NewVillageLocationFormRawValue,
-    );
+    return form.getRawValue() as IVillageLocation | NewVillageLocation;
   }
 
   resetForm(form: VillageLocationFormGroup, villageLocation: VillageLocationFormGroupInput): void {
-    const villageLocationRawValue = this.convertVillageLocationToVillageLocationRawValue({ ...this.getFormDefaults(), ...villageLocation });
+    const villageLocationRawValue = { ...this.getFormDefaults(), ...villageLocation };
     form.reset(
       {
         ...villageLocationRawValue,
@@ -121,32 +97,8 @@ export class VillageLocationFormService {
   }
 
   private getFormDefaults(): VillageLocationFormDefaults {
-    const currentTime = dayjs();
-
     return {
       id: null,
-      createdDate: currentTime,
-      lastModifiedDate: currentTime,
-    };
-  }
-
-  private convertVillageLocationRawValueToVillageLocation(
-    rawVillageLocation: VillageLocationFormRawValue | NewVillageLocationFormRawValue,
-  ): IVillageLocation | NewVillageLocation {
-    return {
-      ...rawVillageLocation,
-      createdDate: dayjs(rawVillageLocation.createdDate, DATE_TIME_FORMAT),
-      lastModifiedDate: dayjs(rawVillageLocation.lastModifiedDate, DATE_TIME_FORMAT),
-    };
-  }
-
-  private convertVillageLocationToVillageLocationRawValue(
-    villageLocation: IVillageLocation | (Partial<NewVillageLocation> & VillageLocationFormDefaults),
-  ): VillageLocationFormRawValue | PartialWithRequiredKeyOf<NewVillageLocationFormRawValue> {
-    return {
-      ...villageLocation,
-      createdDate: villageLocation.createdDate ? villageLocation.createdDate.format(DATE_TIME_FORMAT) : undefined,
-      lastModifiedDate: villageLocation.lastModifiedDate ? villageLocation.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

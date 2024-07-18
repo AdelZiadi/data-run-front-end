@@ -8,7 +8,7 @@
     {
       "fieldName": "uid",
       "fieldType": "String",
-      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRules": ["required", "unique", "maxlength"],
       "fieldValidateRulesMaxlength": "11"
     },
     {
@@ -17,7 +17,21 @@
     },
     {
       "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "locationName",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Gender",
+      "fieldValues": "MALE,FEMALE"
     },
     {
       "fieldName": "visitDate",
@@ -49,68 +63,55 @@
       "fieldValues": "TREATED,FIRSTDOSE,REFERAL"
     },
     {
-      "fieldName": "comment",
-      "fieldType": "String"
+      "fieldName": "deleted",
+      "fieldType": "Boolean"
     },
     {
       "fieldName": "startEntryTime",
       "fieldType": "Instant"
     },
     {
-      "fieldName": "deleted",
-      "fieldType": "Boolean"
+      "fieldName": "finishedEntryTime",
+      "fieldType": "Instant"
     },
     {
-      "auditField": true,
-      "autoGenerate": true,
-      "columnType": "varchar(50)",
-      "fieldName": "createdBy",
+      "fieldName": "comment",
       "fieldType": "String",
-      "nullable": false,
-      "readonly": true
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
     },
     {
-      "auditField": true,
-      "autoGenerate": true,
-      "fieldName": "createdDate",
-      "fieldType": "Instant",
-      "nullable": false,
-      "readonly": true
-    },
-    {
-      "auditField": true,
-      "autoGenerate": true,
-      "columnType": "varchar(50)",
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String",
-      "nullable": false,
-      "readonly": true
-    },
-    {
-      "auditField": true,
-      "autoGenerate": true,
-      "fieldName": "lastModifiedDate",
-      "fieldType": "Instant",
-      "nullable": false,
-      "readonly": true
+      "fieldName": "status",
+      "fieldType": "SyncableStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,COMPLETED"
     }
   ],
   "name": "ChvRegister",
   "pagination": "pagination",
   "relationships": [
     {
-      "otherEntityField": "name",
-      "otherEntityName": "patientInfo",
-      "relationshipName": "patient",
+      "otherEntityField": "code",
+      "otherEntityName": "assignment",
+      "relationshipName": "location",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "activity",
+      "relationshipName": "activity",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     },
     {
       "otherEntityField": "code",
       "otherEntityName": "team",
       "relationshipName": "team",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "searchEngine": "no",

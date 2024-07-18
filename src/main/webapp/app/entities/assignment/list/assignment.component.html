@@ -161,34 +161,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.assignment.createdBy">Created By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="createdDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.assignment.createdDate">Created Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.assignment.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.assignment.lastModifiedDate">Last Modified Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" appSortBy="activity.code">
               <div class="d-flex">
                 <span appTranslate="dataRunClientApp.assignment.activity">Activity</span>
@@ -239,10 +211,6 @@
               <td>{{ assignment.longitude }}</td>
               <td>{{ assignment.latitude }}</td>
               <td>{{ assignment.startDate | formatMediumDatetime }}</td>
-              <td>{{ assignment.createdBy }}</td>
-              <td>{{ assignment.createdDate | formatMediumDatetime }}</td>
-              <td>{{ assignment.lastModifiedBy }}</td>
-              <td>{{ assignment.lastModifiedDate | formatMediumDatetime }}</td>
               <td>
                 @if (assignment.activity) {
                   <div>

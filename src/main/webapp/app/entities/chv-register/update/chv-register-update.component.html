@@ -24,6 +24,9 @@
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
             <div>
+              @if (editForm.get('uid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
               @if (editForm.get('uid')?.errors?.maxlength) {
                 <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
                   >This field cannot be longer than 11 characters.</small
@@ -41,6 +44,40 @@
         <div class="mb-3">
           <label class="form-label" for="field_name" appTranslate="dataRunClientApp.chvRegister.name">Name</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_locationName" appTranslate="dataRunClientApp.chvRegister.locationName">Location Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="locationName"
+            id="field_locationName"
+            data-cy="locationName"
+            formControlName="locationName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_age" appTranslate="dataRunClientApp.chvRegister.age">Age</label>
+          <input type="number" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_gender" appTranslate="dataRunClientApp.chvRegister.gender">Gender</label>
+          <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+            <option [ngValue]="null">{{ 'dataRunClientApp.Gender.null' | translate }}</option>
+            @for (gender of genderValues; track $index) {
+              <option [value]="gender">{{ 'dataRunClientApp.Gender.' + gender | translate }}</option>
+            }
+          </select>
         </div>
 
         <div class="mb-3">
@@ -125,8 +162,8 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_comment" appTranslate="dataRunClientApp.chvRegister.comment">Comment</label>
-          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+          <label class="form-label" for="field_deleted" appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</label>
+          <input type="checkbox" class="form-check" name="deleted" id="field_deleted" data-cy="deleted" formControlName="deleted" />
         </div>
 
         <div class="mb-3">
@@ -147,106 +184,114 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_deleted" appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</label>
-          <input type="checkbox" class="form-check" name="deleted" id="field_deleted" data-cy="deleted" formControlName="deleted" />
+          <label class="form-label" for="field_finishedEntryTime" appTranslate="dataRunClientApp.chvRegister.finishedEntryTime"
+            >Finished Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_finishedEntryTime"
+              data-cy="finishedEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="finishedEntryTime"
+              formControlName="finishedEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
         </div>
 
-        @if (editForm.controls.createdBy.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.chvRegister.createdBy">Created By</label>
-            <input
-              type="text"
-              class="form-control"
-              name="createdBy"
-              id="field_createdBy"
-              data-cy="createdBy"
-              formControlName="createdBy"
-              [readonly]="true"
-            />
-          </div>
-        }
-
-        @if (editForm.controls.createdDate.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.chvRegister.createdDate">Created Date</label>
-            <div class="d-flex">
-              <input
-                id="field_createdDate"
-                data-cy="createdDate"
-                type="datetime-local"
-                class="form-control"
-                name="createdDate"
-                formControlName="createdDate"
-                placeholder="YYYY-MM-DD HH:mm"
-                [readonly]="true"
-              />
+        <div class="mb-3">
+          <label class="form-label" for="field_comment" appTranslate="dataRunClientApp.chvRegister.comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+          @if (editForm.get('comment')!.invalid && (editForm.get('comment')!.dirty || editForm.get('comment')!.touched)) {
+            <div>
+              @if (editForm.get('comment')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
             </div>
-          </div>
-        }
-
-        @if (editForm.controls.lastModifiedBy.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.chvRegister.lastModifiedBy"
-              >Last Modified By</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              name="lastModifiedBy"
-              id="field_lastModifiedBy"
-              data-cy="lastModifiedBy"
-              formControlName="lastModifiedBy"
-              [readonly]="true"
-            />
-          </div>
-        }
-
-        @if (editForm.controls.lastModifiedDate.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.chvRegister.lastModifiedDate"
-              >Last Modified Date</label
-            >
-            <div class="d-flex">
-              <input
-                id="field_lastModifiedDate"
-                data-cy="lastModifiedDate"
-                type="datetime-local"
-                class="form-control"
-                name="lastModifiedDate"
-                formControlName="lastModifiedDate"
-                placeholder="YYYY-MM-DD HH:mm"
-                [readonly]="true"
-              />
-            </div>
-          </div>
-        }
+          }
+        </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_patient" appTranslate="dataRunClientApp.chvRegister.patient">Patient</label>
+          <label class="form-label" for="field_status" appTranslate="dataRunClientApp.chvRegister.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'dataRunClientApp.SyncableStatus.null' | translate }}</option>
+            @for (syncableStatus of syncableStatusValues; track $index) {
+              <option [value]="syncableStatus">{{ 'dataRunClientApp.SyncableStatus.' + syncableStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_location" appTranslate="dataRunClientApp.chvRegister.location">Location</label>
           <select
             class="form-control"
-            id="field_patient"
-            data-cy="patient"
-            name="patient"
-            formControlName="patient"
-            [compareWith]="comparePatientInfo"
+            id="field_location"
+            data-cy="location"
+            name="location"
+            formControlName="location"
+            [compareWith]="compareAssignment"
           >
             <option [ngValue]="null"></option>
-            @for (patientInfoOption of patientInfosSharedCollection; track $index) {
-              <option [ngValue]="patientInfoOption">{{ patientInfoOption.name }}</option>
+            @for (assignmentOption of assignmentsSharedCollection; track $index) {
+              <option [ngValue]="assignmentOption">{{ assignmentOption.code }}</option>
             }
           </select>
         </div>
 
         <div class="mb-3">
+          <label class="form-label" for="field_activity" appTranslate="dataRunClientApp.chvRegister.activity">Activity</label>
+          <select
+            class="form-control"
+            id="field_activity"
+            data-cy="activity"
+            name="activity"
+            formControlName="activity"
+            [compareWith]="compareActivity"
+          >
+            @if (!editForm.get('activity')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (activityOption of activitiesSharedCollection; track $index) {
+              <option [ngValue]="activityOption">{{ activityOption.code }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['activity'])!.invalid && (editForm.get(['activity'])!.dirty || editForm.get(['activity'])!.touched)) {
+          <div>
+            @if (editForm.get(['activity'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
           <label class="form-label" for="field_team" appTranslate="dataRunClientApp.chvRegister.team">Team</label>
           <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team" [compareWith]="compareTeam">
-            <option [ngValue]="null"></option>
+            @if (!editForm.get('team')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
             @for (teamOption of teamsSharedCollection; track $index) {
               <option [ngValue]="teamOption">{{ teamOption.code }}</option>
             }
           </select>
         </div>
+        @if (editForm.get(['team'])!.invalid && (editForm.get(['team'])!.dirty || editForm.get(['team'])!.touched)) {
+          <div>
+            @if (editForm.get(['team'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
       </div>
 
       <div>

@@ -91,34 +91,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouse.createdBy">Created By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="createdDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouse.createdDate">Created Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouse.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouse.lastModifiedDate">Last Modified Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" appSortBy="activity.code">
               <div class="d-flex">
                 <span appTranslate="dataRunClientApp.warehouse.activity">Activity</span>
@@ -141,10 +113,6 @@
               <td>{{ warehouse.gpsCoordinate }}</td>
               <td>{{ warehouse.supervisor }}</td>
               <td>{{ warehouse.supervisorMobile }}</td>
-              <td>{{ warehouse.createdBy }}</td>
-              <td>{{ warehouse.createdDate | formatMediumDatetime }}</td>
-              <td>{{ warehouse.lastModifiedBy }}</td>
-              <td>{{ warehouse.lastModifiedDate | formatMediumDatetime }}</td>
               <td>
                 @if (warehouse.activity) {
                   <div>

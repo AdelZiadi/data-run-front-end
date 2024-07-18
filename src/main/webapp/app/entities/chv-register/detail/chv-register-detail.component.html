@@ -27,6 +27,20 @@
           <dd>
             <span>{{ chvRegister()!.name }}</span>
           </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.locationName">Location Name</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.locationName }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.age">Age</span></dt>
+          <dd>
+            <span>{{ chvRegister()!.age }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.gender">Gender</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.Gender.' + (chvRegister()!.gender ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[chvRegister()!.gender ?? 'null']
+            }}</span>
+          </dd>
           <dt><span appTranslate="dataRunClientApp.chvRegister.visitDate">Visit Date</span></dt>
           <dd>
             <span>{{ chvRegister()!.visitDate | formatMediumDatetime }}</span>
@@ -59,39 +73,41 @@
               { null: '', TREATED: 'TREATED', FIRSTDOSE: 'FIRSTDOSE', REFERAL: 'REFERAL' }[chvRegister()!.treatment ?? 'null']
             }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvRegister.comment">Comment</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</span></dt>
           <dd>
-            <span>{{ chvRegister()!.comment }}</span>
+            <span>{{ chvRegister()!.deleted }}</span>
           </dd>
           <dt><span appTranslate="dataRunClientApp.chvRegister.startEntryTime">Start Entry Time</span></dt>
           <dd>
             <span>{{ chvRegister()!.startEntryTime | formatMediumDatetime }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.finishedEntryTime">Finished Entry Time</span></dt>
           <dd>
-            <span>{{ chvRegister()!.deleted }}</span>
+            <span>{{ chvRegister()!.finishedEntryTime | formatMediumDatetime }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvRegister.createdBy">Created By</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.comment">Comment</span></dt>
           <dd>
-            <span>{{ chvRegister()!.createdBy }}</span>
+            <span>{{ chvRegister()!.comment }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvRegister.createdDate">Created Date</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.status">Status</span></dt>
           <dd>
-            <span>{{ chvRegister()!.createdDate | formatMediumDatetime }}</span>
+            <span [appTranslate]="'dataRunClientApp.SyncableStatus.' + (chvRegister()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[chvRegister()!.status ?? 'null']
+            }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvRegister.lastModifiedBy">Last Modified By</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.location">Location</span></dt>
           <dd>
-            <span>{{ chvRegister()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.chvRegister.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ chvRegister()!.lastModifiedDate | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.chvRegister.patient">Patient</span></dt>
-          <dd>
-            @if (chvRegister()!.patient) {
+            @if (chvRegister()!.location) {
               <div>
-                <a [routerLink]="['/patient-info', chvRegister()!.patient?.id, 'view']">{{ chvRegister()!.patient?.name }}</a>
+                <a [routerLink]="['/assignment', chvRegister()!.location?.id, 'view']">{{ chvRegister()!.location?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvRegister.activity">Activity</span></dt>
+          <dd>
+            @if (chvRegister()!.activity) {
+              <div>
+                <a [routerLink]="['/activity', chvRegister()!.activity?.id, 'view']">{{ chvRegister()!.activity?.code }}</a>
               </div>
             }
           </dd>

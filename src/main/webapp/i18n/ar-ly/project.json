@@ -2,31 +2,27 @@
   "dataRunClientApp": {
     "project": {
       "home": {
-        "title": "Projects",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Project",
-        "createOrEditLabel": "Create or edit a Project",
-        "notFound": "No Projects found"
+        "title": "المشروعات",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء مشروع جديد",
+        "createOrEditLabel": "إنشاء أو تحرير مشروع",
+        "notFound": "لم يتم العثور على مشروعات"
       },
-      "created": "A new Project is created with identifier {{ param }}",
-      "updated": "A Project is updated with identifier {{ param }}",
-      "deleted": "A Project is deleted with identifier {{ param }}",
+      "created": "تم إنشاء مشروع جديد بالمعرف {{ param }}",
+      "updated": "تم تحديث المشروع بالمعرف {{ param }}",
+      "deleted": "تم حذف المشروع بالمعرف {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Project {{ id }}?"
+        "question": "هل أنت متأكد أنك تريد حذف المشروع {{ id }}؟"
       },
       "detail": {
-        "title": "Project"
+        "title": "المشروع"
       },
-      "id": "ID",
-      "uid": "Uid",
-      "code": "Code",
-      "name": "Name",
-      "displayed": "Displayed",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date",
-      "activity": "Activity"
+      "id": "المعرف",
+      "uid": "معرف المستخدم",
+      "code": "الرمز",
+      "name": "الاسم",
+      "disabled": "معطل",
+      "activity": "النشاط"
     }
   }
 }

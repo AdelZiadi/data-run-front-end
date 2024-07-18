@@ -1,8 +1,8 @@
-import dayjs from 'dayjs/esm';
 import { IActivity } from 'app/entities/activity/activity.model';
 import { IReviewTeam } from 'app/entities/review-team/review-team.model';
 import { IWarehouse } from 'app/entities/warehouse/warehouse.model';
 import { IUser } from 'app/entities/user/user.model';
+import { TeamType } from 'app/entities/enumerations/team-type.model';
 
 export interface ITeam {
   id: number;
@@ -13,10 +13,9 @@ export interface ITeam {
   mobile?: string | null;
   workers?: number | null;
   mobility?: string | null;
-  createdBy?: string | null;
-  createdDate?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  lastModifiedDate?: dayjs.Dayjs | null;
+  teamType?: keyof typeof TeamType | null;
+  disabled?: boolean | null;
+  deleteClientData?: boolean | null;
   activity?: IActivity | null;
   operationRoom?: IReviewTeam | null;
   warehouse?: IWarehouse | null;

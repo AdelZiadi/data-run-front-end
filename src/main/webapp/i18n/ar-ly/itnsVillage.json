@@ -1,0 +1,56 @@
+{
+  "dataRunClientApp": {
+    "itnsVillage": {
+      "home": {
+        "title": "Itns Villages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Itns Village",
+        "createOrEditLabel": "Create or edit a Itns Village",
+        "notFound": "No Itns Villages found"
+      },
+      "created": "A new Itns Village is created with identifier {{ param }}",
+      "updated": "A Itns Village is updated with identifier {{ param }}",
+      "deleted": "A Itns Village is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Itns Village {{ id }}?"
+      },
+      "detail": {
+        "title": "Itns Village"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "submissionUuid": "Submission Uuid",
+      "submissionId": "Submission Id",
+      "workDayDate": "Work Day Date",
+      "surveytype": "Surveytype",
+      "otherReasonComment": "Other Reason Comment",
+      "reasonNotcomplete": "Reason Notcomplete",
+      "settlement": "Settlement",
+      "settlementName": "Settlement Name",
+      "tlCommenet": "Tl Commenet",
+      "timeSpentHours": "Time Spent Hours",
+      "timeSpentMinutes": "Time Spent Minutes",
+      "difficulties": "Difficulties",
+      "locationCaptured": "Location Captured",
+      "locationCaptureTime": "Location Capture Time",
+      "hoProof": "Ho Proof",
+      "hoProofUrl": "Ho Proof Url",
+      "submissionTime": "Submission Time",
+      "untargetingOtherSpecify": "Untargeting Other Specify",
+      "otherVillageName": "Other Village Name",
+      "otherVillageCode": "Other Village Code",
+      "otherTeamNo": "Other Team No",
+      "startEntryTime": "Start Entry Time",
+      "finishedEntryTime": "Finished Entry Time",
+      "deleted": "Deleted",
+      "status": "Status",
+      "houseDetail": "House Detail",
+      "progressStatus": "Progress Status",
+      "team": "Team",
+      "assignment": "Assignment",
+      "activity": "Activity"
+    }
+  }
+}

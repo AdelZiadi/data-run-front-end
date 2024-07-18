@@ -77,37 +77,16 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="active">
+            <th scope="col" appSortBy="disabled">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.activity.active">Active</span>
+                <span appTranslate="dataRunClientApp.activity.disabled">Disabled</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
+            <th scope="col" appSortBy="deleteClientData">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.activity.createdBy">Created By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="createdDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.activity.createdDate">Created Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.activity.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.activity.lastModifiedDate">Last Modified Date</span>
+                <span appTranslate="dataRunClientApp.activity.deleteClientData">Delete Client Data</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -132,11 +111,8 @@
               <td>{{ activity.name }}</td>
               <td>{{ activity.startDate | formatMediumDatetime }}</td>
               <td>{{ activity.endDate | formatMediumDatetime }}</td>
-              <td>{{ activity.active }}</td>
-              <td>{{ activity.createdBy }}</td>
-              <td>{{ activity.createdDate | formatMediumDatetime }}</td>
-              <td>{{ activity.lastModifiedBy }}</td>
-              <td>{{ activity.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>{{ activity.disabled }}</td>
+              <td>{{ activity.deleteClientData }}</td>
               <td>
                 @if (activity.project) {
                   <div>

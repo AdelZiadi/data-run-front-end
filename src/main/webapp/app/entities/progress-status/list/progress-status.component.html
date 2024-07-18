@@ -63,34 +63,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.progressStatus.createdBy">Created By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="createdDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.progressStatus.createdDate">Created Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.progressStatus.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.progressStatus.lastModifiedDate">Last Modified Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -103,10 +75,6 @@
               <td>{{ progressStatus.uid }}</td>
               <td>{{ progressStatus.code }}</td>
               <td>{{ progressStatus.name }}</td>
-              <td>{{ progressStatus.createdBy }}</td>
-              <td>{{ progressStatus.createdDate | formatMediumDatetime }}</td>
-              <td>{{ progressStatus.lastModifiedBy }}</td>
-              <td>{{ progressStatus.lastModifiedDate | formatMediumDatetime }}</td>
               <td class="text-end">
                 <div class="btn-group">
                   <a

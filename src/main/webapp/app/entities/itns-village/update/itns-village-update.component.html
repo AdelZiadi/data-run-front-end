@@ -1,0 +1,589 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-itns-village-heading"
+        data-cy="ItnsVillageCreateUpdateHeading"
+        appTranslate="dataRunClientApp.itnsVillage.home.createOrEditLabel"
+      >
+        Create or edit a Itns Village
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.itnsVillage.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.itnsVillage.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.itnsVillage.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.itnsVillage.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_submissionUuid" appTranslate="dataRunClientApp.itnsVillage.submissionUuid"
+            >Submission Uuid</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="submissionUuid"
+            id="field_submissionUuid"
+            data-cy="submissionUuid"
+            formControlName="submissionUuid"
+          />
+          @if (
+            editForm.get('submissionUuid')!.invalid && (editForm.get('submissionUuid')!.dirty || editForm.get('submissionUuid')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('submissionUuid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_submissionId" appTranslate="dataRunClientApp.itnsVillage.submissionId">Submission Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="submissionId"
+            id="field_submissionId"
+            data-cy="submissionId"
+            formControlName="submissionId"
+          />
+          @if (editForm.get('submissionId')!.invalid && (editForm.get('submissionId')!.dirty || editForm.get('submissionId')!.touched)) {
+            <div>
+              @if (editForm.get('submissionId')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('submissionId')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_workDayDate" appTranslate="dataRunClientApp.itnsVillage.workDayDate">Work Day Date</label>
+          <div class="d-flex">
+            <input
+              id="field_workDayDate"
+              data-cy="workDayDate"
+              type="datetime-local"
+              class="form-control"
+              name="workDayDate"
+              formControlName="workDayDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_surveytype" appTranslate="dataRunClientApp.itnsVillage.surveytype">Surveytype</label>
+          <select class="form-control" name="surveytype" formControlName="surveytype" id="field_surveytype" data-cy="surveytype">
+            <option [ngValue]="null">{{ 'dataRunClientApp.SurveyTypeEnum.null' | translate }}</option>
+            @for (surveyTypeEnum of surveyTypeEnumValues; track $index) {
+              <option [value]="surveyTypeEnum">{{ 'dataRunClientApp.SurveyTypeEnum.' + surveyTypeEnum | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_otherReasonComment" appTranslate="dataRunClientApp.itnsVillage.otherReasonComment"
+            >Other Reason Comment</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="otherReasonComment"
+            id="field_otherReasonComment"
+            data-cy="otherReasonComment"
+            formControlName="otherReasonComment"
+          />
+          @if (
+            editForm.get('otherReasonComment')!.invalid &&
+            (editForm.get('otherReasonComment')!.dirty || editForm.get('otherReasonComment')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('otherReasonComment')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_reasonNotcomplete" appTranslate="dataRunClientApp.itnsVillage.reasonNotcomplete"
+            >Reason Notcomplete</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="reasonNotcomplete"
+            id="field_reasonNotcomplete"
+            data-cy="reasonNotcomplete"
+            formControlName="reasonNotcomplete"
+          />
+          @if (
+            editForm.get('reasonNotcomplete')!.invalid &&
+            (editForm.get('reasonNotcomplete')!.dirty || editForm.get('reasonNotcomplete')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('reasonNotcomplete')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_settlement" appTranslate="dataRunClientApp.itnsVillage.settlement">Settlement</label>
+          <select class="form-control" name="settlement" formControlName="settlement" id="field_settlement" data-cy="settlement">
+            <option [ngValue]="null">{{ 'dataRunClientApp.SettlementEnum.null' | translate }}</option>
+            @for (settlementEnum of settlementEnumValues; track $index) {
+              <option [value]="settlementEnum">{{ 'dataRunClientApp.SettlementEnum.' + settlementEnum | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_settlementName" appTranslate="dataRunClientApp.itnsVillage.settlementName"
+            >Settlement Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="settlementName"
+            id="field_settlementName"
+            data-cy="settlementName"
+            formControlName="settlementName"
+          />
+          @if (
+            editForm.get('settlementName')!.invalid && (editForm.get('settlementName')!.dirty || editForm.get('settlementName')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('settlementName')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tlCommenet" appTranslate="dataRunClientApp.itnsVillage.tlCommenet">Tl Commenet</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tlCommenet"
+            id="field_tlCommenet"
+            data-cy="tlCommenet"
+            formControlName="tlCommenet"
+          />
+          @if (editForm.get('tlCommenet')!.invalid && (editForm.get('tlCommenet')!.dirty || editForm.get('tlCommenet')!.touched)) {
+            <div>
+              @if (editForm.get('tlCommenet')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_timeSpentHours" appTranslate="dataRunClientApp.itnsVillage.timeSpentHours"
+            >Time Spent Hours</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="timeSpentHours"
+            id="field_timeSpentHours"
+            data-cy="timeSpentHours"
+            formControlName="timeSpentHours"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_timeSpentMinutes" appTranslate="dataRunClientApp.itnsVillage.timeSpentMinutes"
+            >Time Spent Minutes</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="timeSpentMinutes"
+            id="field_timeSpentMinutes"
+            data-cy="timeSpentMinutes"
+            formControlName="timeSpentMinutes"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_difficulties" appTranslate="dataRunClientApp.itnsVillage.difficulties">Difficulties</label>
+          <input
+            type="text"
+            class="form-control"
+            name="difficulties"
+            id="field_difficulties"
+            data-cy="difficulties"
+            formControlName="difficulties"
+          />
+          @if (editForm.get('difficulties')!.invalid && (editForm.get('difficulties')!.dirty || editForm.get('difficulties')!.touched)) {
+            <div>
+              @if (editForm.get('difficulties')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_locationCaptured" appTranslate="dataRunClientApp.itnsVillage.locationCaptured"
+            >Location Captured</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="locationCaptured"
+            id="field_locationCaptured"
+            data-cy="locationCaptured"
+            formControlName="locationCaptured"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_locationCaptureTime" appTranslate="dataRunClientApp.itnsVillage.locationCaptureTime"
+            >Location Capture Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_locationCaptureTime"
+              data-cy="locationCaptureTime"
+              type="datetime-local"
+              class="form-control"
+              name="locationCaptureTime"
+              formControlName="locationCaptureTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hoProof" appTranslate="dataRunClientApp.itnsVillage.hoProof">Ho Proof</label>
+          <input type="text" class="form-control" name="hoProof" id="field_hoProof" data-cy="hoProof" formControlName="hoProof" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hoProofUrl" appTranslate="dataRunClientApp.itnsVillage.hoProofUrl">Ho Proof Url</label>
+          <input
+            type="text"
+            class="form-control"
+            name="hoProofUrl"
+            id="field_hoProofUrl"
+            data-cy="hoProofUrl"
+            formControlName="hoProofUrl"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_submissionTime" appTranslate="dataRunClientApp.itnsVillage.submissionTime"
+            >Submission Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_submissionTime"
+              data-cy="submissionTime"
+              type="datetime-local"
+              class="form-control"
+              name="submissionTime"
+              formControlName="submissionTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_untargetingOtherSpecify" appTranslate="dataRunClientApp.itnsVillage.untargetingOtherSpecify"
+            >Untargeting Other Specify</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="untargetingOtherSpecify"
+            id="field_untargetingOtherSpecify"
+            data-cy="untargetingOtherSpecify"
+            formControlName="untargetingOtherSpecify"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_otherVillageName" appTranslate="dataRunClientApp.itnsVillage.otherVillageName"
+            >Other Village Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="otherVillageName"
+            id="field_otherVillageName"
+            data-cy="otherVillageName"
+            formControlName="otherVillageName"
+          />
+          @if (
+            editForm.get('otherVillageName')!.invalid &&
+            (editForm.get('otherVillageName')!.dirty || editForm.get('otherVillageName')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('otherVillageName')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_otherVillageCode" appTranslate="dataRunClientApp.itnsVillage.otherVillageCode"
+            >Other Village Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="otherVillageCode"
+            id="field_otherVillageCode"
+            data-cy="otherVillageCode"
+            formControlName="otherVillageCode"
+          />
+          @if (
+            editForm.get('otherVillageCode')!.invalid &&
+            (editForm.get('otherVillageCode')!.dirty || editForm.get('otherVillageCode')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('otherVillageCode')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_otherTeamNo" appTranslate="dataRunClientApp.itnsVillage.otherTeamNo">Other Team No</label>
+          <input
+            type="number"
+            class="form-control"
+            name="otherTeamNo"
+            id="field_otherTeamNo"
+            data-cy="otherTeamNo"
+            formControlName="otherTeamNo"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startEntryTime" appTranslate="dataRunClientApp.itnsVillage.startEntryTime"
+            >Start Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startEntryTime"
+              data-cy="startEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="startEntryTime"
+              formControlName="startEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_finishedEntryTime" appTranslate="dataRunClientApp.itnsVillage.finishedEntryTime"
+            >Finished Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_finishedEntryTime"
+              data-cy="finishedEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="finishedEntryTime"
+              formControlName="finishedEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deleted" appTranslate="dataRunClientApp.itnsVillage.deleted">Deleted</label>
+          <input type="checkbox" class="form-check" name="deleted" id="field_deleted" data-cy="deleted" formControlName="deleted" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" appTranslate="dataRunClientApp.itnsVillage.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'dataRunClientApp.SyncableStatus.null' | translate }}</option>
+            @for (syncableStatus of syncableStatusValues; track $index) {
+              <option [value]="syncableStatus">{{ 'dataRunClientApp.SyncableStatus.' + syncableStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_progressStatus" appTranslate="dataRunClientApp.itnsVillage.progressStatus"
+            >Progress Status</label
+          >
+          <select
+            class="form-control"
+            id="field_progressStatus"
+            data-cy="progressStatus"
+            name="progressStatus"
+            formControlName="progressStatus"
+            [compareWith]="compareProgressStatus"
+          >
+            <option [ngValue]="null"></option>
+            @for (progressStatusOption of progressStatusesSharedCollection; track $index) {
+              <option [ngValue]="progressStatusOption">{{ progressStatusOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_team" appTranslate="dataRunClientApp.itnsVillage.team">Team</label>
+          <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team" [compareWith]="compareTeam">
+            @if (!editForm.get('team')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (teamOption of teamsSharedCollection; track $index) {
+              <option [ngValue]="teamOption">{{ teamOption.code }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['team'])!.invalid && (editForm.get(['team'])!.dirty || editForm.get(['team'])!.touched)) {
+          <div>
+            @if (editForm.get(['team'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assignment" appTranslate="dataRunClientApp.itnsVillage.assignment">Assignment</label>
+          <select
+            class="form-control"
+            id="field_assignment"
+            data-cy="assignment"
+            name="assignment"
+            formControlName="assignment"
+            [compareWith]="compareAssignment"
+          >
+            @if (!editForm.get('assignment')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (assignmentOption of assignmentsSharedCollection; track $index) {
+              <option [ngValue]="assignmentOption">{{ assignmentOption.code }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['assignment'])!.invalid && (editForm.get(['assignment'])!.dirty || editForm.get(['assignment'])!.touched)) {
+          <div>
+            @if (editForm.get(['assignment'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_activity" appTranslate="dataRunClientApp.itnsVillage.activity">Activity</label>
+          <select
+            class="form-control"
+            id="field_activity"
+            data-cy="activity"
+            name="activity"
+            formControlName="activity"
+            [compareWith]="compareActivity"
+          >
+            @if (!editForm.get('activity')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (activityOption of activitiesSharedCollection; track $index) {
+              <option [ngValue]="activityOption">{{ activityOption.code }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['activity'])!.invalid && (editForm.get(['activity'])!.dirty || editForm.get(['activity'])!.touched)) {
+          <div>
+            @if (editForm.get(['activity'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

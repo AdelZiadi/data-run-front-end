@@ -1,19 +1,19 @@
 {
   "home": {
-    "title": "أهلا وسهلا بك، جافا هبستر!",
+    "title": "أهلا وسهلا بك، ماس برو!",
     "subtitle": "هذه صفحتك الرئيسية",
     "logged": {
       "message": "قمت بتسجيل الدخول كمستخدم \"{{username}}\"."
     },
-    "question": "إذا كان لديك أي سؤال حول JHipster:",
+    "question": "إذا كان لديك أي سؤال حول Mass Pro:",
     "link": {
-      "homepage": "JHipster homepage",
-      "stackoverflow": "JHipster on Stack Overflow",
-      "bugtracker": "JHipster bug tracker",
-      "chat": "JHipster public chat room",
-      "follow": "follow @jhipster on Twitter"
+      "homepage": "Mass Pro homepage",
+      "stackoverflow": "Mass Pro on Stack Overflow",
+      "bugtracker": "Mass Pro bug tracker",
+      "chat": "Mass Pro public chat room",
+      "follow": "follow @MassPro on Twitter"
     },
-    "like": "إذا كنت تحب JHipster، لا تنسى أن تعطي لنا نجم على",
+    "like": "إذا كنت تحب Mass Pro، لا تنسى أن تعطي لنا نجم على",
     "github": "GitHub"
   }
 }

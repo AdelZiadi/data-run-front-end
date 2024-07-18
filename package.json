@@ -2,7 +2,7 @@
   "name": "data-run-client",
   "version": "0.0.1-SNAPSHOT",
   "private": true,
-  "description": "Description for Data Run Client",
+  "description": "Description for MASS PRO",
   "license": "UNLICENSED",
   "scripts": {
     "build": "npm run webapp:prod --",

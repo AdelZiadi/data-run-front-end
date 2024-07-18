@@ -86,79 +86,23 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_active" appTranslate="dataRunClientApp.activity.active">Active</label>
-          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+          <label class="form-label" for="field_disabled" appTranslate="dataRunClientApp.activity.disabled">Disabled</label>
+          <input type="checkbox" class="form-check" name="disabled" id="field_disabled" data-cy="disabled" formControlName="disabled" />
         </div>
 
-        @if (editForm.controls.createdBy.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.activity.createdBy">Created By</label>
-            <input
-              type="text"
-              class="form-control"
-              name="createdBy"
-              id="field_createdBy"
-              data-cy="createdBy"
-              formControlName="createdBy"
-              [readonly]="true"
-            />
-          </div>
-        }
-
-        @if (editForm.controls.createdDate.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.activity.createdDate">Created Date</label>
-            <div class="d-flex">
-              <input
-                id="field_createdDate"
-                data-cy="createdDate"
-                type="datetime-local"
-                class="form-control"
-                name="createdDate"
-                formControlName="createdDate"
-                placeholder="YYYY-MM-DD HH:mm"
-                [readonly]="true"
-              />
-            </div>
-          </div>
-        }
-
-        @if (editForm.controls.lastModifiedBy.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.activity.lastModifiedBy"
-              >Last Modified By</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              name="lastModifiedBy"
-              id="field_lastModifiedBy"
-              data-cy="lastModifiedBy"
-              formControlName="lastModifiedBy"
-              [readonly]="true"
-            />
-          </div>
-        }
-
-        @if (editForm.controls.lastModifiedDate.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.activity.lastModifiedDate"
-              >Last Modified Date</label
-            >
-            <div class="d-flex">
-              <input
-                id="field_lastModifiedDate"
-                data-cy="lastModifiedDate"
-                type="datetime-local"
-                class="form-control"
-                name="lastModifiedDate"
-                formControlName="lastModifiedDate"
-                placeholder="YYYY-MM-DD HH:mm"
-                [readonly]="true"
-              />
-            </div>
-          </div>
-        }
+        <div class="mb-3">
+          <label class="form-label" for="field_deleteClientData" appTranslate="dataRunClientApp.activity.deleteClientData"
+            >Delete Client Data</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="deleteClientData"
+            id="field_deleteClientData"
+            data-cy="deleteClientData"
+            formControlName="deleteClientData"
+          />
+        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_project" appTranslate="dataRunClientApp.activity.project">Project</label>
@@ -170,12 +114,21 @@
             formControlName="project"
             [compareWith]="compareProject"
           >
-            <option [ngValue]="null"></option>
+            @if (editForm.get(['project'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
             @for (projectOption of projectsSharedCollection; track $index) {
               <option [ngValue]="projectOption">{{ projectOption.name }}</option>
             }
           </select>
         </div>
+        @if (editForm.get(['project'])!.invalid && (editForm.get(['project'])!.dirty || editForm.get(['project'])!.touched)) {
+          <div>
+            @if (editForm.get(['project'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
       </div>
 
       <div>

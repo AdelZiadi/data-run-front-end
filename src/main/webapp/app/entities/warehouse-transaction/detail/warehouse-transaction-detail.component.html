@@ -1,0 +1,152 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (warehouseTransaction()) {
+      <div>
+        <h2 data-cy="warehouseTransactionDetailsHeading">
+          <span appTranslate="dataRunClientApp.warehouseTransaction.detail.title">Warehouse Transaction</span>
+        </h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.uid">Uid</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.code">Code</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.name">Name</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.imovUid">Imov Uid</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.imovUid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.transactionDate">Transaction Date</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.transactionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.phaseNo">Phase No</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.phaseNo }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.entryType">Entry Type</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.entryType }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.quantity">Quantity</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.quantity }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.notes">Notes</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.notes }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.personName">Person Name</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.personName }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.workDayId">Work Day Id</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.workDayId }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.submissionTime">Submission Time</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.submissionTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.submissionId">Submission Id</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.submissionId }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.deleted }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.submissionUuid">Submission Uuid</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.submissionUuid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.startEntryTime">Start Entry Time</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.startEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.finishedEntryTime">Finished Entry Time</span></dt>
+          <dd>
+            <span>{{ warehouseTransaction()!.finishedEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.status">Status</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.SyncableStatus.' + (warehouseTransaction()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[warehouseTransaction()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.item">Item</span></dt>
+          <dd>
+            @if (warehouseTransaction()!.item) {
+              <div>
+                <a [routerLink]="['/warehouse-item', warehouseTransaction()!.item?.id, 'view']">{{ warehouseTransaction()!.item?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.sourceWarehouse">Source Warehouse</span></dt>
+          <dd>
+            @if (warehouseTransaction()!.sourceWarehouse) {
+              <div>
+                <a [routerLink]="['/warehouse', warehouseTransaction()!.sourceWarehouse?.id, 'view']">{{
+                  warehouseTransaction()!.sourceWarehouse?.name
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.team">Team</span></dt>
+          <dd>
+            @if (warehouseTransaction()!.team) {
+              <div>
+                <a [routerLink]="['/team', warehouseTransaction()!.team?.id, 'view']">{{ warehouseTransaction()!.team?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.warehouse">Warehouse</span></dt>
+          <dd>
+            @if (warehouseTransaction()!.warehouse) {
+              <div>
+                <a [routerLink]="['/warehouse', warehouseTransaction()!.warehouse?.id, 'view']">{{
+                  warehouseTransaction()!.warehouse?.name
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.warehouseTransaction.activity">Activity</span></dt>
+          <dd>
+            @if (warehouseTransaction()!.activity) {
+              <div>
+                <a [routerLink]="['/activity', warehouseTransaction()!.activity?.id, 'view']">{{
+                  warehouseTransaction()!.activity?.code
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/warehouse-transaction', warehouseTransaction()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

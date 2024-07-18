@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "DataRunClient",
+    "title": "MASS PRO",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
@@ -8,7 +8,6 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority",
         "project": "Project",
         "activity": "Activity",
         "villageLocation": "Village Location",
@@ -19,8 +18,12 @@
         "warehouse": "Warehouse",
         "warehouseItem": "Warehouse Item",
         "chvRegister": "Chv Register",
-        "patientInfo": "Patient Info",
-        "chvSession": "Chv Session"
+        "chvSession": "Chv Session",
+        "itnsVillage": "Itns Village",
+        "itnsVillageHousesDetail": "Itns Village Houses Detail",
+        "warehouseTransaction": "Warehouse Transaction",
+        "refreshToken": "Refresh Token",
+        "adminAuthority": "Authorities"
       },
       "account": {
         "main": "Account",

@@ -23,10 +23,6 @@ export interface IAssignment {
   longitude?: number | null;
   latitude?: number | null;
   startDate?: dayjs.Dayjs | null;
-  createdBy?: string | null;
-  createdDate?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  lastModifiedDate?: dayjs.Dayjs | null;
   activity?: IActivity | null;
   organisationUnit?: IVillageLocation | null;
   team?: ITeam | null;

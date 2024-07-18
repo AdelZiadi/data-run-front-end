@@ -8,11 +8,8 @@ export interface IActivity {
   name?: string | null;
   startDate?: dayjs.Dayjs | null;
   endDate?: dayjs.Dayjs | null;
-  active?: boolean | null;
-  createdBy?: string | null;
-  createdDate?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  lastModifiedDate?: dayjs.Dayjs | null;
+  disabled?: boolean | null;
+  deleteClientData?: boolean | null;
   project?: IProject | null;
 }
 

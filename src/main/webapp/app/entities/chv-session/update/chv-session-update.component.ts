@@ -9,7 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITeam } from 'app/entities/team/team.model';
 import { TeamService } from 'app/entities/team/service/team.service';
+import { IActivity } from 'app/entities/activity/activity.model';
+import { ActivityService } from 'app/entities/activity/service/activity.service';
 import { MSessionSubject } from 'app/entities/enumerations/m-session-subject.model';
+import { SyncableStatus } from 'app/entities/enumerations/syncable-status.model';
 import { ChvSessionService } from '../service/chv-session.service';
 import { IChvSession } from '../chv-session.model';
 import { ChvSessionFormService, ChvSessionFormGroup } from './chv-session-form.service';
@@ -24,18 +27,23 @@ export class ChvSessionUpdateComponent implements OnInit {
   isSaving = false;
   chvSession: IChvSession | null = null;
   mSessionSubjectValues = Object.keys(MSessionSubject);
+  syncableStatusValues = Object.keys(SyncableStatus);
 
   teamsSharedCollection: ITeam[] = [];
+  activitiesSharedCollection: IActivity[] = [];
 
   protected chvSessionService = inject(ChvSessionService);
   protected chvSessionFormService = inject(ChvSessionFormService);
   protected teamService = inject(TeamService);
+  protected activityService = inject(ActivityService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ChvSessionFormGroup = this.chvSessionFormService.createChvSessionFormGroup();
 
   compareTeam = (o1: ITeam | null, o2: ITeam | null): boolean => this.teamService.compareTeam(o1, o2);
+
+  compareActivity = (o1: IActivity | null, o2: IActivity | null): boolean => this.activityService.compareActivity(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ chvSession }) => {
@@ -86,6 +94,10 @@ export class ChvSessionUpdateComponent implements OnInit {
     this.chvSessionFormService.resetForm(this.editForm, chvSession);
 
     this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing<ITeam>(this.teamsSharedCollection, chvSession.team);
+    this.activitiesSharedCollection = this.activityService.addActivityToCollectionIfMissing<IActivity>(
+      this.activitiesSharedCollection,
+      chvSession.activity,
+    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -94,5 +106,15 @@ export class ChvSessionUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<ITeam[]>) => res.body ?? []))
       .pipe(map((teams: ITeam[]) => this.teamService.addTeamToCollectionIfMissing<ITeam>(teams, this.chvSession?.team)))
       .subscribe((teams: ITeam[]) => (this.teamsSharedCollection = teams));
+
+    this.activityService
+      .query()
+      .pipe(map((res: HttpResponse<IActivity[]>) => res.body ?? []))
+      .pipe(
+        map((activities: IActivity[]) =>
+          this.activityService.addActivityToCollectionIfMissing<IActivity>(activities, this.chvSession?.activity),
+        ),
+      )
+      .subscribe((activities: IActivity[]) => (this.activitiesSharedCollection = activities));
   }
 }

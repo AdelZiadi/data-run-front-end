@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (itnsVillageHousesDetail()) {
+      <div>
+        <h2 data-cy="itnsVillageHousesDetailDetailsHeading">
+          <span appTranslate="dataRunClientApp.itnsVillageHousesDetail.detail.title">Itns Village Houses Detail</span>
+        </h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.uid">Uid</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.code">Code</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.couponId">Coupon Id</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.couponId }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.name">Name</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.male">Male</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.male }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.female">Female</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.female }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.pregnant">Pregnant</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.pregnant }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.population">Population</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.population }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.maleChild">Male Child</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.maleChild }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.femaleChild">Female Child</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.femaleChild }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.displaced">Displaced</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.displaced }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.itns">Itns</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.itns }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.comment">Comment</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.comment }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.submissionUuid">Submission Uuid</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.submissionUuid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.houseUuid">House Uuid</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.houseUuid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ itnsVillageHousesDetail()!.deleted }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillageHousesDetail.itnsVillage">Itns Village</span></dt>
+          <dd>
+            @if (itnsVillageHousesDetail()!.itnsVillage) {
+              <div>
+                <a [routerLink]="['/itns-village', itnsVillageHousesDetail()!.itnsVillage?.id, 'view']">{{
+                  itnsVillageHousesDetail()!.itnsVillage?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/itns-village-houses-detail', itnsVillageHousesDetail()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

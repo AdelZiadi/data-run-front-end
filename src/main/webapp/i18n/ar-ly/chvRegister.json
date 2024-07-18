@@ -2,40 +2,42 @@
   "dataRunClientApp": {
     "chvRegister": {
       "home": {
-        "title": "Chv Registers",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Chv Register",
-        "createOrEditLabel": "Create or edit a Chv Register",
-        "notFound": "No Chv Registers found"
+        "title": "تدبير حالات الملاريا-متطوعات",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء حالة جديدة",
+        "createOrEditLabel": "إنشاء أو تحرير بيانات حالة",
+        "notFound": "لم يتم العثور على حالات"
       },
-      "created": "A new Chv Register is created with identifier {{ param }}",
-      "updated": "A Chv Register is updated with identifier {{ param }}",
-      "deleted": "A Chv Register is deleted with identifier {{ param }}",
+      "created": "تم إنشاء حالة ملاريا جديدة بالمعرف {{ param }}",
+      "updated": "تم تحديث حالة ملاريا بالمعرف {{ param }}",
+      "deleted": "تم حذف حالة ملاريا بالمعرف {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Chv Register {{ id }}?"
+        "question": "هل أنت متأكد أنك تريد حذف الحالة  {{ id }}؟"
       },
       "detail": {
-        "title": "Chv Register"
+        "title": "حالة ملاريا"
       },
-      "id": "ID",
-      "uid": "Uid",
-      "code": "Code",
-      "name": "Name",
-      "visitDate": "Visit Date",
-      "pregnant": "Pregnant",
-      "testResult": "Test Result",
-      "detectionType": "Detection Type",
-      "severity": "Severity",
-      "treatment": "Treatment",
-      "comment": "Comment",
-      "startEntryTime": "Start Entry Time",
-      "deleted": "Deleted",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date",
-      "patient": "Patient",
-      "team": "Team"
+      "id": "المعرف",
+      "uid": "معرف المستخدم",
+      "code": "الرمز",
+      "name": "الاسم",
+      "locationName": "اسم الموقع",
+      "age": "العمر",
+      "gender": "الجنس",
+      "visitDate": "تاريخ الزيارة",
+      "pregnant": "حامل",
+      "testResult": "نتيجة الاختبار",
+      "detectionType": "نوع الكشف",
+      "severity": "الحدة",
+      "treatment": "العلاج",
+      "deleted": "تم الحذف",
+      "startEntryTime": "وقت بدء الإدخال",
+      "finishedEntryTime": "وقت انتهاء الإدخال",
+      "comment": "التعليق",
+      "status": "الحالة",
+      "location": "الموقع",
+      "activity": "النشاط",
+      "team": "الفريق"
     }
   }
 }

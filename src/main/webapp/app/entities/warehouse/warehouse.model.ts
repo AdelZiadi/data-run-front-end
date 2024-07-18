@@ -1,4 +1,3 @@
-import dayjs from 'dayjs/esm';
 import { IActivity } from 'app/entities/activity/activity.model';
 
 export interface IWarehouse {
@@ -10,10 +9,6 @@ export interface IWarehouse {
   gpsCoordinate?: string | null;
   supervisor?: string | null;
   supervisorMobile?: string | null;
-  createdBy?: string | null;
-  createdDate?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  lastModifiedDate?: dayjs.Dayjs | null;
   activity?: IActivity | null;
 }
 

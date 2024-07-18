@@ -1,0 +1,322 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-itns-village-houses-detail-heading"
+        data-cy="ItnsVillageHousesDetailCreateUpdateHeading"
+        appTranslate="dataRunClientApp.itnsVillageHousesDetail.home.createOrEditLabel"
+      >
+        Create or edit a Itns Village Houses Detail
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.itnsVillageHousesDetail.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.itnsVillageHousesDetail.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.itnsVillageHousesDetail.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_couponId" appTranslate="dataRunClientApp.itnsVillageHousesDetail.couponId">Coupon Id</label>
+          <input type="number" class="form-control" name="couponId" id="field_couponId" data-cy="couponId" formControlName="couponId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.itnsVillageHousesDetail.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_male" appTranslate="dataRunClientApp.itnsVillageHousesDetail.male">Male</label>
+          <input type="number" class="form-control" name="male" id="field_male" data-cy="male" formControlName="male" />
+          @if (editForm.get('male')!.invalid && (editForm.get('male')!.dirty || editForm.get('male')!.touched)) {
+            <div>
+              @if (editForm.get('male')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('male')?.errors?.number" appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_female" appTranslate="dataRunClientApp.itnsVillageHousesDetail.female">Female</label>
+          <input type="number" class="form-control" name="female" id="field_female" data-cy="female" formControlName="female" />
+          @if (editForm.get('female')!.invalid && (editForm.get('female')!.dirty || editForm.get('female')!.touched)) {
+            <div>
+              @if (editForm.get('female')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('female')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pregnant" appTranslate="dataRunClientApp.itnsVillageHousesDetail.pregnant">Pregnant</label>
+          <input type="number" class="form-control" name="pregnant" id="field_pregnant" data-cy="pregnant" formControlName="pregnant" />
+          @if (editForm.get('pregnant')!.invalid && (editForm.get('pregnant')!.dirty || editForm.get('pregnant')!.touched)) {
+            <div>
+              @if (editForm.get('pregnant')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('pregnant')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_population" appTranslate="dataRunClientApp.itnsVillageHousesDetail.population"
+            >Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="population"
+            id="field_population"
+            data-cy="population"
+            formControlName="population"
+          />
+          @if (editForm.get('population')!.invalid && (editForm.get('population')!.dirty || editForm.get('population')!.touched)) {
+            <div>
+              @if (editForm.get('population')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('population')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_maleChild" appTranslate="dataRunClientApp.itnsVillageHousesDetail.maleChild"
+            >Male Child</label
+          >
+          <input type="number" class="form-control" name="maleChild" id="field_maleChild" data-cy="maleChild" formControlName="maleChild" />
+          @if (editForm.get('maleChild')!.invalid && (editForm.get('maleChild')!.dirty || editForm.get('maleChild')!.touched)) {
+            <div>
+              @if (editForm.get('maleChild')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('maleChild')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_femaleChild" appTranslate="dataRunClientApp.itnsVillageHousesDetail.femaleChild"
+            >Female Child</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="femaleChild"
+            id="field_femaleChild"
+            data-cy="femaleChild"
+            formControlName="femaleChild"
+          />
+          @if (editForm.get('femaleChild')!.invalid && (editForm.get('femaleChild')!.dirty || editForm.get('femaleChild')!.touched)) {
+            <div>
+              @if (editForm.get('femaleChild')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('femaleChild')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_displaced" appTranslate="dataRunClientApp.itnsVillageHousesDetail.displaced"
+            >Displaced</label
+          >
+          <input type="number" class="form-control" name="displaced" id="field_displaced" data-cy="displaced" formControlName="displaced" />
+          @if (editForm.get('displaced')!.invalid && (editForm.get('displaced')!.dirty || editForm.get('displaced')!.touched)) {
+            <div>
+              @if (editForm.get('displaced')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('displaced')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_itns" appTranslate="dataRunClientApp.itnsVillageHousesDetail.itns">Itns</label>
+          <input type="number" class="form-control" name="itns" id="field_itns" data-cy="itns" formControlName="itns" />
+          @if (editForm.get('itns')!.invalid && (editForm.get('itns')!.dirty || editForm.get('itns')!.touched)) {
+            <div>
+              @if (editForm.get('itns')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('itns')?.errors?.number" appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_comment" appTranslate="dataRunClientApp.itnsVillageHousesDetail.comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+          @if (editForm.get('comment')!.invalid && (editForm.get('comment')!.dirty || editForm.get('comment')!.touched)) {
+            <div>
+              @if (editForm.get('comment')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_submissionUuid" appTranslate="dataRunClientApp.itnsVillageHousesDetail.submissionUuid"
+            >Submission Uuid</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="submissionUuid"
+            id="field_submissionUuid"
+            data-cy="submissionUuid"
+            formControlName="submissionUuid"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_houseUuid" appTranslate="dataRunClientApp.itnsVillageHousesDetail.houseUuid"
+            >House Uuid</label
+          >
+          <input type="text" class="form-control" name="houseUuid" id="field_houseUuid" data-cy="houseUuid" formControlName="houseUuid" />
+          @if (editForm.get('houseUuid')!.invalid && (editForm.get('houseUuid')!.dirty || editForm.get('houseUuid')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deleted" appTranslate="dataRunClientApp.itnsVillageHousesDetail.deleted">Deleted</label>
+          <input type="checkbox" class="form-check" name="deleted" id="field_deleted" data-cy="deleted" formControlName="deleted" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_itnsVillage" appTranslate="dataRunClientApp.itnsVillageHousesDetail.itnsVillage"
+            >Itns Village</label
+          >
+          <select
+            class="form-control"
+            id="field_itnsVillage"
+            data-cy="itnsVillage"
+            name="itnsVillage"
+            formControlName="itnsVillage"
+            [compareWith]="compareItnsVillage"
+          >
+            @if (editForm.get(['itnsVillage'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (itnsVillageOption of itnsVillagesSharedCollection; track $index) {
+              <option [ngValue]="itnsVillageOption">{{ itnsVillageOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['itnsVillage'])!.invalid && (editForm.get(['itnsVillage'])!.dirty || editForm.get(['itnsVillage'])!.touched)) {
+          <div>
+            @if (editForm.get(['itnsVillage'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

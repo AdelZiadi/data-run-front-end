@@ -49,10 +49,10 @@ describe('Warehouse Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Activity query and add missing value', () => {
       const warehouse: IWarehouse = { id: 456 };
-      const activity: IActivity = { id: 15449 };
+      const activity: IActivity = { id: 775 };
       warehouse.activity = activity;
 
-      const activityCollection: IActivity[] = [{ id: 13226 }];
+      const activityCollection: IActivity[] = [{ id: 13843 }];
       jest.spyOn(activityService, 'query').mockReturnValue(of(new HttpResponse({ body: activityCollection })));
       const additionalActivities = [activity];
       const expectedCollection: IActivity[] = [...additionalActivities, ...activityCollection];
@@ -71,7 +71,7 @@ describe('Warehouse Management Update Component', () => {
 
     it('Should update editForm', () => {
       const warehouse: IWarehouse = { id: 456 };
-      const activity: IActivity = { id: 3094 };
+      const activity: IActivity = { id: 11193 };
       warehouse.activity = activity;
 
       activatedRoute.data = of({ warehouse });

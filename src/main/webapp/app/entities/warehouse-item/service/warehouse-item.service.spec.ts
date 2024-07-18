@@ -4,12 +4,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { IWarehouseItem } from '../warehouse-item.model';
 import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../warehouse-item.test-samples';
 
-import { WarehouseItemService, RestWarehouseItem } from './warehouse-item.service';
+import { WarehouseItemService } from './warehouse-item.service';
 
-const requireRestSample: RestWarehouseItem = {
+const requireRestSample: IWarehouseItem = {
   ...sampleWithRequiredData,
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('WarehouseItem Service', () => {

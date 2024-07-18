@@ -29,7 +29,7 @@ describe('Alert service test', () => {
       expect(
         service.addAlert({
           type: 'success',
-          message: 'Hello Jhipster',
+          message: 'Hello Mass Pro',
           timeout: 3000,
           toast: true,
           position: 'top left',
@@ -37,7 +37,7 @@ describe('Alert service test', () => {
       ).toEqual(
         expect.objectContaining({
           type: 'success',
-          message: 'Hello Jhipster',
+          message: 'Hello Mass Pro',
           id: 0,
           timeout: 3000,
           toast: true,
@@ -49,7 +49,7 @@ describe('Alert service test', () => {
       expect(service.get()[0]).toEqual(
         expect.objectContaining({
           type: 'success',
-          message: 'Hello Jhipster',
+          message: 'Hello Mass Pro',
           id: 0,
           timeout: 3000,
           toast: true,

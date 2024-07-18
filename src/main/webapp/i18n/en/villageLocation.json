@@ -35,11 +35,7 @@
       "longitude": "Longitude",
       "latitude": "Latitude",
       "ppcCodeGis": "Ppc Code Gis",
-      "level": "Level",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date"
+      "level": "Level"
     }
   }
 }

@@ -49,10 +49,10 @@ describe('Activity Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Project query and add missing value', () => {
       const activity: IActivity = { id: 456 };
-      const project: IProject = { id: 5673 };
+      const project: IProject = { id: 8361 };
       activity.project = project;
 
-      const projectCollection: IProject[] = [{ id: 18524 }];
+      const projectCollection: IProject[] = [{ id: 7381 }];
       jest.spyOn(projectService, 'query').mockReturnValue(of(new HttpResponse({ body: projectCollection })));
       const additionalProjects = [project];
       const expectedCollection: IProject[] = [...additionalProjects, ...projectCollection];
@@ -71,7 +71,7 @@ describe('Activity Management Update Component', () => {
 
     it('Should update editForm', () => {
       const activity: IActivity = { id: 456 };
-      const project: IProject = { id: 21546 };
+      const project: IProject = { id: 6833 };
       activity.project = project;
 
       activatedRoute.data = of({ activity });

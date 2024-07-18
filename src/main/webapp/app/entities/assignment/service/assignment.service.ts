@@ -11,10 +11,8 @@ import { IAssignment, NewAssignment } from '../assignment.model';
 
 export type PartialUpdateAssignment = Partial<IAssignment> & Pick<IAssignment, 'id'>;
 
-type RestOf<T extends IAssignment | NewAssignment> = Omit<T, 'startDate' | 'createdDate' | 'lastModifiedDate'> & {
+type RestOf<T extends IAssignment | NewAssignment> = Omit<T, 'startDate'> & {
   startDate?: string | null;
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
 };
 
 export type RestAssignment = RestOf<IAssignment>;
@@ -103,8 +101,6 @@ export class AssignmentService {
     return {
       ...assignment,
       startDate: assignment.startDate?.toJSON() ?? null,
-      createdDate: assignment.createdDate?.toJSON() ?? null,
-      lastModifiedDate: assignment.lastModifiedDate?.toJSON() ?? null,
     };
   }
 
@@ -112,8 +108,6 @@ export class AssignmentService {
     return {
       ...restAssignment,
       startDate: restAssignment.startDate ? dayjs(restAssignment.startDate) : undefined,
-      createdDate: restAssignment.createdDate ? dayjs(restAssignment.createdDate) : undefined,
-      lastModifiedDate: restAssignment.lastModifiedDate ? dayjs(restAssignment.lastModifiedDate) : undefined,
     };
   }
 

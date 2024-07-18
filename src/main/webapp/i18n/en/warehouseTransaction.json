@@ -1,0 +1,46 @@
+{
+  "dataRunClientApp": {
+    "warehouseTransaction": {
+      "home": {
+        "title": "Warehouse Transactions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Warehouse Transaction",
+        "createOrEditLabel": "Create or edit a Warehouse Transaction",
+        "notFound": "No Warehouse Transactions found"
+      },
+      "created": "A new Warehouse Transaction is created with identifier {{ param }}",
+      "updated": "A Warehouse Transaction is updated with identifier {{ param }}",
+      "deleted": "A Warehouse Transaction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Warehouse Transaction {{ id }}?"
+      },
+      "detail": {
+        "title": "Warehouse Transaction"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "imovUid": "Imov Uid",
+      "transactionDate": "Transaction Date",
+      "phaseNo": "Phase No",
+      "entryType": "Entry Type",
+      "quantity": "Quantity",
+      "notes": "Notes",
+      "personName": "Person Name",
+      "workDayId": "Work Day Id",
+      "submissionTime": "Submission Time",
+      "submissionId": "Submission Id",
+      "deleted": "Deleted",
+      "submissionUuid": "Submission Uuid",
+      "startEntryTime": "Start Entry Time",
+      "finishedEntryTime": "Finished Entry Time",
+      "status": "Status",
+      "item": "Item",
+      "sourceWarehouse": "Source Warehouse",
+      "team": "Team",
+      "warehouse": "Warehouse",
+      "activity": "Activity"
+    }
+  }
+}

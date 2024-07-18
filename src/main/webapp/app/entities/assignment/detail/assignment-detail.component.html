@@ -83,22 +83,6 @@
           <dd>
             <span>{{ assignment()!.startDate | formatMediumDatetime }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.assignment.createdBy">Created By</span></dt>
-          <dd>
-            <span>{{ assignment()!.createdBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.assignment.createdDate">Created Date</span></dt>
-          <dd>
-            <span>{{ assignment()!.createdDate | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.assignment.lastModifiedBy">Last Modified By</span></dt>
-          <dd>
-            <span>{{ assignment()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.assignment.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ assignment()!.lastModifiedDate | formatMediumDatetime }}</span>
-          </dd>
           <dt><span appTranslate="dataRunClientApp.assignment.activity">Activity</span></dt>
           <dd>
             @if (assignment()!.activity) {

@@ -61,10 +61,10 @@ describe('Team Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Activity query and add missing value', () => {
       const team: ITeam = { id: 456 };
-      const activity: IActivity = { id: 20352 };
+      const activity: IActivity = { id: 4308 };
       team.activity = activity;
 
-      const activityCollection: IActivity[] = [{ id: 18668 }];
+      const activityCollection: IActivity[] = [{ id: 30540 }];
       jest.spyOn(activityService, 'query').mockReturnValue(of(new HttpResponse({ body: activityCollection })));
       const additionalActivities = [activity];
       const expectedCollection: IActivity[] = [...additionalActivities, ...activityCollection];
@@ -83,10 +83,10 @@ describe('Team Management Update Component', () => {
 
     it('Should call ReviewTeam query and add missing value', () => {
       const team: ITeam = { id: 456 };
-      const operationRoom: IReviewTeam = { id: 29420 };
+      const operationRoom: IReviewTeam = { id: 32510 };
       team.operationRoom = operationRoom;
 
-      const reviewTeamCollection: IReviewTeam[] = [{ id: 14545 }];
+      const reviewTeamCollection: IReviewTeam[] = [{ id: 25631 }];
       jest.spyOn(reviewTeamService, 'query').mockReturnValue(of(new HttpResponse({ body: reviewTeamCollection })));
       const additionalReviewTeams = [operationRoom];
       const expectedCollection: IReviewTeam[] = [...additionalReviewTeams, ...reviewTeamCollection];
@@ -105,10 +105,10 @@ describe('Team Management Update Component', () => {
 
     it('Should call Warehouse query and add missing value', () => {
       const team: ITeam = { id: 456 };
-      const warehouse: IWarehouse = { id: 30350 };
+      const warehouse: IWarehouse = { id: 8858 };
       team.warehouse = warehouse;
 
-      const warehouseCollection: IWarehouse[] = [{ id: 29914 }];
+      const warehouseCollection: IWarehouse[] = [{ id: 26401 }];
       jest.spyOn(warehouseService, 'query').mockReturnValue(of(new HttpResponse({ body: warehouseCollection })));
       const additionalWarehouses = [warehouse];
       const expectedCollection: IWarehouse[] = [...additionalWarehouses, ...warehouseCollection];
@@ -127,10 +127,10 @@ describe('Team Management Update Component', () => {
 
     it('Should call User query and add missing value', () => {
       const team: ITeam = { id: 456 };
-      const userInfo: IUser = { id: 11931 };
+      const userInfo: IUser = { id: 9076 };
       team.userInfo = userInfo;
 
-      const userCollection: IUser[] = [{ id: 13120 }];
+      const userCollection: IUser[] = [{ id: 28811 }];
       jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
       const additionalUsers = [userInfo];
       const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
@@ -149,13 +149,13 @@ describe('Team Management Update Component', () => {
 
     it('Should update editForm', () => {
       const team: ITeam = { id: 456 };
-      const activity: IActivity = { id: 27926 };
+      const activity: IActivity = { id: 16662 };
       team.activity = activity;
-      const operationRoom: IReviewTeam = { id: 28351 };
+      const operationRoom: IReviewTeam = { id: 6659 };
       team.operationRoom = operationRoom;
-      const warehouse: IWarehouse = { id: 11190 };
+      const warehouse: IWarehouse = { id: 4130 };
       team.warehouse = warehouse;
-      const userInfo: IUser = { id: 20617 };
+      const userInfo: IUser = { id: 15701 };
       team.userInfo = userInfo;
 
       activatedRoute.data = of({ team });

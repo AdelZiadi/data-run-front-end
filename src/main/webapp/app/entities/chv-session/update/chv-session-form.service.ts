@@ -19,18 +19,17 @@ type ChvSessionFormGroupInput = IChvSession | PartialWithRequiredKeyOf<NewChvSes
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IChvSession | NewChvSession> = Omit<T, 'sessionDate' | 'startEntryTime' | 'createdDate' | 'lastModifiedDate'> & {
+type FormValueOf<T extends IChvSession | NewChvSession> = Omit<T, 'sessionDate' | 'startEntryTime' | 'finishedEntryTime'> & {
   sessionDate?: string | null;
   startEntryTime?: string | null;
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
+  finishedEntryTime?: string | null;
 };
 
 type ChvSessionFormRawValue = FormValueOf<IChvSession>;
 
 type NewChvSessionFormRawValue = FormValueOf<NewChvSession>;
 
-type ChvSessionFormDefaults = Pick<NewChvSession, 'id' | 'sessionDate' | 'startEntryTime' | 'deleted' | 'createdDate' | 'lastModifiedDate'>;
+type ChvSessionFormDefaults = Pick<NewChvSession, 'id' | 'sessionDate' | 'deleted' | 'startEntryTime' | 'finishedEntryTime'>;
 
 type ChvSessionFormGroupContent = {
   id: FormControl<ChvSessionFormRawValue['id'] | NewChvSession['id']>;
@@ -42,13 +41,12 @@ type ChvSessionFormGroupContent = {
   sessions: FormControl<ChvSessionFormRawValue['sessions']>;
   people: FormControl<ChvSessionFormRawValue['people']>;
   comment: FormControl<ChvSessionFormRawValue['comment']>;
-  startEntryTime: FormControl<ChvSessionFormRawValue['startEntryTime']>;
   deleted: FormControl<ChvSessionFormRawValue['deleted']>;
-  createdBy: FormControl<ChvSessionFormRawValue['createdBy']>;
-  createdDate: FormControl<ChvSessionFormRawValue['createdDate']>;
-  lastModifiedBy: FormControl<ChvSessionFormRawValue['lastModifiedBy']>;
-  lastModifiedDate: FormControl<ChvSessionFormRawValue['lastModifiedDate']>;
+  startEntryTime: FormControl<ChvSessionFormRawValue['startEntryTime']>;
+  finishedEntryTime: FormControl<ChvSessionFormRawValue['finishedEntryTime']>;
+  status: FormControl<ChvSessionFormRawValue['status']>;
   team: FormControl<ChvSessionFormRawValue['team']>;
+  activity: FormControl<ChvSessionFormRawValue['activity']>;
 };
 
 export type ChvSessionFormGroup = FormGroup<ChvSessionFormGroupContent>;
@@ -69,7 +67,7 @@ export class ChvSessionFormService {
         },
       ),
       uid: new FormControl(chvSessionRawValue.uid, {
-        validators: [Validators.maxLength(11)],
+        validators: [Validators.required, Validators.maxLength(11)],
       }),
       code: new FormControl(chvSessionRawValue.code),
       name: new FormControl(chvSessionRawValue.name),
@@ -84,13 +82,18 @@ export class ChvSessionFormService {
         validators: [Validators.required],
       }),
       comment: new FormControl(chvSessionRawValue.comment),
-      startEntryTime: new FormControl(chvSessionRawValue.startEntryTime),
       deleted: new FormControl(chvSessionRawValue.deleted),
-      createdBy: new FormControl(chvSessionRawValue.createdBy),
-      createdDate: new FormControl(chvSessionRawValue.createdDate),
-      lastModifiedBy: new FormControl(chvSessionRawValue.lastModifiedBy),
-      lastModifiedDate: new FormControl(chvSessionRawValue.lastModifiedDate),
-      team: new FormControl(chvSessionRawValue.team),
+      startEntryTime: new FormControl(chvSessionRawValue.startEntryTime),
+      finishedEntryTime: new FormControl(chvSessionRawValue.finishedEntryTime),
+      status: new FormControl(chvSessionRawValue.status, {
+        validators: [Validators.required],
+      }),
+      team: new FormControl(chvSessionRawValue.team, {
+        validators: [Validators.required],
+      }),
+      activity: new FormControl(chvSessionRawValue.activity, {
+        validators: [Validators.required],
+      }),
     });
   }
 
@@ -114,10 +117,9 @@ export class ChvSessionFormService {
     return {
       id: null,
       sessionDate: currentTime,
-      startEntryTime: currentTime,
       deleted: false,
-      createdDate: currentTime,
-      lastModifiedDate: currentTime,
+      startEntryTime: currentTime,
+      finishedEntryTime: currentTime,
     };
   }
 
@@ -128,8 +130,7 @@ export class ChvSessionFormService {
       ...rawChvSession,
       sessionDate: dayjs(rawChvSession.sessionDate, DATE_TIME_FORMAT),
       startEntryTime: dayjs(rawChvSession.startEntryTime, DATE_TIME_FORMAT),
-      createdDate: dayjs(rawChvSession.createdDate, DATE_TIME_FORMAT),
-      lastModifiedDate: dayjs(rawChvSession.lastModifiedDate, DATE_TIME_FORMAT),
+      finishedEntryTime: dayjs(rawChvSession.finishedEntryTime, DATE_TIME_FORMAT),
     };
   }
 
@@ -140,8 +141,7 @@ export class ChvSessionFormService {
       ...chvSession,
       sessionDate: chvSession.sessionDate ? chvSession.sessionDate.format(DATE_TIME_FORMAT) : undefined,
       startEntryTime: chvSession.startEntryTime ? chvSession.startEntryTime.format(DATE_TIME_FORMAT) : undefined,
-      createdDate: chvSession.createdDate ? chvSession.createdDate.format(DATE_TIME_FORMAT) : undefined,
-      lastModifiedDate: chvSession.lastModifiedDate ? chvSession.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
+      finishedEntryTime: chvSession.finishedEntryTime ? chvSession.finishedEntryTime.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

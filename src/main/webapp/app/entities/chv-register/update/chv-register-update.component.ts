@@ -7,14 +7,18 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IPatientInfo } from 'app/entities/patient-info/patient-info.model';
-import { PatientInfoService } from 'app/entities/patient-info/service/patient-info.service';
+import { IAssignment } from 'app/entities/assignment/assignment.model';
+import { AssignmentService } from 'app/entities/assignment/service/assignment.service';
+import { IActivity } from 'app/entities/activity/activity.model';
+import { ActivityService } from 'app/entities/activity/service/activity.service';
 import { ITeam } from 'app/entities/team/team.model';
 import { TeamService } from 'app/entities/team/service/team.service';
+import { Gender } from 'app/entities/enumerations/gender.model';
 import { MTestResult } from 'app/entities/enumerations/m-test-result.model';
 import { MDetectionType } from 'app/entities/enumerations/m-detection-type.model';
 import { MSeverity } from 'app/entities/enumerations/m-severity.model';
 import { MTreatment } from 'app/entities/enumerations/m-treatment.model';
+import { SyncableStatus } from 'app/entities/enumerations/syncable-status.model';
 import { ChvRegisterService } from '../service/chv-register.service';
 import { IChvRegister } from '../chv-register.model';
 import { ChvRegisterFormService, ChvRegisterFormGroup } from './chv-register-form.service';
@@ -28,24 +32,30 @@ import { ChvRegisterFormService, ChvRegisterFormGroup } from './chv-register-for
 export class ChvRegisterUpdateComponent implements OnInit {
   isSaving = false;
   chvRegister: IChvRegister | null = null;
+  genderValues = Object.keys(Gender);
   mTestResultValues = Object.keys(MTestResult);
   mDetectionTypeValues = Object.keys(MDetectionType);
   mSeverityValues = Object.keys(MSeverity);
   mTreatmentValues = Object.keys(MTreatment);
+  syncableStatusValues = Object.keys(SyncableStatus);
 
-  patientInfosSharedCollection: IPatientInfo[] = [];
+  assignmentsSharedCollection: IAssignment[] = [];
+  activitiesSharedCollection: IActivity[] = [];
   teamsSharedCollection: ITeam[] = [];
 
   protected chvRegisterService = inject(ChvRegisterService);
   protected chvRegisterFormService = inject(ChvRegisterFormService);
-  protected patientInfoService = inject(PatientInfoService);
+  protected assignmentService = inject(AssignmentService);
+  protected activityService = inject(ActivityService);
   protected teamService = inject(TeamService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ChvRegisterFormGroup = this.chvRegisterFormService.createChvRegisterFormGroup();
 
-  comparePatientInfo = (o1: IPatientInfo | null, o2: IPatientInfo | null): boolean => this.patientInfoService.comparePatientInfo(o1, o2);
+  compareAssignment = (o1: IAssignment | null, o2: IAssignment | null): boolean => this.assignmentService.compareAssignment(o1, o2);
+
+  compareActivity = (o1: IActivity | null, o2: IActivity | null): boolean => this.activityService.compareActivity(o1, o2);
 
   compareTeam = (o1: ITeam | null, o2: ITeam | null): boolean => this.teamService.compareTeam(o1, o2);
 
@@ -97,23 +107,37 @@ export class ChvRegisterUpdateComponent implements OnInit {
     this.chvRegister = chvRegister;
     this.chvRegisterFormService.resetForm(this.editForm, chvRegister);
 
-    this.patientInfosSharedCollection = this.patientInfoService.addPatientInfoToCollectionIfMissing<IPatientInfo>(
-      this.patientInfosSharedCollection,
-      chvRegister.patient,
+    this.assignmentsSharedCollection = this.assignmentService.addAssignmentToCollectionIfMissing<IAssignment>(
+      this.assignmentsSharedCollection,
+      chvRegister.location,
+    );
+    this.activitiesSharedCollection = this.activityService.addActivityToCollectionIfMissing<IActivity>(
+      this.activitiesSharedCollection,
+      chvRegister.activity,
     );
     this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing<ITeam>(this.teamsSharedCollection, chvRegister.team);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.patientInfoService
+    this.assignmentService
       .query()
-      .pipe(map((res: HttpResponse<IPatientInfo[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<IAssignment[]>) => res.body ?? []))
       .pipe(
-        map((patientInfos: IPatientInfo[]) =>
-          this.patientInfoService.addPatientInfoToCollectionIfMissing<IPatientInfo>(patientInfos, this.chvRegister?.patient),
+        map((assignments: IAssignment[]) =>
+          this.assignmentService.addAssignmentToCollectionIfMissing<IAssignment>(assignments, this.chvRegister?.location),
         ),
       )
-      .subscribe((patientInfos: IPatientInfo[]) => (this.patientInfosSharedCollection = patientInfos));
+      .subscribe((assignments: IAssignment[]) => (this.assignmentsSharedCollection = assignments));
+
+    this.activityService
+      .query()
+      .pipe(map((res: HttpResponse<IActivity[]>) => res.body ?? []))
+      .pipe(
+        map((activities: IActivity[]) =>
+          this.activityService.addActivityToCollectionIfMissing<IActivity>(activities, this.chvRegister?.activity),
+        ),
+      )
+      .subscribe((activities: IActivity[]) => (this.activitiesSharedCollection = activities));
 
     this.teamService
       .query()

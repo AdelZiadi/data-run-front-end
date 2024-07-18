@@ -1,7 +1,5 @@
 # dataRunClient
 
-This application was generated using JHipster 8.4.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.4.0](https://www.jhipster.tech/documentation-archive/v8.4.0).
-
 ## Project Structure
 
 ## Development
@@ -36,7 +34,7 @@ The `npm run` command will list all of the scripts available to run for this pro
 
 ### PWA Support
 
-JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.
+Mass Pro ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.
 
 The service worker initialization code is disabled by default. To enable it, uncomment the following code in `src/main/webapp/app/app.config.ts`:
 
@@ -73,7 +71,7 @@ Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/ven
 
 Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
 
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+For further instructions on how to develop with Mass Pro, have a look at [Using Mass Pro in development][].
 
 ### Using Angular CLI
 
@@ -104,20 +102,3 @@ Unit tests are run by [Jest][]. They're located in [src/test/javascript/](src/te
 ```
 npm test
 ```
-
-[JHipster Homepage and latest documentation]: https://www.jhipster.tech
-[JHipster 8.4.0 archive]: https://www.jhipster.tech/documentation-archive/v8.4.0
-[Using JHipster in development]: https://www.jhipster.tech/documentation-archive/v8.4.0/development/
-[Using Docker and Docker-Compose]: https://www.jhipster.tech/documentation-archive/v8.4.0/docker-compose
-[Using JHipster in production]: https://www.jhipster.tech/documentation-archive/v8.4.0/production/
-[Running tests page]: https://www.jhipster.tech/documentation-archive/v8.4.0/running-tests/
-[Code quality page]: https://www.jhipster.tech/documentation-archive/v8.4.0/code-quality/
-[Setting up Continuous Integration]: https://www.jhipster.tech/documentation-archive/v8.4.0/setting-up-ci/
-[Node.js]: https://nodejs.org/
-[NPM]: https://www.npmjs.com/
-[Webpack]: https://webpack.github.io/
-[BrowserSync]: https://www.browsersync.io/
-[Jest]: https://facebook.github.io/jest/
-[Leaflet]: https://leafletjs.com/
-[DefinitelyTyped]: https://definitelytyped.org/
-[Angular CLI]: https://cli.angular.io/

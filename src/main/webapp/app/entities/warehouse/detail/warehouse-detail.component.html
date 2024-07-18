@@ -43,22 +43,6 @@
           <dd>
             <span>{{ warehouse()!.supervisorMobile }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.warehouse.createdBy">Created By</span></dt>
-          <dd>
-            <span>{{ warehouse()!.createdBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.warehouse.createdDate">Created Date</span></dt>
-          <dd>
-            <span>{{ warehouse()!.createdDate | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.warehouse.lastModifiedBy">Last Modified By</span></dt>
-          <dd>
-            <span>{{ warehouse()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.warehouse.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ warehouse()!.lastModifiedDate | formatMediumDatetime }}</span>
-          </dd>
           <dt><span appTranslate="dataRunClientApp.warehouse.activity">Activity</span></dt>
           <dd>
             @if (warehouse()!.activity) {

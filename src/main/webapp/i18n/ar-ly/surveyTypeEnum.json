@@ -1,0 +1,9 @@
+{
+  "dataRunClientApp": {
+    "SurveyTypeEnum": {
+      "null": "",
+      "ACTUALREPORT": "ACTUALREPORT",
+      "TESTREPORT": "TESTREPORT"
+    }
+  }
+}

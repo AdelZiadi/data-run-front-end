@@ -1,0 +1,195 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-team-form-access-heading"
+        data-cy="TeamFormAccessCreateUpdateHeading"
+        appTranslate="dataRunClientApp.teamFormAccess.home.createOrEditLabel"
+      >
+        Create or edit a Team Form Access
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.teamFormAccess.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.teamFormAccess.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.teamFormAccess.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.teamFormAccess.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sessionDate" appTranslate="dataRunClientApp.teamFormAccess.sessionDate">Session Date</label>
+          <div class="d-flex">
+            <input
+              id="field_sessionDate"
+              data-cy="sessionDate"
+              type="datetime-local"
+              class="form-control"
+              name="sessionDate"
+              formControlName="sessionDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('sessionDate')!.invalid && (editForm.get('sessionDate')!.dirty || editForm.get('sessionDate')!.touched)) {
+            <div>
+              @if (editForm.get('sessionDate')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('sessionDate')?.errors?.datetimelocal"
+                appTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_subject" appTranslate="dataRunClientApp.teamFormAccess.subject">Subject</label>
+          <select class="form-control" name="subject" formControlName="subject" id="field_subject" data-cy="subject">
+            <option [ngValue]="null">{{ 'dataRunClientApp.MSessionSubject.null' | translate }}</option>
+            @for (mSessionSubject of mSessionSubjectValues; track $index) {
+              <option [value]="mSessionSubject">{{ 'dataRunClientApp.MSessionSubject.' + mSessionSubject | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sessions" appTranslate="dataRunClientApp.teamFormAccess.sessions">Sessions</label>
+          <input type="number" class="form-control" name="sessions" id="field_sessions" data-cy="sessions" formControlName="sessions" />
+          @if (editForm.get('sessions')!.invalid && (editForm.get('sessions')!.dirty || editForm.get('sessions')!.touched)) {
+            <div>
+              @if (editForm.get('sessions')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('sessions')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_people" appTranslate="dataRunClientApp.teamFormAccess.people">People</label>
+          <input type="number" class="form-control" name="people" id="field_people" data-cy="people" formControlName="people" />
+          @if (editForm.get('people')!.invalid && (editForm.get('people')!.dirty || editForm.get('people')!.touched)) {
+            <div>
+              @if (editForm.get('people')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('people')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_comment" appTranslate="dataRunClientApp.teamFormAccess.comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deleted" appTranslate="dataRunClientApp.teamFormAccess.deleted">Deleted</label>
+          <input type="checkbox" class="form-check" name="deleted" id="field_deleted" data-cy="deleted" formControlName="deleted" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startEntryTime" appTranslate="dataRunClientApp.teamFormAccess.startEntryTime"
+            >Start Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startEntryTime"
+              data-cy="startEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="startEntryTime"
+              formControlName="startEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_finishedEntryTime" appTranslate="dataRunClientApp.teamFormAccess.finishedEntryTime"
+            >Finished Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_finishedEntryTime"
+              data-cy="finishedEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="finishedEntryTime"
+              formControlName="finishedEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" appTranslate="dataRunClientApp.teamFormAccess.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'dataRunClientApp.SyncableStatus.null' | translate }}</option>
+            @for (syncableStatus of syncableStatusValues; track $index) {
+              <option [value]="syncableStatus">{{ 'dataRunClientApp.SyncableStatus.' + syncableStatus | translate }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

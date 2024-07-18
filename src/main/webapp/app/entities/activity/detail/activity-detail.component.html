@@ -35,25 +35,13 @@
           <dd>
             <span>{{ activity()!.endDate | formatMediumDatetime }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.activity.active">Active</span></dt>
+          <dt><span appTranslate="dataRunClientApp.activity.disabled">Disabled</span></dt>
           <dd>
-            <span>{{ activity()!.active }}</span>
+            <span>{{ activity()!.disabled }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.activity.createdBy">Created By</span></dt>
+          <dt><span appTranslate="dataRunClientApp.activity.deleteClientData">Delete Client Data</span></dt>
           <dd>
-            <span>{{ activity()!.createdBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.activity.createdDate">Created Date</span></dt>
-          <dd>
-            <span>{{ activity()!.createdDate | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.activity.lastModifiedBy">Last Modified By</span></dt>
-          <dd>
-            <span>{{ activity()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.activity.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ activity()!.lastModifiedDate | formatMediumDatetime }}</span>
+            <span>{{ activity()!.deleteClientData }}</span>
           </dd>
           <dt><span appTranslate="dataRunClientApp.activity.project">Project</span></dt>
           <dd>

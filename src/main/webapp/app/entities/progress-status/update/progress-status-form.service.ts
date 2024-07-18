@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import dayjs from 'dayjs/esm';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IProgressStatus, NewProgressStatus } from '../progress-status.model';
 
 /**
@@ -16,29 +14,13 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ProgressStatusFormGroupInput = IProgressStatus | PartialWithRequiredKeyOf<NewProgressStatus>;
 
-/**
- * Type that converts some properties for forms.
- */
-type FormValueOf<T extends IProgressStatus | NewProgressStatus> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-type ProgressStatusFormRawValue = FormValueOf<IProgressStatus>;
-
-type NewProgressStatusFormRawValue = FormValueOf<NewProgressStatus>;
-
-type ProgressStatusFormDefaults = Pick<NewProgressStatus, 'id' | 'createdDate' | 'lastModifiedDate'>;
+type ProgressStatusFormDefaults = Pick<NewProgressStatus, 'id'>;
 
 type ProgressStatusFormGroupContent = {
-  id: FormControl<ProgressStatusFormRawValue['id'] | NewProgressStatus['id']>;
-  uid: FormControl<ProgressStatusFormRawValue['uid']>;
-  code: FormControl<ProgressStatusFormRawValue['code']>;
-  name: FormControl<ProgressStatusFormRawValue['name']>;
-  createdBy: FormControl<ProgressStatusFormRawValue['createdBy']>;
-  createdDate: FormControl<ProgressStatusFormRawValue['createdDate']>;
-  lastModifiedBy: FormControl<ProgressStatusFormRawValue['lastModifiedBy']>;
-  lastModifiedDate: FormControl<ProgressStatusFormRawValue['lastModifiedDate']>;
+  id: FormControl<IProgressStatus['id'] | NewProgressStatus['id']>;
+  uid: FormControl<IProgressStatus['uid']>;
+  code: FormControl<IProgressStatus['code']>;
+  name: FormControl<IProgressStatus['name']>;
 };
 
 export type ProgressStatusFormGroup = FormGroup<ProgressStatusFormGroupContent>;
@@ -46,10 +28,10 @@ export type ProgressStatusFormGroup = FormGroup<ProgressStatusFormGroupContent>;
 @Injectable({ providedIn: 'root' })
 export class ProgressStatusFormService {
   createProgressStatusFormGroup(progressStatus: ProgressStatusFormGroupInput = { id: null }): ProgressStatusFormGroup {
-    const progressStatusRawValue = this.convertProgressStatusToProgressStatusRawValue({
+    const progressStatusRawValue = {
       ...this.getFormDefaults(),
       ...progressStatus,
-    });
+    };
     return new FormGroup<ProgressStatusFormGroupContent>({
       id: new FormControl(
         { value: progressStatusRawValue.id, disabled: true },
@@ -59,25 +41,19 @@ export class ProgressStatusFormService {
         },
       ),
       uid: new FormControl(progressStatusRawValue.uid, {
-        validators: [Validators.maxLength(11)],
+        validators: [Validators.required, Validators.maxLength(11)],
       }),
       code: new FormControl(progressStatusRawValue.code),
       name: new FormControl(progressStatusRawValue.name),
-      createdBy: new FormControl(progressStatusRawValue.createdBy),
-      createdDate: new FormControl(progressStatusRawValue.createdDate),
-      lastModifiedBy: new FormControl(progressStatusRawValue.lastModifiedBy),
-      lastModifiedDate: new FormControl(progressStatusRawValue.lastModifiedDate),
     });
   }
 
   getProgressStatus(form: ProgressStatusFormGroup): IProgressStatus | NewProgressStatus {
-    return this.convertProgressStatusRawValueToProgressStatus(
-      form.getRawValue() as ProgressStatusFormRawValue | NewProgressStatusFormRawValue,
-    );
+    return form.getRawValue() as IProgressStatus | NewProgressStatus;
   }
 
   resetForm(form: ProgressStatusFormGroup, progressStatus: ProgressStatusFormGroupInput): void {
-    const progressStatusRawValue = this.convertProgressStatusToProgressStatusRawValue({ ...this.getFormDefaults(), ...progressStatus });
+    const progressStatusRawValue = { ...this.getFormDefaults(), ...progressStatus };
     form.reset(
       {
         ...progressStatusRawValue,
@@ -87,32 +63,8 @@ export class ProgressStatusFormService {
   }
 
   private getFormDefaults(): ProgressStatusFormDefaults {
-    const currentTime = dayjs();
-
     return {
       id: null,
-      createdDate: currentTime,
-      lastModifiedDate: currentTime,
-    };
-  }
-
-  private convertProgressStatusRawValueToProgressStatus(
-    rawProgressStatus: ProgressStatusFormRawValue | NewProgressStatusFormRawValue,
-  ): IProgressStatus | NewProgressStatus {
-    return {
-      ...rawProgressStatus,
-      createdDate: dayjs(rawProgressStatus.createdDate, DATE_TIME_FORMAT),
-      lastModifiedDate: dayjs(rawProgressStatus.lastModifiedDate, DATE_TIME_FORMAT),
-    };
-  }
-
-  private convertProgressStatusToProgressStatusRawValue(
-    progressStatus: IProgressStatus | (Partial<NewProgressStatus> & ProgressStatusFormDefaults),
-  ): ProgressStatusFormRawValue | PartialWithRequiredKeyOf<NewProgressStatusFormRawValue> {
-    return {
-      ...progressStatus,
-      createdDate: progressStatus.createdDate ? progressStatus.createdDate.format(DATE_TIME_FORMAT) : undefined,
-      lastModifiedDate: progressStatus.lastModifiedDate ? progressStatus.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

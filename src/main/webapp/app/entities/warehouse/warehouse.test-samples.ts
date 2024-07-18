@@ -1,41 +1,32 @@
-import dayjs from 'dayjs/esm';
-
 import { IWarehouse, NewWarehouse } from './warehouse.model';
 
 export const sampleWithRequiredData: IWarehouse = {
-  id: 21538,
-  code: 'frightfully',
+  id: 21994,
+  uid: 'quizzical s',
+  code: 'during yearningly the',
 };
 
 export const sampleWithPartialData: IWarehouse = {
-  id: 29629,
-  uid: 'skid',
-  code: 'because cattle handsome',
-  description: 'TV up capitalise',
-  gpsCoordinate: 'er',
-  supervisorMobile: 'how blind',
-  createdBy: 'yowza furthermore',
-  lastModifiedBy: 'scout curio',
-  lastModifiedDate: dayjs('2024-05-22T07:22'),
+  id: 5803,
+  uid: 'lion',
+  code: 'whereas inside unfolded',
+  supervisorMobile: 'humongous while',
 };
 
 export const sampleWithFullData: IWarehouse = {
-  id: 10362,
-  uid: 'uh-huh gadz',
-  code: 'tattoo including',
-  name: 'whoa woot hybridize',
-  description: 'family',
-  gpsCoordinate: 'oh once hm',
-  supervisor: 'even per well-worn',
-  supervisorMobile: 'unknown netsuke lazy',
-  createdBy: 'dish sniff',
-  createdDate: dayjs('2024-05-22T19:33'),
-  lastModifiedBy: 'wearily',
-  lastModifiedDate: dayjs('2024-05-22T15:17'),
+  id: 3243,
+  uid: 'pump',
+  code: 'kitten unless',
+  name: 'glint sadly gosh',
+  description: 'wherever towards',
+  gpsCoordinate: 'outside solidly',
+  supervisor: 'huzzah ikebana too',
+  supervisorMobile: 'uncork genuine presence',
 };
 
 export const sampleWithNewData: NewWarehouse = {
-  code: 'if athwart',
+  uid: 'actually ca',
+  code: 'amid',
   id: null,
 };
 

@@ -98,13 +98,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="startEntryTime">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvSession.startEntryTime">Start Entry Time</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" appSortBy="deleted">
               <div class="d-flex">
                 <span appTranslate="dataRunClientApp.chvSession.deleted">Deleted</span>
@@ -112,30 +105,23 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
+            <th scope="col" appSortBy="startEntryTime">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvSession.createdBy">Created By</span>
+                <span appTranslate="dataRunClientApp.chvSession.startEntryTime">Start Entry Time</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdDate">
+            <th scope="col" appSortBy="finishedEntryTime">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvSession.createdDate">Created Date</span>
+                <span appTranslate="dataRunClientApp.chvSession.finishedEntryTime">Finished Entry Time</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="lastModifiedBy">
+            <th scope="col" appSortBy="status">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvSession.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvSession.lastModifiedDate">Last Modified Date</span>
+                <span appTranslate="dataRunClientApp.chvSession.status">Status</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -143,6 +129,12 @@
             <th scope="col" appSortBy="team.code">
               <div class="d-flex">
                 <span appTranslate="dataRunClientApp.chvSession.team">Team</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="activity.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvSession.activity">Activity</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -169,16 +161,23 @@
               <td>{{ chvSession.sessions }}</td>
               <td>{{ chvSession.people }}</td>
               <td>{{ chvSession.comment }}</td>
-              <td>{{ chvSession.startEntryTime | formatMediumDatetime }}</td>
               <td>{{ chvSession.deleted }}</td>
-              <td>{{ chvSession.createdBy }}</td>
-              <td>{{ chvSession.createdDate | formatMediumDatetime }}</td>
-              <td>{{ chvSession.lastModifiedBy }}</td>
-              <td>{{ chvSession.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>{{ chvSession.startEntryTime | formatMediumDatetime }}</td>
+              <td>{{ chvSession.finishedEntryTime | formatMediumDatetime }}</td>
+              <td [appTranslate]="'dataRunClientApp.SyncableStatus.' + (chvSession.status ?? 'null')">
+                {{ { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[chvSession.status ?? 'null'] }}
+              </td>
               <td>
                 @if (chvSession.team) {
                   <div>
                     <a [routerLink]="['/team', chvSession.team.id, 'view']">{{ chvSession.team.code }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (chvSession.activity) {
+                  <div>
+                    <a [routerLink]="['/activity', chvSession.activity.id, 'view']">{{ chvSession.activity.code }}</a>
                   </div>
                 }
               </td>

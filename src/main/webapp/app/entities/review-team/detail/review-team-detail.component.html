@@ -31,22 +31,6 @@
           <dd>
             <span>{{ reviewTeam()!.user }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.reviewTeam.createdBy">Created By</span></dt>
-          <dd>
-            <span>{{ reviewTeam()!.createdBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.reviewTeam.createdDate">Created Date</span></dt>
-          <dd>
-            <span>{{ reviewTeam()!.createdDate | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.reviewTeam.lastModifiedBy">Last Modified By</span></dt>
-          <dd>
-            <span>{{ reviewTeam()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.reviewTeam.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ reviewTeam()!.lastModifiedDate | formatMediumDatetime }}</span>
-          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

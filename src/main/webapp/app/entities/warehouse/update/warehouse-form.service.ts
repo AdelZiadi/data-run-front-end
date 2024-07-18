@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import dayjs from 'dayjs/esm';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IWarehouse, NewWarehouse } from '../warehouse.model';
 
 /**
@@ -16,34 +14,18 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type WarehouseFormGroupInput = IWarehouse | PartialWithRequiredKeyOf<NewWarehouse>;
 
-/**
- * Type that converts some properties for forms.
- */
-type FormValueOf<T extends IWarehouse | NewWarehouse> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-type WarehouseFormRawValue = FormValueOf<IWarehouse>;
-
-type NewWarehouseFormRawValue = FormValueOf<NewWarehouse>;
-
-type WarehouseFormDefaults = Pick<NewWarehouse, 'id' | 'createdDate' | 'lastModifiedDate'>;
+type WarehouseFormDefaults = Pick<NewWarehouse, 'id'>;
 
 type WarehouseFormGroupContent = {
-  id: FormControl<WarehouseFormRawValue['id'] | NewWarehouse['id']>;
-  uid: FormControl<WarehouseFormRawValue['uid']>;
-  code: FormControl<WarehouseFormRawValue['code']>;
-  name: FormControl<WarehouseFormRawValue['name']>;
-  description: FormControl<WarehouseFormRawValue['description']>;
-  gpsCoordinate: FormControl<WarehouseFormRawValue['gpsCoordinate']>;
-  supervisor: FormControl<WarehouseFormRawValue['supervisor']>;
-  supervisorMobile: FormControl<WarehouseFormRawValue['supervisorMobile']>;
-  createdBy: FormControl<WarehouseFormRawValue['createdBy']>;
-  createdDate: FormControl<WarehouseFormRawValue['createdDate']>;
-  lastModifiedBy: FormControl<WarehouseFormRawValue['lastModifiedBy']>;
-  lastModifiedDate: FormControl<WarehouseFormRawValue['lastModifiedDate']>;
-  activity: FormControl<WarehouseFormRawValue['activity']>;
+  id: FormControl<IWarehouse['id'] | NewWarehouse['id']>;
+  uid: FormControl<IWarehouse['uid']>;
+  code: FormControl<IWarehouse['code']>;
+  name: FormControl<IWarehouse['name']>;
+  description: FormControl<IWarehouse['description']>;
+  gpsCoordinate: FormControl<IWarehouse['gpsCoordinate']>;
+  supervisor: FormControl<IWarehouse['supervisor']>;
+  supervisorMobile: FormControl<IWarehouse['supervisorMobile']>;
+  activity: FormControl<IWarehouse['activity']>;
 };
 
 export type WarehouseFormGroup = FormGroup<WarehouseFormGroupContent>;
@@ -51,10 +33,10 @@ export type WarehouseFormGroup = FormGroup<WarehouseFormGroupContent>;
 @Injectable({ providedIn: 'root' })
 export class WarehouseFormService {
   createWarehouseFormGroup(warehouse: WarehouseFormGroupInput = { id: null }): WarehouseFormGroup {
-    const warehouseRawValue = this.convertWarehouseToWarehouseRawValue({
+    const warehouseRawValue = {
       ...this.getFormDefaults(),
       ...warehouse,
-    });
+    };
     return new FormGroup<WarehouseFormGroupContent>({
       id: new FormControl(
         { value: warehouseRawValue.id, disabled: true },
@@ -64,7 +46,7 @@ export class WarehouseFormService {
         },
       ),
       uid: new FormControl(warehouseRawValue.uid, {
-        validators: [Validators.maxLength(11)],
+        validators: [Validators.required, Validators.maxLength(11)],
       }),
       code: new FormControl(warehouseRawValue.code, {
         validators: [Validators.required],
@@ -74,20 +56,16 @@ export class WarehouseFormService {
       gpsCoordinate: new FormControl(warehouseRawValue.gpsCoordinate),
       supervisor: new FormControl(warehouseRawValue.supervisor),
       supervisorMobile: new FormControl(warehouseRawValue.supervisorMobile),
-      createdBy: new FormControl(warehouseRawValue.createdBy),
-      createdDate: new FormControl(warehouseRawValue.createdDate),
-      lastModifiedBy: new FormControl(warehouseRawValue.lastModifiedBy),
-      lastModifiedDate: new FormControl(warehouseRawValue.lastModifiedDate),
       activity: new FormControl(warehouseRawValue.activity),
     });
   }
 
   getWarehouse(form: WarehouseFormGroup): IWarehouse | NewWarehouse {
-    return this.convertWarehouseRawValueToWarehouse(form.getRawValue() as WarehouseFormRawValue | NewWarehouseFormRawValue);
+    return form.getRawValue() as IWarehouse | NewWarehouse;
   }
 
   resetForm(form: WarehouseFormGroup, warehouse: WarehouseFormGroupInput): void {
-    const warehouseRawValue = this.convertWarehouseToWarehouseRawValue({ ...this.getFormDefaults(), ...warehouse });
+    const warehouseRawValue = { ...this.getFormDefaults(), ...warehouse };
     form.reset(
       {
         ...warehouseRawValue,
@@ -97,30 +75,8 @@ export class WarehouseFormService {
   }
 
   private getFormDefaults(): WarehouseFormDefaults {
-    const currentTime = dayjs();
-
     return {
       id: null,
-      createdDate: currentTime,
-      lastModifiedDate: currentTime,
-    };
-  }
-
-  private convertWarehouseRawValueToWarehouse(rawWarehouse: WarehouseFormRawValue | NewWarehouseFormRawValue): IWarehouse | NewWarehouse {
-    return {
-      ...rawWarehouse,
-      createdDate: dayjs(rawWarehouse.createdDate, DATE_TIME_FORMAT),
-      lastModifiedDate: dayjs(rawWarehouse.lastModifiedDate, DATE_TIME_FORMAT),
-    };
-  }
-
-  private convertWarehouseToWarehouseRawValue(
-    warehouse: IWarehouse | (Partial<NewWarehouse> & WarehouseFormDefaults),
-  ): WarehouseFormRawValue | PartialWithRequiredKeyOf<NewWarehouseFormRawValue> {
-    return {
-      ...warehouse,
-      createdDate: warehouse.createdDate ? warehouse.createdDate.format(DATE_TIME_FORMAT) : undefined,
-      lastModifiedDate: warehouse.lastModifiedDate ? warehouse.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

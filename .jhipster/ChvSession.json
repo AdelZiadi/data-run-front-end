@@ -8,7 +8,7 @@
     {
       "fieldName": "uid",
       "fieldType": "String",
-      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRules": ["required", "unique", "maxlength"],
       "fieldValidateRulesMaxlength": "11"
     },
     {
@@ -44,46 +44,22 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "startEntryTime",
-      "fieldType": "Instant"
-    },
-    {
       "fieldName": "deleted",
       "fieldType": "Boolean"
     },
     {
-      "auditField": true,
-      "autoGenerate": true,
-      "columnType": "varchar(50)",
-      "fieldName": "createdBy",
-      "fieldType": "String",
-      "nullable": false,
-      "readonly": true
+      "fieldName": "startEntryTime",
+      "fieldType": "Instant"
     },
     {
-      "auditField": true,
-      "autoGenerate": true,
-      "fieldName": "createdDate",
-      "fieldType": "Instant",
-      "nullable": false,
-      "readonly": true
+      "fieldName": "finishedEntryTime",
+      "fieldType": "Instant"
     },
     {
-      "auditField": true,
-      "autoGenerate": true,
-      "columnType": "varchar(50)",
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String",
-      "nullable": false,
-      "readonly": true
-    },
-    {
-      "auditField": true,
-      "autoGenerate": true,
-      "fieldName": "lastModifiedDate",
-      "fieldType": "Instant",
-      "nullable": false,
-      "readonly": true
+      "fieldName": "status",
+      "fieldType": "SyncableStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,COMPLETED"
     }
   ],
   "name": "ChvSession",
@@ -94,7 +70,16 @@
       "otherEntityName": "team",
       "relationshipName": "team",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "activity",
+      "relationshipName": "activity",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "searchEngine": "no",

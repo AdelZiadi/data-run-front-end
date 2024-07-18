@@ -29,22 +29,6 @@
           <dd>
             <span>{{ progressStatus()!.name }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.progressStatus.createdBy">Created By</span></dt>
-          <dd>
-            <span>{{ progressStatus()!.createdBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.progressStatus.createdDate">Created Date</span></dt>
-          <dd>
-            <span>{{ progressStatus()!.createdDate | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.progressStatus.lastModifiedBy">Last Modified By</span></dt>
-          <dd>
-            <span>{{ progressStatus()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.progressStatus.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ progressStatus()!.lastModifiedDate | formatMediumDatetime }}</span>
-          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

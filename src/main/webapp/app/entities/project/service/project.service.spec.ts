@@ -4,12 +4,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { IProject } from '../project.model';
 import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../project.test-samples';
 
-import { ProjectService, RestProject } from './project.service';
+import { ProjectService } from './project.service';
 
-const requireRestSample: RestProject = {
+const requireRestSample: IProject = {
   ...sampleWithRequiredData,
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('Project Service', () => {

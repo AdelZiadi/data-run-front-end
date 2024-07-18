@@ -21,11 +21,7 @@
       "uid": "Uid",
       "code": "Code",
       "name": "Name",
-      "displayed": "Displayed",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date",
+      "disabled": "Disabled",
       "activity": "Activity"
     }
   }

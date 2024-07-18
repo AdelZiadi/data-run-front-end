@@ -1,40 +1,41 @@
-import dayjs from 'dayjs/esm';
-
 import { ITeam, NewTeam } from './team.model';
 
 export const sampleWithRequiredData: ITeam = {
-  id: 12009,
-  code: 'too forenenst astride',
+  id: 13577,
+  uid: 'but',
+  code: 'frantically dissonance instead',
+  teamType: 'IRS_DISTRIBUTION',
 };
 
 export const sampleWithPartialData: ITeam = {
-  id: 3522,
-  code: 'robust although',
-  description: 'prey via',
-  mobility: 'into dearly leek',
-  createdBy: 'generously although',
-  createdDate: dayjs('2024-05-22T05:44'),
-  lastModifiedBy: 'doe fooey',
-  lastModifiedDate: dayjs('2024-05-22T18:08'),
+  id: 14125,
+  uid: 'explicate',
+  code: 'or beautiful aha',
+  name: 'blissfully blight dip',
+  mobile: 'cradle',
+  workers: 10247,
+  mobility: 'longingly tromp today',
+  teamType: 'ITNS_WAREHOUSE',
 };
 
 export const sampleWithFullData: ITeam = {
-  id: 21771,
-  uid: 'yowza searc',
-  code: 'seriously inspiration barring',
-  name: 'ack estate',
-  description: 'quaintly mushy concerned',
-  mobile: 'hourly among',
-  workers: 24613,
-  mobility: 'silver clerk playful',
-  createdBy: 'at yet',
-  createdDate: dayjs('2024-05-22T18:44'),
-  lastModifiedBy: 'celebrated amid moral',
-  lastModifiedDate: dayjs('2024-05-22T23:05'),
+  id: 20090,
+  uid: 'meanwhile p',
+  code: 'notion',
+  name: 'gee',
+  description: 'lest',
+  mobile: 'zesty talkative blindfolded',
+  workers: 9176,
+  mobility: 'into',
+  teamType: 'IRS_WAREHOUSE',
+  disabled: false,
+  deleteClientData: false,
 };
 
 export const sampleWithNewData: NewTeam = {
-  code: 'escalate',
+  uid: 'hint pace',
+  code: 'flank tragic',
+  teamType: 'CHV_PATIENTS',
   id: null,
 };
 

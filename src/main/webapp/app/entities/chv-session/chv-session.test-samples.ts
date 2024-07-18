@@ -3,47 +3,49 @@ import dayjs from 'dayjs/esm';
 import { IChvSession, NewChvSession } from './chv-session.model';
 
 export const sampleWithRequiredData: IChvSession = {
-  id: 24554,
-  sessionDate: dayjs('2024-05-29T17:35'),
-  sessions: 32242,
-  people: 1625,
+  id: 21602,
+  uid: 'buttery',
+  sessionDate: dayjs('2024-05-29T12:38'),
+  sessions: 12138,
+  people: 28196,
+  status: 'ACTIVE',
 };
 
 export const sampleWithPartialData: IChvSession = {
-  id: 26253,
-  uid: 'eternity re',
-  name: 'unhealthy boo till',
-  sessionDate: dayjs('2024-05-30T11:52'),
-  sessions: 945,
-  people: 5571,
-  comment: 'knowledgeably misplace zowie',
+  id: 18925,
+  uid: 'soundproof ',
+  sessionDate: dayjs('2024-05-29T22:26'),
+  subject: 'BreadingSite',
+  sessions: 18745,
+  people: 19673,
+  comment: 'twist monster',
   deleted: true,
-  createdBy: 'oh',
-  createdDate: dayjs('2024-05-29T22:41'),
+  finishedEntryTime: dayjs('2024-05-30T07:08'),
+  status: 'COMPLETED',
 };
 
 export const sampleWithFullData: IChvSession = {
-  id: 13552,
-  uid: 'scrutinise ',
-  code: 'rapidly failing scarily',
-  name: 'surge intensely',
-  sessionDate: dayjs('2024-05-29T13:53'),
+  id: 11776,
+  uid: 'treasure',
+  code: 'loads',
+  name: 'till pray er',
+  sessionDate: dayjs('2024-05-30T04:13'),
   subject: 'BreadingSite',
-  sessions: 23889,
-  people: 3989,
-  comment: 'in unlawful',
-  startEntryTime: dayjs('2024-05-29T21:00'),
+  sessions: 12039,
+  people: 11057,
+  comment: 'paint fair',
   deleted: true,
-  createdBy: 'productive private',
-  createdDate: dayjs('2024-05-29T19:18'),
-  lastModifiedBy: 'though',
-  lastModifiedDate: dayjs('2024-05-29T23:31'),
+  startEntryTime: dayjs('2024-05-29T17:12'),
+  finishedEntryTime: dayjs('2024-05-30T00:25'),
+  status: 'ACTIVE',
 };
 
 export const sampleWithNewData: NewChvSession = {
-  sessionDate: dayjs('2024-05-30T10:51'),
-  sessions: 9181,
-  people: 32505,
+  uid: 'needy',
+  sessionDate: dayjs('2024-05-30T06:12'),
+  sessions: 17619,
+  people: 26523,
+  status: 'ACTIVE',
   id: null,
 };
 

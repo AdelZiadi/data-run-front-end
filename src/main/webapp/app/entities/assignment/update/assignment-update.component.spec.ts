@@ -61,10 +61,10 @@ describe('Assignment Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Activity query and add missing value', () => {
       const assignment: IAssignment = { id: 456 };
-      const activity: IActivity = { id: 28934 };
+      const activity: IActivity = { id: 19318 };
       assignment.activity = activity;
 
-      const activityCollection: IActivity[] = [{ id: 20796 }];
+      const activityCollection: IActivity[] = [{ id: 23598 }];
       jest.spyOn(activityService, 'query').mockReturnValue(of(new HttpResponse({ body: activityCollection })));
       const additionalActivities = [activity];
       const expectedCollection: IActivity[] = [...additionalActivities, ...activityCollection];
@@ -83,10 +83,10 @@ describe('Assignment Management Update Component', () => {
 
     it('Should call VillageLocation query and add missing value', () => {
       const assignment: IAssignment = { id: 456 };
-      const organisationUnit: IVillageLocation = { id: 8939 };
+      const organisationUnit: IVillageLocation = { id: 30526 };
       assignment.organisationUnit = organisationUnit;
 
-      const villageLocationCollection: IVillageLocation[] = [{ id: 9384 }];
+      const villageLocationCollection: IVillageLocation[] = [{ id: 20836 }];
       jest.spyOn(villageLocationService, 'query').mockReturnValue(of(new HttpResponse({ body: villageLocationCollection })));
       const additionalVillageLocations = [organisationUnit];
       const expectedCollection: IVillageLocation[] = [...additionalVillageLocations, ...villageLocationCollection];
@@ -105,10 +105,10 @@ describe('Assignment Management Update Component', () => {
 
     it('Should call Team query and add missing value', () => {
       const assignment: IAssignment = { id: 456 };
-      const team: ITeam = { id: 6236 };
+      const team: ITeam = { id: 1028 };
       assignment.team = team;
 
-      const teamCollection: ITeam[] = [{ id: 5776 }];
+      const teamCollection: ITeam[] = [{ id: 17988 }];
       jest.spyOn(teamService, 'query').mockReturnValue(of(new HttpResponse({ body: teamCollection })));
       const additionalTeams = [team];
       const expectedCollection: ITeam[] = [...additionalTeams, ...teamCollection];
@@ -127,10 +127,10 @@ describe('Assignment Management Update Component', () => {
 
     it('Should call Warehouse query and add missing value', () => {
       const assignment: IAssignment = { id: 456 };
-      const warehouse: IWarehouse = { id: 25116 };
+      const warehouse: IWarehouse = { id: 27545 };
       assignment.warehouse = warehouse;
 
-      const warehouseCollection: IWarehouse[] = [{ id: 2750 }];
+      const warehouseCollection: IWarehouse[] = [{ id: 16576 }];
       jest.spyOn(warehouseService, 'query').mockReturnValue(of(new HttpResponse({ body: warehouseCollection })));
       const additionalWarehouses = [warehouse];
       const expectedCollection: IWarehouse[] = [...additionalWarehouses, ...warehouseCollection];
@@ -149,13 +149,13 @@ describe('Assignment Management Update Component', () => {
 
     it('Should update editForm', () => {
       const assignment: IAssignment = { id: 456 };
-      const activity: IActivity = { id: 7 };
+      const activity: IActivity = { id: 15515 };
       assignment.activity = activity;
-      const organisationUnit: IVillageLocation = { id: 11072 };
+      const organisationUnit: IVillageLocation = { id: 24052 };
       assignment.organisationUnit = organisationUnit;
-      const team: ITeam = { id: 22052 };
+      const team: ITeam = { id: 21313 };
       assignment.team = team;
-      const warehouse: IWarehouse = { id: 24565 };
+      const warehouse: IWarehouse = { id: 22622 };
       assignment.warehouse = warehouse;
 
       activatedRoute.data = of({ assignment });

@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-
-import dayjs from 'dayjs/esm';
+import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -10,17 +8,6 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { IProject, NewProject } from '../project.model';
 
 export type PartialUpdateProject = Partial<IProject> & Pick<IProject, 'id'>;
-
-type RestOf<T extends IProject | NewProject> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-export type RestProject = RestOf<IProject>;
-
-export type NewRestProject = RestOf<NewProject>;
-
-export type PartialUpdateRestProject = RestOf<PartialUpdateProject>;
 
 export type EntityResponseType = HttpResponse<IProject>;
 export type EntityArrayResponseType = HttpResponse<IProject[]>;
@@ -33,37 +20,24 @@ export class ProjectService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/projects');
 
   create(project: NewProject): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(project);
-    return this.http
-      .post<RestProject>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.post<IProject>(this.resourceUrl, project, { observe: 'response' });
   }
 
   update(project: IProject): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(project);
-    return this.http
-      .put<RestProject>(`${this.resourceUrl}/${this.getProjectIdentifier(project)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.put<IProject>(`${this.resourceUrl}/${this.getProjectIdentifier(project)}`, project, { observe: 'response' });
   }
 
   partialUpdate(project: PartialUpdateProject): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(project);
-    return this.http
-      .patch<RestProject>(`${this.resourceUrl}/${this.getProjectIdentifier(project)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.patch<IProject>(`${this.resourceUrl}/${this.getProjectIdentifier(project)}`, project, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http
-      .get<RestProject>(`${this.resourceUrl}/${id}`, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.get<IProject>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http
-      .get<RestProject[]>(this.resourceUrl, { params: options, observe: 'response' })
-      .pipe(map(res => this.convertResponseArrayFromServer(res)));
+    return this.http.get<IProject[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
@@ -96,33 +70,5 @@ export class ProjectService {
       return [...projectsToAdd, ...projectCollection];
     }
     return projectCollection;
-  }
-
-  protected convertDateFromClient<T extends IProject | NewProject | PartialUpdateProject>(project: T): RestOf<T> {
-    return {
-      ...project,
-      createdDate: project.createdDate?.toJSON() ?? null,
-      lastModifiedDate: project.lastModifiedDate?.toJSON() ?? null,
-    };
-  }
-
-  protected convertDateFromServer(restProject: RestProject): IProject {
-    return {
-      ...restProject,
-      createdDate: restProject.createdDate ? dayjs(restProject.createdDate) : undefined,
-      lastModifiedDate: restProject.lastModifiedDate ? dayjs(restProject.lastModifiedDate) : undefined,
-    };
-  }
-
-  protected convertResponseFromServer(res: HttpResponse<RestProject>): HttpResponse<IProject> {
-    return res.clone({
-      body: res.body ? this.convertDateFromServer(res.body) : null,
-    });
-  }
-
-  protected convertResponseArrayFromServer(res: HttpResponse<RestProject[]>): HttpResponse<IProject[]> {
-    return res.clone({
-      body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
-    });
   }
 }

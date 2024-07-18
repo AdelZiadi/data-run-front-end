@@ -19,17 +19,15 @@ type AssignmentFormGroupInput = IAssignment | PartialWithRequiredKeyOf<NewAssign
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IAssignment | NewAssignment> = Omit<T, 'startDate' | 'createdDate' | 'lastModifiedDate'> & {
+type FormValueOf<T extends IAssignment | NewAssignment> = Omit<T, 'startDate'> & {
   startDate?: string | null;
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
 };
 
 type AssignmentFormRawValue = FormValueOf<IAssignment>;
 
 type NewAssignmentFormRawValue = FormValueOf<NewAssignment>;
 
-type AssignmentFormDefaults = Pick<NewAssignment, 'id' | 'startDate' | 'createdDate' | 'lastModifiedDate'>;
+type AssignmentFormDefaults = Pick<NewAssignment, 'id' | 'startDate'>;
 
 type AssignmentFormGroupContent = {
   id: FormControl<AssignmentFormRawValue['id'] | NewAssignment['id']>;
@@ -50,10 +48,6 @@ type AssignmentFormGroupContent = {
   longitude: FormControl<AssignmentFormRawValue['longitude']>;
   latitude: FormControl<AssignmentFormRawValue['latitude']>;
   startDate: FormControl<AssignmentFormRawValue['startDate']>;
-  createdBy: FormControl<AssignmentFormRawValue['createdBy']>;
-  createdDate: FormControl<AssignmentFormRawValue['createdDate']>;
-  lastModifiedBy: FormControl<AssignmentFormRawValue['lastModifiedBy']>;
-  lastModifiedDate: FormControl<AssignmentFormRawValue['lastModifiedDate']>;
   activity: FormControl<AssignmentFormRawValue['activity']>;
   organisationUnit: FormControl<AssignmentFormRawValue['organisationUnit']>;
   team: FormControl<AssignmentFormRawValue['team']>;
@@ -78,7 +72,7 @@ export class AssignmentFormService {
         },
       ),
       uid: new FormControl(assignmentRawValue.uid, {
-        validators: [Validators.maxLength(11)],
+        validators: [Validators.required, Validators.maxLength(11)],
       }),
       code: new FormControl(assignmentRawValue.code),
       phaseNo: new FormControl(assignmentRawValue.phaseNo),
@@ -96,13 +90,11 @@ export class AssignmentFormService {
       longitude: new FormControl(assignmentRawValue.longitude),
       latitude: new FormControl(assignmentRawValue.latitude),
       startDate: new FormControl(assignmentRawValue.startDate),
-      createdBy: new FormControl(assignmentRawValue.createdBy),
-      createdDate: new FormControl(assignmentRawValue.createdDate),
-      lastModifiedBy: new FormControl(assignmentRawValue.lastModifiedBy),
-      lastModifiedDate: new FormControl(assignmentRawValue.lastModifiedDate),
       activity: new FormControl(assignmentRawValue.activity),
       organisationUnit: new FormControl(assignmentRawValue.organisationUnit),
-      team: new FormControl(assignmentRawValue.team),
+      team: new FormControl(assignmentRawValue.team, {
+        validators: [Validators.required],
+      }),
       warehouse: new FormControl(assignmentRawValue.warehouse),
     });
   }
@@ -127,8 +119,6 @@ export class AssignmentFormService {
     return {
       id: null,
       startDate: currentTime,
-      createdDate: currentTime,
-      lastModifiedDate: currentTime,
     };
   }
 
@@ -138,8 +128,6 @@ export class AssignmentFormService {
     return {
       ...rawAssignment,
       startDate: dayjs(rawAssignment.startDate, DATE_TIME_FORMAT),
-      createdDate: dayjs(rawAssignment.createdDate, DATE_TIME_FORMAT),
-      lastModifiedDate: dayjs(rawAssignment.lastModifiedDate, DATE_TIME_FORMAT),
     };
   }
 
@@ -149,8 +137,6 @@ export class AssignmentFormService {
     return {
       ...assignment,
       startDate: assignment.startDate ? assignment.startDate.format(DATE_TIME_FORMAT) : undefined,
-      createdDate: assignment.createdDate ? assignment.createdDate.format(DATE_TIME_FORMAT) : undefined,
-      lastModifiedDate: assignment.lastModifiedDate ? assignment.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

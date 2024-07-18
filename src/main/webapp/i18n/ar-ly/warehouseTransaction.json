@@ -1,0 +1,46 @@
+{
+  "dataRunClientApp": {
+    "warehouseTransaction": {
+      "home": {
+        "title": "حركة المستودع",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء حركة مستودع جديدة",
+        "createOrEditLabel": "إنشاء أو تحرير حركة مستودع",
+        "notFound": "لم يتم العثور على حركات مستودع"
+      },
+      "created": "تم إنشاء حركة مستودع جديدة بالمعرف {{ param }}",
+      "updated": "تم تحديث حركة المستودع بالمعرف {{ param }}",
+      "deleted": "تم حذف حركة المستودع بالمعرف {{ param }}",
+      "delete": {
+        "question": "هل أنت متأكد أنك تريد حذف حركة المستودع {{ id }}؟"
+      },
+      "detail": {
+        "title": "حركة المستودع"
+      },
+      "id": "المعرف",
+      "uid": "معرف المستخدم",
+      "code": "الرمز",
+      "name": "الاسم",
+      "imovUid": "معرف IMOV",
+      "transactionDate": "تاريخ الحركة",
+      "phaseNo": "رقم المرحلة",
+      "entryType": "نوع الإدخال",
+      "quantity": "الكمية",
+      "notes": "الملاحظات",
+      "personName": "اسم الشخص",
+      "workDayId": "معرف يوم العمل",
+      "submissionTime": "وقت التقديم",
+      "submissionId": "معرف التقديم",
+      "deleted": "تم الحذف",
+      "submissionUuid": "UUID التقديم",
+      "startEntryTime": "وقت بدء الإدخال",
+      "finishedEntryTime": "وقت انتهاء الإدخال",
+      "status": "الحالة",
+      "item": "العنصر",
+      "sourceWarehouse": "المستودع المصدر",
+      "team": "الفريق",
+      "warehouse": "المستودع",
+      "activity": "النشاط"
+    }
+  }
+}

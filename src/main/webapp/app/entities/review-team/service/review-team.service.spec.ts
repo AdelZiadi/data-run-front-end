@@ -4,12 +4,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { IReviewTeam } from '../review-team.model';
 import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../review-team.test-samples';
 
-import { ReviewTeamService, RestReviewTeam } from './review-team.service';
+import { ReviewTeamService } from './review-team.service';
 
-const requireRestSample: RestReviewTeam = {
+const requireRestSample: IReviewTeam = {
   ...sampleWithRequiredData,
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('ReviewTeam Service', () => {

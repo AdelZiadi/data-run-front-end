@@ -51,35 +51,37 @@
           <dd>
             <span>{{ chvSession()!.comment }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvSession.startEntryTime">Start Entry Time</span></dt>
-          <dd>
-            <span>{{ chvSession()!.startEntryTime | formatMediumDatetime }}</span>
-          </dd>
           <dt><span appTranslate="dataRunClientApp.chvSession.deleted">Deleted</span></dt>
           <dd>
             <span>{{ chvSession()!.deleted }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvSession.createdBy">Created By</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvSession.startEntryTime">Start Entry Time</span></dt>
           <dd>
-            <span>{{ chvSession()!.createdBy }}</span>
+            <span>{{ chvSession()!.startEntryTime | formatMediumDatetime }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvSession.createdDate">Created Date</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvSession.finishedEntryTime">Finished Entry Time</span></dt>
           <dd>
-            <span>{{ chvSession()!.createdDate | formatMediumDatetime }}</span>
+            <span>{{ chvSession()!.finishedEntryTime | formatMediumDatetime }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.chvSession.lastModifiedBy">Last Modified By</span></dt>
+          <dt><span appTranslate="dataRunClientApp.chvSession.status">Status</span></dt>
           <dd>
-            <span>{{ chvSession()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.chvSession.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ chvSession()!.lastModifiedDate | formatMediumDatetime }}</span>
+            <span [appTranslate]="'dataRunClientApp.SyncableStatus.' + (chvSession()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[chvSession()!.status ?? 'null']
+            }}</span>
           </dd>
           <dt><span appTranslate="dataRunClientApp.chvSession.team">Team</span></dt>
           <dd>
             @if (chvSession()!.team) {
               <div>
                 <a [routerLink]="['/team', chvSession()!.team?.id, 'view']">{{ chvSession()!.team?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.chvSession.activity">Activity</span></dt>
+          <dd>
+            @if (chvSession()!.activity) {
+              <div>
+                <a [routerLink]="['/activity', chvSession()!.activity?.id, 'view']">{{ chvSession()!.activity?.code }}</a>
               </div>
             }
           </dd>

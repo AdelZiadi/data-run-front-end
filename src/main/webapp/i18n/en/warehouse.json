@@ -25,10 +25,6 @@
       "gpsCoordinate": "Gps Coordinate",
       "supervisor": "Supervisor",
       "supervisorMobile": "Supervisor Mobile",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date",
       "activity": "Activity"
     }
   }

@@ -5,8 +5,10 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject, from } from 'rxjs';
 
-import { IPatientInfo } from 'app/entities/patient-info/patient-info.model';
-import { PatientInfoService } from 'app/entities/patient-info/service/patient-info.service';
+import { IAssignment } from 'app/entities/assignment/assignment.model';
+import { AssignmentService } from 'app/entities/assignment/service/assignment.service';
+import { IActivity } from 'app/entities/activity/activity.model';
+import { ActivityService } from 'app/entities/activity/service/activity.service';
 import { ITeam } from 'app/entities/team/team.model';
 import { TeamService } from 'app/entities/team/service/team.service';
 import { IChvRegister } from '../chv-register.model';
@@ -21,7 +23,8 @@ describe('ChvRegister Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let chvRegisterFormService: ChvRegisterFormService;
   let chvRegisterService: ChvRegisterService;
-  let patientInfoService: PatientInfoService;
+  let assignmentService: AssignmentService;
+  let activityService: ActivityService;
   let teamService: TeamService;
 
   beforeEach(() => {
@@ -44,41 +47,64 @@ describe('ChvRegister Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     chvRegisterFormService = TestBed.inject(ChvRegisterFormService);
     chvRegisterService = TestBed.inject(ChvRegisterService);
-    patientInfoService = TestBed.inject(PatientInfoService);
+    assignmentService = TestBed.inject(AssignmentService);
+    activityService = TestBed.inject(ActivityService);
     teamService = TestBed.inject(TeamService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should call PatientInfo query and add missing value', () => {
+    it('Should call Assignment query and add missing value', () => {
       const chvRegister: IChvRegister = { id: 456 };
-      const patient: IPatientInfo = { id: 26116 };
-      chvRegister.patient = patient;
+      const location: IAssignment = { id: 28182 };
+      chvRegister.location = location;
 
-      const patientInfoCollection: IPatientInfo[] = [{ id: 12481 }];
-      jest.spyOn(patientInfoService, 'query').mockReturnValue(of(new HttpResponse({ body: patientInfoCollection })));
-      const additionalPatientInfos = [patient];
-      const expectedCollection: IPatientInfo[] = [...additionalPatientInfos, ...patientInfoCollection];
-      jest.spyOn(patientInfoService, 'addPatientInfoToCollectionIfMissing').mockReturnValue(expectedCollection);
+      const assignmentCollection: IAssignment[] = [{ id: 11236 }];
+      jest.spyOn(assignmentService, 'query').mockReturnValue(of(new HttpResponse({ body: assignmentCollection })));
+      const additionalAssignments = [location];
+      const expectedCollection: IAssignment[] = [...additionalAssignments, ...assignmentCollection];
+      jest.spyOn(assignmentService, 'addAssignmentToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ chvRegister });
       comp.ngOnInit();
 
-      expect(patientInfoService.query).toHaveBeenCalled();
-      expect(patientInfoService.addPatientInfoToCollectionIfMissing).toHaveBeenCalledWith(
-        patientInfoCollection,
-        ...additionalPatientInfos.map(expect.objectContaining),
+      expect(assignmentService.query).toHaveBeenCalled();
+      expect(assignmentService.addAssignmentToCollectionIfMissing).toHaveBeenCalledWith(
+        assignmentCollection,
+        ...additionalAssignments.map(expect.objectContaining),
       );
-      expect(comp.patientInfosSharedCollection).toEqual(expectedCollection);
+      expect(comp.assignmentsSharedCollection).toEqual(expectedCollection);
+    });
+
+    it('Should call Activity query and add missing value', () => {
+      const chvRegister: IChvRegister = { id: 456 };
+      const activity: IActivity = { id: 2824 };
+      chvRegister.activity = activity;
+
+      const activityCollection: IActivity[] = [{ id: 16366 }];
+      jest.spyOn(activityService, 'query').mockReturnValue(of(new HttpResponse({ body: activityCollection })));
+      const additionalActivities = [activity];
+      const expectedCollection: IActivity[] = [...additionalActivities, ...activityCollection];
+      jest.spyOn(activityService, 'addActivityToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ chvRegister });
+      comp.ngOnInit();
+
+      expect(activityService.query).toHaveBeenCalled();
+      expect(activityService.addActivityToCollectionIfMissing).toHaveBeenCalledWith(
+        activityCollection,
+        ...additionalActivities.map(expect.objectContaining),
+      );
+      expect(comp.activitiesSharedCollection).toEqual(expectedCollection);
     });
 
     it('Should call Team query and add missing value', () => {
       const chvRegister: IChvRegister = { id: 456 };
-      const team: ITeam = { id: 15027 };
+      const team: ITeam = { id: 31578 };
       chvRegister.team = team;
 
-      const teamCollection: ITeam[] = [{ id: 17977 }];
+      const teamCollection: ITeam[] = [{ id: 22399 }];
       jest.spyOn(teamService, 'query').mockReturnValue(of(new HttpResponse({ body: teamCollection })));
       const additionalTeams = [team];
       const expectedCollection: ITeam[] = [...additionalTeams, ...teamCollection];
@@ -97,15 +123,18 @@ describe('ChvRegister Management Update Component', () => {
 
     it('Should update editForm', () => {
       const chvRegister: IChvRegister = { id: 456 };
-      const patient: IPatientInfo = { id: 12265 };
-      chvRegister.patient = patient;
-      const team: ITeam = { id: 2850 };
+      const location: IAssignment = { id: 2670 };
+      chvRegister.location = location;
+      const activity: IActivity = { id: 7378 };
+      chvRegister.activity = activity;
+      const team: ITeam = { id: 9788 };
       chvRegister.team = team;
 
       activatedRoute.data = of({ chvRegister });
       comp.ngOnInit();
 
-      expect(comp.patientInfosSharedCollection).toContain(patient);
+      expect(comp.assignmentsSharedCollection).toContain(location);
+      expect(comp.activitiesSharedCollection).toContain(activity);
       expect(comp.teamsSharedCollection).toContain(team);
       expect(comp.chvRegister).toEqual(chvRegister);
     });
@@ -180,13 +209,23 @@ describe('ChvRegister Management Update Component', () => {
   });
 
   describe('Compare relationships', () => {
-    describe('comparePatientInfo', () => {
-      it('Should forward to patientInfoService', () => {
+    describe('compareAssignment', () => {
+      it('Should forward to assignmentService', () => {
         const entity = { id: 123 };
         const entity2 = { id: 456 };
-        jest.spyOn(patientInfoService, 'comparePatientInfo');
-        comp.comparePatientInfo(entity, entity2);
-        expect(patientInfoService.comparePatientInfo).toHaveBeenCalledWith(entity, entity2);
+        jest.spyOn(assignmentService, 'compareAssignment');
+        comp.compareAssignment(entity, entity2);
+        expect(assignmentService.compareAssignment).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
+    describe('compareActivity', () => {
+      it('Should forward to activityService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(activityService, 'compareActivity');
+        comp.compareActivity(entity, entity2);
+        expect(activityService.compareActivity).toHaveBeenCalledWith(entity, entity2);
       });
     });
 

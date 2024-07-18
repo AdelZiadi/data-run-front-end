@@ -1,0 +1,190 @@
+<div>
+  <h2 id="page-heading" data-cy="TeamFormAccessHeading">
+    <span appTranslate="dataRunClientApp.teamFormAccess.home.title">Team Form Accesses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.teamFormAccess.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-team-form-access"
+        [routerLink]="['/team-form-access/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.teamFormAccess.home.createLabel">Create a new Team Form Access</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (teamFormAccesses?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.teamFormAccess.home.notFound">No Team Form Accesses found</span>
+    </div>
+  }
+
+  @if (teamFormAccesses && teamFormAccesses.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="sessionDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.sessionDate">Session Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="subject">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.subject">Subject</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="sessions">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.sessions">Sessions</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="people">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.people">People</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="comment">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.comment">Comment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="deleted">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.deleted">Deleted</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="startEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.startEntryTime">Start Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="finishedEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.finishedEntryTime">Finished Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="status">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.teamFormAccess.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (teamFormAccess of teamFormAccesses; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/team-form-access', teamFormAccess.id, 'view']">{{ teamFormAccess.id }}</a>
+              </td>
+              <td>{{ teamFormAccess.uid }}</td>
+              <td>{{ teamFormAccess.code }}</td>
+              <td>{{ teamFormAccess.name }}</td>
+              <td>{{ teamFormAccess.sessionDate | formatMediumDatetime }}</td>
+              <td [appTranslate]="'dataRunClientApp.MSessionSubject.' + (teamFormAccess.subject ?? 'null')">
+                {{
+                  { null: '', ITNs: 'ITNs', BreadingSite: 'BreadingSite', TRANSMISSION_PREVENTION: 'TRANSMISSION_PREVENTION' }[
+                    teamFormAccess.subject ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ teamFormAccess.sessions }}</td>
+              <td>{{ teamFormAccess.people }}</td>
+              <td>{{ teamFormAccess.comment }}</td>
+              <td>{{ teamFormAccess.deleted }}</td>
+              <td>{{ teamFormAccess.startEntryTime | formatMediumDatetime }}</td>
+              <td>{{ teamFormAccess.finishedEntryTime | formatMediumDatetime }}</td>
+              <td [appTranslate]="'dataRunClientApp.SyncableStatus.' + (teamFormAccess.status ?? 'null')">
+                {{ { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[teamFormAccess.status ?? 'null'] }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/team-form-access', teamFormAccess.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/team-form-access', teamFormAccess.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(teamFormAccess)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

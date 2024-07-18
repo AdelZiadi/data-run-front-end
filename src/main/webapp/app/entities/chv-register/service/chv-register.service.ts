@@ -11,11 +11,10 @@ import { IChvRegister, NewChvRegister } from '../chv-register.model';
 
 export type PartialUpdateChvRegister = Partial<IChvRegister> & Pick<IChvRegister, 'id'>;
 
-type RestOf<T extends IChvRegister | NewChvRegister> = Omit<T, 'visitDate' | 'startEntryTime' | 'createdDate' | 'lastModifiedDate'> & {
+type RestOf<T extends IChvRegister | NewChvRegister> = Omit<T, 'visitDate' | 'startEntryTime' | 'finishedEntryTime'> & {
   visitDate?: string | null;
   startEntryTime?: string | null;
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
+  finishedEntryTime?: string | null;
 };
 
 export type RestChvRegister = RestOf<IChvRegister>;
@@ -105,8 +104,7 @@ export class ChvRegisterService {
       ...chvRegister,
       visitDate: chvRegister.visitDate?.toJSON() ?? null,
       startEntryTime: chvRegister.startEntryTime?.toJSON() ?? null,
-      createdDate: chvRegister.createdDate?.toJSON() ?? null,
-      lastModifiedDate: chvRegister.lastModifiedDate?.toJSON() ?? null,
+      finishedEntryTime: chvRegister.finishedEntryTime?.toJSON() ?? null,
     };
   }
 
@@ -115,8 +113,7 @@ export class ChvRegisterService {
       ...restChvRegister,
       visitDate: restChvRegister.visitDate ? dayjs(restChvRegister.visitDate) : undefined,
       startEntryTime: restChvRegister.startEntryTime ? dayjs(restChvRegister.startEntryTime) : undefined,
-      createdDate: restChvRegister.createdDate ? dayjs(restChvRegister.createdDate) : undefined,
-      lastModifiedDate: restChvRegister.lastModifiedDate ? dayjs(restChvRegister.lastModifiedDate) : undefined,
+      finishedEntryTime: restChvRegister.finishedEntryTime ? dayjs(restChvRegister.finishedEntryTime) : undefined,
     };
   }
 

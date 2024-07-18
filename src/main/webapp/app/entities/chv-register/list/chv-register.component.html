@@ -63,6 +63,27 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" appSortBy="locationName">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.locationName">Location Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="age">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.age">Age</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="gender">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.chvRegister.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col" appSortBy="visitDate">
               <div class="d-flex">
                 <span appTranslate="dataRunClientApp.chvRegister.visitDate">Visit Date</span>
@@ -105,9 +126,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="comment">
+            <th scope="col" appSortBy="deleted">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.comment">Comment</span>
+                <span appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -119,44 +140,36 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="deleted">
+            <th scope="col" appSortBy="finishedEntryTime">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.deleted">Deleted</span>
+                <span appTranslate="dataRunClientApp.chvRegister.finishedEntryTime">Finished Entry Time</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
+            <th scope="col" appSortBy="comment">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.createdBy">Created By</span>
+                <span appTranslate="dataRunClientApp.chvRegister.comment">Comment</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdDate">
+            <th scope="col" appSortBy="status">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.createdDate">Created Date</span>
+                <span appTranslate="dataRunClientApp.chvRegister.status">Status</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="lastModifiedBy">
+            <th scope="col" appSortBy="location.code">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.lastModifiedBy">Last Modified By</span>
-
+                <span appTranslate="dataRunClientApp.chvRegister.location">Location</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="lastModifiedDate">
+            <th scope="col" appSortBy="activity.code">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.lastModifiedDate">Last Modified Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="patient.name">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.chvRegister.patient">Patient</span>
+                <span appTranslate="dataRunClientApp.chvRegister.activity">Activity</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -178,6 +191,11 @@
               <td>{{ chvRegister.uid }}</td>
               <td>{{ chvRegister.code }}</td>
               <td>{{ chvRegister.name }}</td>
+              <td>{{ chvRegister.locationName }}</td>
+              <td>{{ chvRegister.age }}</td>
+              <td [appTranslate]="'dataRunClientApp.Gender.' + (chvRegister.gender ?? 'null')">
+                {{ { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[chvRegister.gender ?? 'null'] }}
+              </td>
               <td>{{ chvRegister.visitDate | formatMediumDatetime }}</td>
               <td>{{ chvRegister.pregnant }}</td>
               <td [appTranslate]="'dataRunClientApp.MTestResult.' + (chvRegister.testResult ?? 'null')">
@@ -194,17 +212,24 @@
               <td [appTranslate]="'dataRunClientApp.MTreatment.' + (chvRegister.treatment ?? 'null')">
                 {{ { null: '', TREATED: 'TREATED', FIRSTDOSE: 'FIRSTDOSE', REFERAL: 'REFERAL' }[chvRegister.treatment ?? 'null'] }}
               </td>
-              <td>{{ chvRegister.comment }}</td>
-              <td>{{ chvRegister.startEntryTime | formatMediumDatetime }}</td>
               <td>{{ chvRegister.deleted }}</td>
-              <td>{{ chvRegister.createdBy }}</td>
-              <td>{{ chvRegister.createdDate | formatMediumDatetime }}</td>
-              <td>{{ chvRegister.lastModifiedBy }}</td>
-              <td>{{ chvRegister.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>{{ chvRegister.startEntryTime | formatMediumDatetime }}</td>
+              <td>{{ chvRegister.finishedEntryTime | formatMediumDatetime }}</td>
+              <td>{{ chvRegister.comment }}</td>
+              <td [appTranslate]="'dataRunClientApp.SyncableStatus.' + (chvRegister.status ?? 'null')">
+                {{ { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[chvRegister.status ?? 'null'] }}
+              </td>
               <td>
-                @if (chvRegister.patient) {
+                @if (chvRegister.location) {
                   <div>
-                    <a [routerLink]="['/patient-info', chvRegister.patient.id, 'view']">{{ chvRegister.patient.name }}</a>
+                    <a [routerLink]="['/assignment', chvRegister.location.id, 'view']">{{ chvRegister.location.code }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (chvRegister.activity) {
+                  <div>
+                    <a [routerLink]="['/activity', chvRegister.activity.id, 'view']">{{ chvRegister.activity.code }}</a>
                   </div>
                 }
               </td>

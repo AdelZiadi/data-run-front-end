@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-
-import dayjs from 'dayjs/esm';
+import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -10,17 +8,6 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { IProgressStatus, NewProgressStatus } from '../progress-status.model';
 
 export type PartialUpdateProgressStatus = Partial<IProgressStatus> & Pick<IProgressStatus, 'id'>;
-
-type RestOf<T extends IProgressStatus | NewProgressStatus> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-export type RestProgressStatus = RestOf<IProgressStatus>;
-
-export type NewRestProgressStatus = RestOf<NewProgressStatus>;
-
-export type PartialUpdateRestProgressStatus = RestOf<PartialUpdateProgressStatus>;
 
 export type EntityResponseType = HttpResponse<IProgressStatus>;
 export type EntityArrayResponseType = HttpResponse<IProgressStatus[]>;
@@ -33,37 +20,28 @@ export class ProgressStatusService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/progress-statuses');
 
   create(progressStatus: NewProgressStatus): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(progressStatus);
-    return this.http
-      .post<RestProgressStatus>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.post<IProgressStatus>(this.resourceUrl, progressStatus, { observe: 'response' });
   }
 
   update(progressStatus: IProgressStatus): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(progressStatus);
-    return this.http
-      .put<RestProgressStatus>(`${this.resourceUrl}/${this.getProgressStatusIdentifier(progressStatus)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.put<IProgressStatus>(`${this.resourceUrl}/${this.getProgressStatusIdentifier(progressStatus)}`, progressStatus, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(progressStatus: PartialUpdateProgressStatus): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(progressStatus);
-    return this.http
-      .patch<RestProgressStatus>(`${this.resourceUrl}/${this.getProgressStatusIdentifier(progressStatus)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.patch<IProgressStatus>(`${this.resourceUrl}/${this.getProgressStatusIdentifier(progressStatus)}`, progressStatus, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http
-      .get<RestProgressStatus>(`${this.resourceUrl}/${id}`, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.get<IProgressStatus>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http
-      .get<RestProgressStatus[]>(this.resourceUrl, { params: options, observe: 'response' })
-      .pipe(map(res => this.convertResponseArrayFromServer(res)));
+    return this.http.get<IProgressStatus[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
@@ -98,35 +76,5 @@ export class ProgressStatusService {
       return [...progressStatusesToAdd, ...progressStatusCollection];
     }
     return progressStatusCollection;
-  }
-
-  protected convertDateFromClient<T extends IProgressStatus | NewProgressStatus | PartialUpdateProgressStatus>(
-    progressStatus: T,
-  ): RestOf<T> {
-    return {
-      ...progressStatus,
-      createdDate: progressStatus.createdDate?.toJSON() ?? null,
-      lastModifiedDate: progressStatus.lastModifiedDate?.toJSON() ?? null,
-    };
-  }
-
-  protected convertDateFromServer(restProgressStatus: RestProgressStatus): IProgressStatus {
-    return {
-      ...restProgressStatus,
-      createdDate: restProgressStatus.createdDate ? dayjs(restProgressStatus.createdDate) : undefined,
-      lastModifiedDate: restProgressStatus.lastModifiedDate ? dayjs(restProgressStatus.lastModifiedDate) : undefined,
-    };
-  }
-
-  protected convertResponseFromServer(res: HttpResponse<RestProgressStatus>): HttpResponse<IProgressStatus> {
-    return res.clone({
-      body: res.body ? this.convertDateFromServer(res.body) : null,
-    });
-  }
-
-  protected convertResponseArrayFromServer(res: HttpResponse<RestProgressStatus[]>): HttpResponse<IProgressStatus[]> {
-    return res.clone({
-      body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
-    });
   }
 }

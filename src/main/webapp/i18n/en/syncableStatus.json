@@ -1,0 +1,9 @@
+{
+  "dataRunClientApp": {
+    "SyncableStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

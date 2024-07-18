@@ -1,0 +1,9 @@
+{
+  "dataRunClientApp": {
+    "SettlementEnum": {
+      "null": "",
+      "RESIDENTS": "RESIDENTS",
+      "IDPSCAMP": "IDPSCAMP"
+    }
+  }
+}

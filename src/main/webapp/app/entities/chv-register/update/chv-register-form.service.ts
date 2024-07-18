@@ -19,41 +19,39 @@ type ChvRegisterFormGroupInput = IChvRegister | PartialWithRequiredKeyOf<NewChvR
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IChvRegister | NewChvRegister> = Omit<T, 'visitDate' | 'startEntryTime' | 'createdDate' | 'lastModifiedDate'> & {
+type FormValueOf<T extends IChvRegister | NewChvRegister> = Omit<T, 'visitDate' | 'startEntryTime' | 'finishedEntryTime'> & {
   visitDate?: string | null;
   startEntryTime?: string | null;
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
+  finishedEntryTime?: string | null;
 };
 
 type ChvRegisterFormRawValue = FormValueOf<IChvRegister>;
 
 type NewChvRegisterFormRawValue = FormValueOf<NewChvRegister>;
 
-type ChvRegisterFormDefaults = Pick<
-  NewChvRegister,
-  'id' | 'visitDate' | 'pregnant' | 'startEntryTime' | 'deleted' | 'createdDate' | 'lastModifiedDate'
->;
+type ChvRegisterFormDefaults = Pick<NewChvRegister, 'id' | 'visitDate' | 'pregnant' | 'deleted' | 'startEntryTime' | 'finishedEntryTime'>;
 
 type ChvRegisterFormGroupContent = {
   id: FormControl<ChvRegisterFormRawValue['id'] | NewChvRegister['id']>;
   uid: FormControl<ChvRegisterFormRawValue['uid']>;
   code: FormControl<ChvRegisterFormRawValue['code']>;
   name: FormControl<ChvRegisterFormRawValue['name']>;
+  locationName: FormControl<ChvRegisterFormRawValue['locationName']>;
+  age: FormControl<ChvRegisterFormRawValue['age']>;
+  gender: FormControl<ChvRegisterFormRawValue['gender']>;
   visitDate: FormControl<ChvRegisterFormRawValue['visitDate']>;
   pregnant: FormControl<ChvRegisterFormRawValue['pregnant']>;
   testResult: FormControl<ChvRegisterFormRawValue['testResult']>;
   detectionType: FormControl<ChvRegisterFormRawValue['detectionType']>;
   severity: FormControl<ChvRegisterFormRawValue['severity']>;
   treatment: FormControl<ChvRegisterFormRawValue['treatment']>;
-  comment: FormControl<ChvRegisterFormRawValue['comment']>;
-  startEntryTime: FormControl<ChvRegisterFormRawValue['startEntryTime']>;
   deleted: FormControl<ChvRegisterFormRawValue['deleted']>;
-  createdBy: FormControl<ChvRegisterFormRawValue['createdBy']>;
-  createdDate: FormControl<ChvRegisterFormRawValue['createdDate']>;
-  lastModifiedBy: FormControl<ChvRegisterFormRawValue['lastModifiedBy']>;
-  lastModifiedDate: FormControl<ChvRegisterFormRawValue['lastModifiedDate']>;
-  patient: FormControl<ChvRegisterFormRawValue['patient']>;
+  startEntryTime: FormControl<ChvRegisterFormRawValue['startEntryTime']>;
+  finishedEntryTime: FormControl<ChvRegisterFormRawValue['finishedEntryTime']>;
+  comment: FormControl<ChvRegisterFormRawValue['comment']>;
+  status: FormControl<ChvRegisterFormRawValue['status']>;
+  location: FormControl<ChvRegisterFormRawValue['location']>;
+  activity: FormControl<ChvRegisterFormRawValue['activity']>;
   team: FormControl<ChvRegisterFormRawValue['team']>;
 };
 
@@ -75,10 +73,15 @@ export class ChvRegisterFormService {
         },
       ),
       uid: new FormControl(chvRegisterRawValue.uid, {
-        validators: [Validators.maxLength(11)],
+        validators: [Validators.required, Validators.maxLength(11)],
       }),
       code: new FormControl(chvRegisterRawValue.code),
-      name: new FormControl(chvRegisterRawValue.name),
+      name: new FormControl(chvRegisterRawValue.name, {
+        validators: [Validators.required],
+      }),
+      locationName: new FormControl(chvRegisterRawValue.locationName),
+      age: new FormControl(chvRegisterRawValue.age),
+      gender: new FormControl(chvRegisterRawValue.gender),
       visitDate: new FormControl(chvRegisterRawValue.visitDate, {
         validators: [Validators.required],
       }),
@@ -87,15 +90,22 @@ export class ChvRegisterFormService {
       detectionType: new FormControl(chvRegisterRawValue.detectionType),
       severity: new FormControl(chvRegisterRawValue.severity),
       treatment: new FormControl(chvRegisterRawValue.treatment),
-      comment: new FormControl(chvRegisterRawValue.comment),
-      startEntryTime: new FormControl(chvRegisterRawValue.startEntryTime),
       deleted: new FormControl(chvRegisterRawValue.deleted),
-      createdBy: new FormControl(chvRegisterRawValue.createdBy),
-      createdDate: new FormControl(chvRegisterRawValue.createdDate),
-      lastModifiedBy: new FormControl(chvRegisterRawValue.lastModifiedBy),
-      lastModifiedDate: new FormControl(chvRegisterRawValue.lastModifiedDate),
-      patient: new FormControl(chvRegisterRawValue.patient),
-      team: new FormControl(chvRegisterRawValue.team),
+      startEntryTime: new FormControl(chvRegisterRawValue.startEntryTime),
+      finishedEntryTime: new FormControl(chvRegisterRawValue.finishedEntryTime),
+      comment: new FormControl(chvRegisterRawValue.comment, {
+        validators: [Validators.maxLength(2000)],
+      }),
+      status: new FormControl(chvRegisterRawValue.status, {
+        validators: [Validators.required],
+      }),
+      location: new FormControl(chvRegisterRawValue.location),
+      activity: new FormControl(chvRegisterRawValue.activity, {
+        validators: [Validators.required],
+      }),
+      team: new FormControl(chvRegisterRawValue.team, {
+        validators: [Validators.required],
+      }),
     });
   }
 
@@ -120,10 +130,9 @@ export class ChvRegisterFormService {
       id: null,
       visitDate: currentTime,
       pregnant: false,
-      startEntryTime: currentTime,
       deleted: false,
-      createdDate: currentTime,
-      lastModifiedDate: currentTime,
+      startEntryTime: currentTime,
+      finishedEntryTime: currentTime,
     };
   }
 
@@ -134,8 +143,7 @@ export class ChvRegisterFormService {
       ...rawChvRegister,
       visitDate: dayjs(rawChvRegister.visitDate, DATE_TIME_FORMAT),
       startEntryTime: dayjs(rawChvRegister.startEntryTime, DATE_TIME_FORMAT),
-      createdDate: dayjs(rawChvRegister.createdDate, DATE_TIME_FORMAT),
-      lastModifiedDate: dayjs(rawChvRegister.lastModifiedDate, DATE_TIME_FORMAT),
+      finishedEntryTime: dayjs(rawChvRegister.finishedEntryTime, DATE_TIME_FORMAT),
     };
   }
 
@@ -146,8 +154,7 @@ export class ChvRegisterFormService {
       ...chvRegister,
       visitDate: chvRegister.visitDate ? chvRegister.visitDate.format(DATE_TIME_FORMAT) : undefined,
       startEntryTime: chvRegister.startEntryTime ? chvRegister.startEntryTime.format(DATE_TIME_FORMAT) : undefined,
-      createdDate: chvRegister.createdDate ? chvRegister.createdDate.format(DATE_TIME_FORMAT) : undefined,
-      lastModifiedDate: chvRegister.lastModifiedDate ? chvRegister.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
+      finishedEntryTime: chvRegister.finishedEntryTime ? chvRegister.finishedEntryTime.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

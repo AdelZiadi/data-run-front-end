@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import dayjs from 'dayjs/esm';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IReviewTeam, NewReviewTeam } from '../review-team.model';
 
 /**
@@ -16,30 +14,14 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ReviewTeamFormGroupInput = IReviewTeam | PartialWithRequiredKeyOf<NewReviewTeam>;
 
-/**
- * Type that converts some properties for forms.
- */
-type FormValueOf<T extends IReviewTeam | NewReviewTeam> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-type ReviewTeamFormRawValue = FormValueOf<IReviewTeam>;
-
-type NewReviewTeamFormRawValue = FormValueOf<NewReviewTeam>;
-
-type ReviewTeamFormDefaults = Pick<NewReviewTeam, 'id' | 'createdDate' | 'lastModifiedDate'>;
+type ReviewTeamFormDefaults = Pick<NewReviewTeam, 'id'>;
 
 type ReviewTeamFormGroupContent = {
-  id: FormControl<ReviewTeamFormRawValue['id'] | NewReviewTeam['id']>;
-  uid: FormControl<ReviewTeamFormRawValue['uid']>;
-  code: FormControl<ReviewTeamFormRawValue['code']>;
-  name: FormControl<ReviewTeamFormRawValue['name']>;
-  user: FormControl<ReviewTeamFormRawValue['user']>;
-  createdBy: FormControl<ReviewTeamFormRawValue['createdBy']>;
-  createdDate: FormControl<ReviewTeamFormRawValue['createdDate']>;
-  lastModifiedBy: FormControl<ReviewTeamFormRawValue['lastModifiedBy']>;
-  lastModifiedDate: FormControl<ReviewTeamFormRawValue['lastModifiedDate']>;
+  id: FormControl<IReviewTeam['id'] | NewReviewTeam['id']>;
+  uid: FormControl<IReviewTeam['uid']>;
+  code: FormControl<IReviewTeam['code']>;
+  name: FormControl<IReviewTeam['name']>;
+  user: FormControl<IReviewTeam['user']>;
 };
 
 export type ReviewTeamFormGroup = FormGroup<ReviewTeamFormGroupContent>;
@@ -47,10 +29,10 @@ export type ReviewTeamFormGroup = FormGroup<ReviewTeamFormGroupContent>;
 @Injectable({ providedIn: 'root' })
 export class ReviewTeamFormService {
   createReviewTeamFormGroup(reviewTeam: ReviewTeamFormGroupInput = { id: null }): ReviewTeamFormGroup {
-    const reviewTeamRawValue = this.convertReviewTeamToReviewTeamRawValue({
+    const reviewTeamRawValue = {
       ...this.getFormDefaults(),
       ...reviewTeam,
-    });
+    };
     return new FormGroup<ReviewTeamFormGroupContent>({
       id: new FormControl(
         { value: reviewTeamRawValue.id, disabled: true },
@@ -60,24 +42,20 @@ export class ReviewTeamFormService {
         },
       ),
       uid: new FormControl(reviewTeamRawValue.uid, {
-        validators: [Validators.maxLength(11)],
+        validators: [Validators.required, Validators.maxLength(11)],
       }),
       code: new FormControl(reviewTeamRawValue.code),
       name: new FormControl(reviewTeamRawValue.name),
       user: new FormControl(reviewTeamRawValue.user),
-      createdBy: new FormControl(reviewTeamRawValue.createdBy),
-      createdDate: new FormControl(reviewTeamRawValue.createdDate),
-      lastModifiedBy: new FormControl(reviewTeamRawValue.lastModifiedBy),
-      lastModifiedDate: new FormControl(reviewTeamRawValue.lastModifiedDate),
     });
   }
 
   getReviewTeam(form: ReviewTeamFormGroup): IReviewTeam | NewReviewTeam {
-    return this.convertReviewTeamRawValueToReviewTeam(form.getRawValue() as ReviewTeamFormRawValue | NewReviewTeamFormRawValue);
+    return form.getRawValue() as IReviewTeam | NewReviewTeam;
   }
 
   resetForm(form: ReviewTeamFormGroup, reviewTeam: ReviewTeamFormGroupInput): void {
-    const reviewTeamRawValue = this.convertReviewTeamToReviewTeamRawValue({ ...this.getFormDefaults(), ...reviewTeam });
+    const reviewTeamRawValue = { ...this.getFormDefaults(), ...reviewTeam };
     form.reset(
       {
         ...reviewTeamRawValue,
@@ -87,32 +65,8 @@ export class ReviewTeamFormService {
   }
 
   private getFormDefaults(): ReviewTeamFormDefaults {
-    const currentTime = dayjs();
-
     return {
       id: null,
-      createdDate: currentTime,
-      lastModifiedDate: currentTime,
-    };
-  }
-
-  private convertReviewTeamRawValueToReviewTeam(
-    rawReviewTeam: ReviewTeamFormRawValue | NewReviewTeamFormRawValue,
-  ): IReviewTeam | NewReviewTeam {
-    return {
-      ...rawReviewTeam,
-      createdDate: dayjs(rawReviewTeam.createdDate, DATE_TIME_FORMAT),
-      lastModifiedDate: dayjs(rawReviewTeam.lastModifiedDate, DATE_TIME_FORMAT),
-    };
-  }
-
-  private convertReviewTeamToReviewTeamRawValue(
-    reviewTeam: IReviewTeam | (Partial<NewReviewTeam> & ReviewTeamFormDefaults),
-  ): ReviewTeamFormRawValue | PartialWithRequiredKeyOf<NewReviewTeamFormRawValue> {
-    return {
-      ...reviewTeam,
-      createdDate: reviewTeam.createdDate ? reviewTeam.createdDate.format(DATE_TIME_FORMAT) : undefined,
-      lastModifiedDate: reviewTeam.lastModifiedDate ? reviewTeam.lastModifiedDate.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

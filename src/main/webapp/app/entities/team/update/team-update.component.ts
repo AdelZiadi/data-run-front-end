@@ -15,6 +15,7 @@ import { IWarehouse } from 'app/entities/warehouse/warehouse.model';
 import { WarehouseService } from 'app/entities/warehouse/service/warehouse.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/service/user.service';
+import { TeamType } from 'app/entities/enumerations/team-type.model';
 import { TeamService } from '../service/team.service';
 import { ITeam } from '../team.model';
 import { TeamFormService, TeamFormGroup } from './team-form.service';
@@ -28,6 +29,7 @@ import { TeamFormService, TeamFormGroup } from './team-form.service';
 export class TeamUpdateComponent implements OnInit {
   isSaving = false;
   team: ITeam | null = null;
+  teamTypeValues = Object.keys(TeamType);
 
   activitiesSharedCollection: IActivity[] = [];
   reviewTeamsSharedCollection: IReviewTeam[] = [];

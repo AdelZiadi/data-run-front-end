@@ -166,18 +166,6 @@
               <li>
                 <a
                   class="dropdown-item"
-                  routerLink="/patient-info"
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  (click)="collapseNavbar()"
-                >
-                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                  <span appTranslate="global.menu.entities.patientInfo">Patient Info</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="dropdown-item"
                   routerLink="/chv-session"
                   routerLinkActive="active"
                   [routerLinkActiveOptions]="{ exact: true }"
@@ -185,6 +173,42 @@
                 >
                   <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                   <span appTranslate="global.menu.entities.chvSession">Chv Session</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/itns-village"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span appTranslate="global.menu.entities.itnsVillage">Itns Village</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/itns-village-houses-detail"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span appTranslate="global.menu.entities.itnsVillageHousesDetail">Itns Village Houses Detail</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/warehouse-transaction"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span appTranslate="global.menu.entities.warehouseTransaction">Warehouse Transaction</span>
                 </a>
               </li>
               <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

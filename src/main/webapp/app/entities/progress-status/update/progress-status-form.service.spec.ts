@@ -23,10 +23,6 @@ describe('ProgressStatus Form Service', () => {
             uid: expect.any(Object),
             code: expect.any(Object),
             name: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdDate: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            lastModifiedDate: expect.any(Object),
           }),
         );
       });
@@ -40,10 +36,6 @@ describe('ProgressStatus Form Service', () => {
             uid: expect.any(Object),
             code: expect.any(Object),
             name: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdDate: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            lastModifiedDate: expect.any(Object),
           }),
         );
       });

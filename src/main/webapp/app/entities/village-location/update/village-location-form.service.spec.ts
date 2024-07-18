@@ -38,10 +38,6 @@ describe('VillageLocation Form Service', () => {
             latitude: expect.any(Object),
             ppcCodeGis: expect.any(Object),
             level: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdDate: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            lastModifiedDate: expect.any(Object),
           }),
         );
       });
@@ -70,10 +66,6 @@ describe('VillageLocation Form Service', () => {
             latitude: expect.any(Object),
             ppcCodeGis: expect.any(Object),
             level: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdDate: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            lastModifiedDate: expect.any(Object),
           }),
         );
       });

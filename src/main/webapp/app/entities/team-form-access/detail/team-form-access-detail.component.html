@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (teamFormAccess()) {
+      <div>
+        <h2 data-cy="teamFormAccessDetailsHeading">
+          <span appTranslate="dataRunClientApp.teamFormAccess.detail.title">Team Form Access</span>
+        </h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.uid">Uid</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.code">Code</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.name">Name</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.sessionDate">Session Date</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.sessionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.subject">Subject</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.MSessionSubject.' + (teamFormAccess()!.subject ?? 'null')">{{
+              { null: '', ITNs: 'ITNs', BreadingSite: 'BreadingSite', TRANSMISSION_PREVENTION: 'TRANSMISSION_PREVENTION' }[
+                teamFormAccess()!.subject ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.sessions">Sessions</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.sessions }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.people">People</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.people }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.comment">Comment</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.comment }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.deleted }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.startEntryTime">Start Entry Time</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.startEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.finishedEntryTime">Finished Entry Time</span></dt>
+          <dd>
+            <span>{{ teamFormAccess()!.finishedEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.teamFormAccess.status">Status</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.SyncableStatus.' + (teamFormAccess()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[teamFormAccess()!.status ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/team-form-access', teamFormAccess()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

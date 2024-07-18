@@ -1,0 +1,182 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (itnsVillage()) {
+      <div>
+        <h2 data-cy="itnsVillageDetailsHeading"><span appTranslate="dataRunClientApp.itnsVillage.detail.title">Itns Village</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.uid">Uid</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.uid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.code">Code</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.code }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.name">Name</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.name }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.submissionUuid">Submission Uuid</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.submissionUuid }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.submissionId">Submission Id</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.submissionId }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.workDayDate">Work Day Date</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.workDayDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.surveytype">Surveytype</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.SurveyTypeEnum.' + (itnsVillage()!.surveytype ?? 'null')">{{
+              { null: '', ACTUALREPORT: 'ACTUALREPORT', TESTREPORT: 'TESTREPORT' }[itnsVillage()!.surveytype ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.otherReasonComment">Other Reason Comment</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.otherReasonComment }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.reasonNotcomplete">Reason Notcomplete</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.reasonNotcomplete }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.settlement">Settlement</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.SettlementEnum.' + (itnsVillage()!.settlement ?? 'null')">{{
+              { null: '', RESIDENTS: 'RESIDENTS', IDPSCAMP: 'IDPSCAMP' }[itnsVillage()!.settlement ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.settlementName">Settlement Name</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.settlementName }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.tlCommenet">Tl Commenet</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.tlCommenet }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.timeSpentHours">Time Spent Hours</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.timeSpentHours }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.timeSpentMinutes">Time Spent Minutes</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.timeSpentMinutes }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.difficulties">Difficulties</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.difficulties }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.locationCaptured">Location Captured</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.locationCaptured }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.locationCaptureTime">Location Capture Time</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.locationCaptureTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.hoProof">Ho Proof</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.hoProof }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.hoProofUrl">Ho Proof Url</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.hoProofUrl }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.submissionTime">Submission Time</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.submissionTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.untargetingOtherSpecify">Untargeting Other Specify</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.untargetingOtherSpecify }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.otherVillageName">Other Village Name</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.otherVillageName }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.otherVillageCode">Other Village Code</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.otherVillageCode }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.otherTeamNo">Other Team No</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.otherTeamNo }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.startEntryTime">Start Entry Time</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.startEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.finishedEntryTime">Finished Entry Time</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.finishedEntryTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.deleted">Deleted</span></dt>
+          <dd>
+            <span>{{ itnsVillage()!.deleted }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.status">Status</span></dt>
+          <dd>
+            <span [appTranslate]="'dataRunClientApp.SyncableStatus.' + (itnsVillage()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[itnsVillage()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.progressStatus">Progress Status</span></dt>
+          <dd>
+            @if (itnsVillage()!.progressStatus) {
+              <div>
+                <a [routerLink]="['/progress-status', itnsVillage()!.progressStatus?.id, 'view']">{{
+                  itnsVillage()!.progressStatus?.name
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.team">Team</span></dt>
+          <dd>
+            @if (itnsVillage()!.team) {
+              <div>
+                <a [routerLink]="['/team', itnsVillage()!.team?.id, 'view']">{{ itnsVillage()!.team?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.assignment">Assignment</span></dt>
+          <dd>
+            @if (itnsVillage()!.assignment) {
+              <div>
+                <a [routerLink]="['/assignment', itnsVillage()!.assignment?.id, 'view']">{{ itnsVillage()!.assignment?.code }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span appTranslate="dataRunClientApp.itnsVillage.activity">Activity</span></dt>
+          <dd>
+            @if (itnsVillage()!.activity) {
+              <div>
+                <a [routerLink]="['/activity', itnsVillage()!.activity?.id, 'view']">{{ itnsVillage()!.activity?.code }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/itns-village', itnsVillage()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

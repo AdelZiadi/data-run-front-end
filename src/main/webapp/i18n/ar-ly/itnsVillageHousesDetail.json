@@ -1,0 +1,40 @@
+{
+  "dataRunClientApp": {
+    "itnsVillageHousesDetail": {
+      "home": {
+        "title": "Itns Village Houses Details",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Itns Village Houses Detail",
+        "createOrEditLabel": "Create or edit a Itns Village Houses Detail",
+        "notFound": "No Itns Village Houses Details found"
+      },
+      "created": "A new Itns Village Houses Detail is created with identifier {{ param }}",
+      "updated": "A Itns Village Houses Detail is updated with identifier {{ param }}",
+      "deleted": "A Itns Village Houses Detail is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Itns Village Houses Detail {{ id }}?"
+      },
+      "detail": {
+        "title": "Itns Village Houses Detail"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "couponId": "Coupon Id",
+      "name": "Name",
+      "male": "Male",
+      "female": "Female",
+      "pregnant": "Pregnant",
+      "population": "Population",
+      "maleChild": "Male Child",
+      "femaleChild": "Female Child",
+      "displaced": "Displaced",
+      "itns": "Itns",
+      "comment": "Comment",
+      "submissionUuid": "Submission Uuid",
+      "houseUuid": "House Uuid",
+      "deleted": "Deleted",
+      "itnsVillage": "Itns Village"
+    }
+  }
+}

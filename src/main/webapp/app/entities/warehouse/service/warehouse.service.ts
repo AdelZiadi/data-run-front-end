@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-
-import dayjs from 'dayjs/esm';
+import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -10,17 +8,6 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { IWarehouse, NewWarehouse } from '../warehouse.model';
 
 export type PartialUpdateWarehouse = Partial<IWarehouse> & Pick<IWarehouse, 'id'>;
-
-type RestOf<T extends IWarehouse | NewWarehouse> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-export type RestWarehouse = RestOf<IWarehouse>;
-
-export type NewRestWarehouse = RestOf<NewWarehouse>;
-
-export type PartialUpdateRestWarehouse = RestOf<PartialUpdateWarehouse>;
 
 export type EntityResponseType = HttpResponse<IWarehouse>;
 export type EntityArrayResponseType = HttpResponse<IWarehouse[]>;
@@ -33,37 +20,24 @@ export class WarehouseService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/warehouses');
 
   create(warehouse: NewWarehouse): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(warehouse);
-    return this.http
-      .post<RestWarehouse>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.post<IWarehouse>(this.resourceUrl, warehouse, { observe: 'response' });
   }
 
   update(warehouse: IWarehouse): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(warehouse);
-    return this.http
-      .put<RestWarehouse>(`${this.resourceUrl}/${this.getWarehouseIdentifier(warehouse)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.put<IWarehouse>(`${this.resourceUrl}/${this.getWarehouseIdentifier(warehouse)}`, warehouse, { observe: 'response' });
   }
 
   partialUpdate(warehouse: PartialUpdateWarehouse): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(warehouse);
-    return this.http
-      .patch<RestWarehouse>(`${this.resourceUrl}/${this.getWarehouseIdentifier(warehouse)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.patch<IWarehouse>(`${this.resourceUrl}/${this.getWarehouseIdentifier(warehouse)}`, warehouse, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http
-      .get<RestWarehouse>(`${this.resourceUrl}/${id}`, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.get<IWarehouse>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http
-      .get<RestWarehouse[]>(this.resourceUrl, { params: options, observe: 'response' })
-      .pipe(map(res => this.convertResponseArrayFromServer(res)));
+    return this.http.get<IWarehouse[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
@@ -96,33 +70,5 @@ export class WarehouseService {
       return [...warehousesToAdd, ...warehouseCollection];
     }
     return warehouseCollection;
-  }
-
-  protected convertDateFromClient<T extends IWarehouse | NewWarehouse | PartialUpdateWarehouse>(warehouse: T): RestOf<T> {
-    return {
-      ...warehouse,
-      createdDate: warehouse.createdDate?.toJSON() ?? null,
-      lastModifiedDate: warehouse.lastModifiedDate?.toJSON() ?? null,
-    };
-  }
-
-  protected convertDateFromServer(restWarehouse: RestWarehouse): IWarehouse {
-    return {
-      ...restWarehouse,
-      createdDate: restWarehouse.createdDate ? dayjs(restWarehouse.createdDate) : undefined,
-      lastModifiedDate: restWarehouse.lastModifiedDate ? dayjs(restWarehouse.lastModifiedDate) : undefined,
-    };
-  }
-
-  protected convertResponseFromServer(res: HttpResponse<RestWarehouse>): HttpResponse<IWarehouse> {
-    return res.clone({
-      body: res.body ? this.convertDateFromServer(res.body) : null,
-    });
-  }
-
-  protected convertResponseArrayFromServer(res: HttpResponse<RestWarehouse[]>): HttpResponse<IWarehouse[]> {
-    return res.clone({
-      body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
-    });
   }
 }

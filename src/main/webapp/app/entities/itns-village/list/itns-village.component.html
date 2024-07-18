@@ -1,0 +1,379 @@
+<div>
+  <h2 id="page-heading" data-cy="ItnsVillageHeading">
+    <span appTranslate="dataRunClientApp.itnsVillage.home.title">Itns Villages</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.itnsVillage.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-itns-village"
+        [routerLink]="['/itns-village/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.itnsVillage.home.createLabel">Create a new Itns Village</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (itnsVillages?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.itnsVillage.home.notFound">No Itns Villages found</span>
+    </div>
+  }
+
+  @if (itnsVillages && itnsVillages.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="submissionUuid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.submissionUuid">Submission Uuid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="submissionId">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.submissionId">Submission Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="workDayDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.workDayDate">Work Day Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="surveytype">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.surveytype">Surveytype</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="otherReasonComment">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.otherReasonComment">Other Reason Comment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="reasonNotcomplete">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.reasonNotcomplete">Reason Notcomplete</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="settlement">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.settlement">Settlement</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="settlementName">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.settlementName">Settlement Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="tlCommenet">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.tlCommenet">Tl Commenet</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="timeSpentHours">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.timeSpentHours">Time Spent Hours</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="timeSpentMinutes">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.timeSpentMinutes">Time Spent Minutes</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="difficulties">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.difficulties">Difficulties</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="locationCaptured">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.locationCaptured">Location Captured</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="locationCaptureTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.locationCaptureTime">Location Capture Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="hoProof">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.hoProof">Ho Proof</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="hoProofUrl">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.hoProofUrl">Ho Proof Url</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="submissionTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.submissionTime">Submission Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="untargetingOtherSpecify">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.untargetingOtherSpecify">Untargeting Other Specify</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="otherVillageName">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.otherVillageName">Other Village Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="otherVillageCode">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.otherVillageCode">Other Village Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="otherTeamNo">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.otherTeamNo">Other Team No</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="startEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.startEntryTime">Start Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="finishedEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.finishedEntryTime">Finished Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="deleted">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.deleted">Deleted</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="status">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="progressStatus.name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.progressStatus">Progress Status</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="team.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.team">Team</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="assignment.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.assignment">Assignment</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="activity.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.itnsVillage.activity">Activity</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (itnsVillage of itnsVillages; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/itns-village', itnsVillage.id, 'view']">{{ itnsVillage.id }}</a>
+              </td>
+              <td>{{ itnsVillage.uid }}</td>
+              <td>{{ itnsVillage.code }}</td>
+              <td>{{ itnsVillage.name }}</td>
+              <td>{{ itnsVillage.submissionUuid }}</td>
+              <td>{{ itnsVillage.submissionId }}</td>
+              <td>{{ itnsVillage.workDayDate | formatMediumDatetime }}</td>
+              <td [appTranslate]="'dataRunClientApp.SurveyTypeEnum.' + (itnsVillage.surveytype ?? 'null')">
+                {{ { null: '', ACTUALREPORT: 'ACTUALREPORT', TESTREPORT: 'TESTREPORT' }[itnsVillage.surveytype ?? 'null'] }}
+              </td>
+              <td>{{ itnsVillage.otherReasonComment }}</td>
+              <td>{{ itnsVillage.reasonNotcomplete }}</td>
+              <td [appTranslate]="'dataRunClientApp.SettlementEnum.' + (itnsVillage.settlement ?? 'null')">
+                {{ { null: '', RESIDENTS: 'RESIDENTS', IDPSCAMP: 'IDPSCAMP' }[itnsVillage.settlement ?? 'null'] }}
+              </td>
+              <td>{{ itnsVillage.settlementName }}</td>
+              <td>{{ itnsVillage.tlCommenet }}</td>
+              <td>{{ itnsVillage.timeSpentHours }}</td>
+              <td>{{ itnsVillage.timeSpentMinutes }}</td>
+              <td>{{ itnsVillage.difficulties }}</td>
+              <td>{{ itnsVillage.locationCaptured }}</td>
+              <td>{{ itnsVillage.locationCaptureTime | formatMediumDatetime }}</td>
+              <td>{{ itnsVillage.hoProof }}</td>
+              <td>{{ itnsVillage.hoProofUrl }}</td>
+              <td>{{ itnsVillage.submissionTime | formatMediumDatetime }}</td>
+              <td>{{ itnsVillage.untargetingOtherSpecify }}</td>
+              <td>{{ itnsVillage.otherVillageName }}</td>
+              <td>{{ itnsVillage.otherVillageCode }}</td>
+              <td>{{ itnsVillage.otherTeamNo }}</td>
+              <td>{{ itnsVillage.startEntryTime | formatMediumDatetime }}</td>
+              <td>{{ itnsVillage.finishedEntryTime | formatMediumDatetime }}</td>
+              <td>{{ itnsVillage.deleted }}</td>
+              <td [appTranslate]="'dataRunClientApp.SyncableStatus.' + (itnsVillage.status ?? 'null')">
+                {{ { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[itnsVillage.status ?? 'null'] }}
+              </td>
+              <td>
+                @if (itnsVillage.progressStatus) {
+                  <div>
+                    <a [routerLink]="['/progress-status', itnsVillage.progressStatus.id, 'view']">{{ itnsVillage.progressStatus.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (itnsVillage.team) {
+                  <div>
+                    <a [routerLink]="['/team', itnsVillage.team.id, 'view']">{{ itnsVillage.team.code }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (itnsVillage.assignment) {
+                  <div>
+                    <a [routerLink]="['/assignment', itnsVillage.assignment.id, 'view']">{{ itnsVillage.assignment.code }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (itnsVillage.activity) {
+                  <div>
+                    <a [routerLink]="['/activity', itnsVillage.activity.id, 'view']">{{ itnsVillage.activity.code }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/itns-village', itnsVillage.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/itns-village', itnsVillage.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(itnsVillage)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (itnsVillages && itnsVillages.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

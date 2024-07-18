@@ -1,0 +1,66 @@
+{
+  "annotations": {
+    "changelogDate": "20240703203917"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sessionDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "MSessionSubject",
+      "fieldValues": "ITNs,BreadingSite,TRANSMISSION_PREVENTION"
+    },
+    {
+      "fieldName": "sessions",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "people",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deleted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "startEntryTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "finishedEntryTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "SyncableStatus",
+      "fieldValues": "ACTIVE,COMPLETED"
+    }
+  ],
+  "name": "TeamFormAccess",
+  "relationships": [],
+  "service": "serviceImpl"
+}

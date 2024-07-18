@@ -11,11 +11,9 @@ import { IActivity, NewActivity } from '../activity.model';
 
 export type PartialUpdateActivity = Partial<IActivity> & Pick<IActivity, 'id'>;
 
-type RestOf<T extends IActivity | NewActivity> = Omit<T, 'startDate' | 'endDate' | 'createdDate' | 'lastModifiedDate'> & {
+type RestOf<T extends IActivity | NewActivity> = Omit<T, 'startDate' | 'endDate'> & {
   startDate?: string | null;
   endDate?: string | null;
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
 };
 
 export type RestActivity = RestOf<IActivity>;
@@ -105,8 +103,6 @@ export class ActivityService {
       ...activity,
       startDate: activity.startDate?.toJSON() ?? null,
       endDate: activity.endDate?.toJSON() ?? null,
-      createdDate: activity.createdDate?.toJSON() ?? null,
-      lastModifiedDate: activity.lastModifiedDate?.toJSON() ?? null,
     };
   }
 
@@ -115,8 +111,6 @@ export class ActivityService {
       ...restActivity,
       startDate: restActivity.startDate ? dayjs(restActivity.startDate) : undefined,
       endDate: restActivity.endDate ? dayjs(restActivity.endDate) : undefined,
-      createdDate: restActivity.createdDate ? dayjs(restActivity.createdDate) : undefined,
-      lastModifiedDate: restActivity.lastModifiedDate ? dayjs(restActivity.lastModifiedDate) : undefined,
     };
   }
 

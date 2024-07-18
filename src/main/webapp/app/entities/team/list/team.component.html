@@ -91,30 +91,23 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
+            <th scope="col" appSortBy="teamType">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.team.createdBy">Created By</span>
+                <span appTranslate="dataRunClientApp.team.teamType">Team Type</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdDate">
+            <th scope="col" appSortBy="disabled">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.team.createdDate">Created Date</span>
+                <span appTranslate="dataRunClientApp.team.disabled">Disabled</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="lastModifiedBy">
+            <th scope="col" appSortBy="deleteClientData">
               <div class="d-flex">
-                <span appTranslate="dataRunClientApp.team.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.team.lastModifiedDate">Last Modified Date</span>
+                <span appTranslate="dataRunClientApp.team.deleteClientData">Delete Client Data</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -159,10 +152,20 @@
               <td>{{ team.mobile }}</td>
               <td>{{ team.workers }}</td>
               <td>{{ team.mobility }}</td>
-              <td>{{ team.createdBy }}</td>
-              <td>{{ team.createdDate | formatMediumDatetime }}</td>
-              <td>{{ team.lastModifiedBy }}</td>
-              <td>{{ team.lastModifiedDate | formatMediumDatetime }}</td>
+              <td [appTranslate]="'dataRunClientApp.TeamType.' + (team.teamType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    ITNS_DISTRIBUTION: 'ITNS_DISTRIBUTION',
+                    ITNS_WAREHOUSE: 'ITNS_WAREHOUSE',
+                    IRS_DISTRIBUTION: 'IRS_DISTRIBUTION',
+                    IRS_WAREHOUSE: 'IRS_WAREHOUSE',
+                    CHV_PATIENTS: 'CHV_PATIENTS'
+                  }[team.teamType ?? 'null']
+                }}
+              </td>
+              <td>{{ team.disabled }}</td>
+              <td>{{ team.deleteClientData }}</td>
               <td>
                 @if (team.activity) {
                   <div>

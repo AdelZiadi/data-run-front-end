@@ -2,33 +2,30 @@
   "dataRunClientApp": {
     "activity": {
       "home": {
-        "title": "Activities",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Activity",
-        "createOrEditLabel": "Create or edit a Activity",
-        "notFound": "No Activities found"
+        "title": "الأنشطة",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء نشاط جديد",
+        "createOrEditLabel": "إنشاء أو تعديل نشاط",
+        "notFound": "لم يتم العثور على أنشطة"
       },
-      "created": "A new Activity is created with identifier {{ param }}",
-      "updated": "A Activity is updated with identifier {{ param }}",
-      "deleted": "A Activity is deleted with identifier {{ param }}",
+      "created": "تم إنشاء نشاط جديد بالمعرف {{ param }}",
+      "updated": "تم تحديث النشاط بالمعرف {{ param }}",
+      "deleted": "تم حذف النشاط بالمعرف {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Activity {{ id }}?"
+        "question": "هل أنت متأكد أنك تريد حذف النشاط {{ id }}؟"
       },
       "detail": {
-        "title": "Activity"
+        "title": "النشاط"
       },
-      "id": "ID",
-      "uid": "Uid",
-      "code": "Code",
-      "name": "Name",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "active": "Active",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date",
-      "project": "Project"
+      "id": "المعرف",
+      "uid": "الرقم الفريد",
+      "code": "الكود",
+      "name": "الاسم",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "disabled": "معطل",
+      "deleteClientData": "حذف بيانات العميل",
+      "project": "المشروع"
     }
   }
 }

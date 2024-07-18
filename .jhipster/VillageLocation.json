@@ -8,7 +8,7 @@
     {
       "fieldName": "uid",
       "fieldType": "String",
-      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRules": ["required", "unique", "maxlength"],
       "fieldValidateRulesMaxlength": "11"
     },
     {
@@ -81,40 +81,6 @@
       "fieldName": "level",
       "fieldType": "PublicLocationType",
       "fieldValues": "DISTRICT,SUBDISTRICT,SUBVILLAGE"
-    },
-    {
-      "auditField": true,
-      "autoGenerate": true,
-      "columnType": "varchar(50)",
-      "fieldName": "createdBy",
-      "fieldType": "String",
-      "nullable": false,
-      "readonly": true
-    },
-    {
-      "auditField": true,
-      "autoGenerate": true,
-      "fieldName": "createdDate",
-      "fieldType": "Instant",
-      "nullable": false,
-      "readonly": true
-    },
-    {
-      "auditField": true,
-      "autoGenerate": true,
-      "columnType": "varchar(50)",
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String",
-      "nullable": false,
-      "readonly": true
-    },
-    {
-      "auditField": true,
-      "autoGenerate": true,
-      "fieldName": "lastModifiedDate",
-      "fieldType": "Instant",
-      "nullable": false,
-      "readonly": true
     }
   ],
   "name": "VillageLocation",

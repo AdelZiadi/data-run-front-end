@@ -10,8 +10,7 @@ const requireRestSample: RestChvRegister = {
   ...sampleWithRequiredData,
   visitDate: sampleWithRequiredData.visitDate?.toJSON(),
   startEntryTime: sampleWithRequiredData.startEntryTime?.toJSON(),
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
+  finishedEntryTime: sampleWithRequiredData.finishedEntryTime?.toJSON(),
 };
 
 describe('ChvRegister Service', () => {

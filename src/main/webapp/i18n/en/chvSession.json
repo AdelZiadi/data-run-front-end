@@ -26,13 +26,12 @@
       "sessions": "Sessions",
       "people": "People",
       "comment": "Comment",
-      "startEntryTime": "Start Entry Time",
       "deleted": "Deleted",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date",
-      "team": "Team"
+      "startEntryTime": "Start Entry Time",
+      "finishedEntryTime": "Finished Entry Time",
+      "status": "Status",
+      "team": "Team",
+      "activity": "Activity"
     }
   }
 }

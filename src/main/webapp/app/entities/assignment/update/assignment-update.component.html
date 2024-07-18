@@ -24,6 +24,9 @@
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
             <div>
+              @if (editForm.get('uid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
               @if (editForm.get('uid')?.errors?.maxlength) {
                 <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
                   >This field cannot be longer than 11 characters.</small
@@ -165,76 +168,6 @@
           </div>
         </div>
 
-        @if (editForm.controls.createdBy.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_createdBy" appTranslate="dataRunClientApp.assignment.createdBy">Created By</label>
-            <input
-              type="text"
-              class="form-control"
-              name="createdBy"
-              id="field_createdBy"
-              data-cy="createdBy"
-              formControlName="createdBy"
-              [readonly]="true"
-            />
-          </div>
-        }
-
-        @if (editForm.controls.createdDate.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_createdDate" appTranslate="dataRunClientApp.assignment.createdDate">Created Date</label>
-            <div class="d-flex">
-              <input
-                id="field_createdDate"
-                data-cy="createdDate"
-                type="datetime-local"
-                class="form-control"
-                name="createdDate"
-                formControlName="createdDate"
-                placeholder="YYYY-MM-DD HH:mm"
-                [readonly]="true"
-              />
-            </div>
-          </div>
-        }
-
-        @if (editForm.controls.lastModifiedBy.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_lastModifiedBy" appTranslate="dataRunClientApp.assignment.lastModifiedBy"
-              >Last Modified By</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              name="lastModifiedBy"
-              id="field_lastModifiedBy"
-              data-cy="lastModifiedBy"
-              formControlName="lastModifiedBy"
-              [readonly]="true"
-            />
-          </div>
-        }
-
-        @if (editForm.controls.lastModifiedDate.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_lastModifiedDate" appTranslate="dataRunClientApp.assignment.lastModifiedDate"
-              >Last Modified Date</label
-            >
-            <div class="d-flex">
-              <input
-                id="field_lastModifiedDate"
-                data-cy="lastModifiedDate"
-                type="datetime-local"
-                class="form-control"
-                name="lastModifiedDate"
-                formControlName="lastModifiedDate"
-                placeholder="YYYY-MM-DD HH:mm"
-                [readonly]="true"
-              />
-            </div>
-          </div>
-        }
-
         <div class="mb-3">
           <label class="form-label" for="field_activity" appTranslate="dataRunClientApp.assignment.activity">Activity</label>
           <select
@@ -274,12 +207,21 @@
         <div class="mb-3">
           <label class="form-label" for="field_team" appTranslate="dataRunClientApp.assignment.team">Team</label>
           <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team" [compareWith]="compareTeam">
-            <option [ngValue]="null"></option>
+            @if (editForm.get(['team'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
             @for (teamOption of teamsSharedCollection; track $index) {
               <option [ngValue]="teamOption">{{ teamOption.code }}</option>
             }
           </select>
         </div>
+        @if (editForm.get(['team'])!.invalid && (editForm.get(['team'])!.dirty || editForm.get(['team'])!.touched)) {
+          <div>
+            @if (editForm.get(['team'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
 
         <div class="mb-3">
           <label class="form-label" for="field_warehouse" appTranslate="dataRunClientApp.assignment.warehouse">Warehouse</label>

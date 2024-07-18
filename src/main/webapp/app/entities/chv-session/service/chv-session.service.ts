@@ -11,11 +11,10 @@ import { IChvSession, NewChvSession } from '../chv-session.model';
 
 export type PartialUpdateChvSession = Partial<IChvSession> & Pick<IChvSession, 'id'>;
 
-type RestOf<T extends IChvSession | NewChvSession> = Omit<T, 'sessionDate' | 'startEntryTime' | 'createdDate' | 'lastModifiedDate'> & {
+type RestOf<T extends IChvSession | NewChvSession> = Omit<T, 'sessionDate' | 'startEntryTime' | 'finishedEntryTime'> & {
   sessionDate?: string | null;
   startEntryTime?: string | null;
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
+  finishedEntryTime?: string | null;
 };
 
 export type RestChvSession = RestOf<IChvSession>;
@@ -105,8 +104,7 @@ export class ChvSessionService {
       ...chvSession,
       sessionDate: chvSession.sessionDate?.toJSON() ?? null,
       startEntryTime: chvSession.startEntryTime?.toJSON() ?? null,
-      createdDate: chvSession.createdDate?.toJSON() ?? null,
-      lastModifiedDate: chvSession.lastModifiedDate?.toJSON() ?? null,
+      finishedEntryTime: chvSession.finishedEntryTime?.toJSON() ?? null,
     };
   }
 
@@ -115,8 +113,7 @@ export class ChvSessionService {
       ...restChvSession,
       sessionDate: restChvSession.sessionDate ? dayjs(restChvSession.sessionDate) : undefined,
       startEntryTime: restChvSession.startEntryTime ? dayjs(restChvSession.startEntryTime) : undefined,
-      createdDate: restChvSession.createdDate ? dayjs(restChvSession.createdDate) : undefined,
-      lastModifiedDate: restChvSession.lastModifiedDate ? dayjs(restChvSession.lastModifiedDate) : undefined,
+      finishedEntryTime: restChvSession.finishedEntryTime ? dayjs(restChvSession.finishedEntryTime) : undefined,
     };
   }
 

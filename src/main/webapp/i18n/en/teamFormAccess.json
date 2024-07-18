@@ -1,0 +1,35 @@
+{
+  "dataRunClientApp": {
+    "teamFormAccess": {
+      "home": {
+        "title": "Team Form Accesses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Team Form Access",
+        "createOrEditLabel": "Create or edit a Team Form Access",
+        "notFound": "No Team Form Accesses found"
+      },
+      "created": "A new Team Form Access is created with identifier {{ param }}",
+      "updated": "A Team Form Access is updated with identifier {{ param }}",
+      "deleted": "A Team Form Access is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Team Form Access {{ id }}?"
+      },
+      "detail": {
+        "title": "Team Form Access"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "sessionDate": "Session Date",
+      "subject": "Subject",
+      "sessions": "Sessions",
+      "people": "People",
+      "comment": "Comment",
+      "deleted": "Deleted",
+      "startEntryTime": "Start Entry Time",
+      "finishedEntryTime": "Finished Entry Time",
+      "status": "Status"
+    }
+  }
+}

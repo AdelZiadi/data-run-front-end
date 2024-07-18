@@ -1,29 +1,21 @@
-import dayjs from 'dayjs/esm';
-
 import { IProject, NewProject } from './project.model';
 
 export const sampleWithRequiredData: IProject = {
-  id: 29294,
+  id: 28026,
 };
 
 export const sampleWithPartialData: IProject = {
-  id: 17221,
-  displayed: false,
-  createdDate: dayjs('2024-05-22T13:34'),
-  lastModifiedBy: 'verdict',
-  lastModifiedDate: dayjs('2024-05-22T12:12'),
+  id: 1150,
+  uid: 'belt',
+  code: 'oh besides pfft',
 };
 
 export const sampleWithFullData: IProject = {
-  id: 13717,
-  uid: 'sick psst',
-  code: 'now oh',
-  name: 'yum',
-  displayed: false,
-  createdBy: 'instead buttonhole whitewash',
-  createdDate: dayjs('2024-05-22T03:59'),
-  lastModifiedBy: 'comestible',
-  lastModifiedDate: dayjs('2024-05-22T04:52'),
+  id: 29331,
+  uid: 'phew sketch',
+  code: 'though',
+  name: 'gah beside when',
+  disabled: true,
 };
 
 export const sampleWithNewData: NewProject = {

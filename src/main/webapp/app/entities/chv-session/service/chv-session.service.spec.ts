@@ -10,8 +10,7 @@ const requireRestSample: RestChvSession = {
   ...sampleWithRequiredData,
   sessionDate: sampleWithRequiredData.sessionDate?.toJSON(),
   startEntryTime: sampleWithRequiredData.startEntryTime?.toJSON(),
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
+  finishedEntryTime: sampleWithRequiredData.finishedEntryTime?.toJSON(),
 };
 
 describe('ChvSession Service', () => {

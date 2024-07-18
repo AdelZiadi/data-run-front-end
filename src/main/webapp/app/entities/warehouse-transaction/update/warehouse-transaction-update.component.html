@@ -1,0 +1,383 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-warehouse-transaction-heading"
+        data-cy="WarehouseTransactionCreateUpdateHeading"
+        appTranslate="dataRunClientApp.warehouseTransaction.home.createOrEditLabel"
+      >
+        Create or edit a Warehouse Transaction
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="dataRunClientApp.warehouseTransaction.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uid" appTranslate="dataRunClientApp.warehouseTransaction.uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          @if (editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)) {
+            <div>
+              @if (editForm.get('uid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('uid')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '11' }"
+                  >This field cannot be longer than 11 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" appTranslate="dataRunClientApp.warehouseTransaction.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" appTranslate="dataRunClientApp.warehouseTransaction.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_imovUid" appTranslate="dataRunClientApp.warehouseTransaction.imovUid">Imov Uid</label>
+          <input type="text" class="form-control" name="imovUid" id="field_imovUid" data-cy="imovUid" formControlName="imovUid" />
+          @if (editForm.get('imovUid')!.invalid && (editForm.get('imovUid')!.dirty || editForm.get('imovUid')!.touched)) {
+            <div>
+              @if (editForm.get('imovUid')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_transactionDate" appTranslate="dataRunClientApp.warehouseTransaction.transactionDate"
+            >Transaction Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_transactionDate"
+              data-cy="transactionDate"
+              type="datetime-local"
+              class="form-control"
+              name="transactionDate"
+              formControlName="transactionDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('transactionDate')!.invalid && (editForm.get('transactionDate')!.dirty || editForm.get('transactionDate')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('transactionDate')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('transactionDate')?.errors?.datetimelocal"
+                appTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phaseNo" appTranslate="dataRunClientApp.warehouseTransaction.phaseNo">Phase No</label>
+          <input type="number" class="form-control" name="phaseNo" id="field_phaseNo" data-cy="phaseNo" formControlName="phaseNo" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_entryType" appTranslate="dataRunClientApp.warehouseTransaction.entryType">Entry Type</label>
+          <input type="text" class="form-control" name="entryType" id="field_entryType" data-cy="entryType" formControlName="entryType" />
+          @if (editForm.get('entryType')!.invalid && (editForm.get('entryType')!.dirty || editForm.get('entryType')!.touched)) {
+            <div>
+              @if (editForm.get('entryType')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_quantity" appTranslate="dataRunClientApp.warehouseTransaction.quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+          @if (editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)) {
+            <div>
+              @if (editForm.get('quantity')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('quantity')?.errors?.min) {
+                <small class="form-text text-danger" appTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('quantity')?.errors?.number"
+                appTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_notes" appTranslate="dataRunClientApp.warehouseTransaction.notes">Notes</label>
+          <input type="text" class="form-control" name="notes" id="field_notes" data-cy="notes" formControlName="notes" />
+          @if (editForm.get('notes')!.invalid && (editForm.get('notes')!.dirty || editForm.get('notes')!.touched)) {
+            <div>
+              @if (editForm.get('notes')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_personName" appTranslate="dataRunClientApp.warehouseTransaction.personName"
+            >Person Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="personName"
+            id="field_personName"
+            data-cy="personName"
+            formControlName="personName"
+          />
+          @if (editForm.get('personName')!.invalid && (editForm.get('personName')!.dirty || editForm.get('personName')!.touched)) {
+            <div>
+              @if (editForm.get('personName')?.errors?.maxlength) {
+                <small class="form-text text-danger" appTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_workDayId" appTranslate="dataRunClientApp.warehouseTransaction.workDayId">Work Day Id</label>
+          <input type="number" class="form-control" name="workDayId" id="field_workDayId" data-cy="workDayId" formControlName="workDayId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_submissionTime" appTranslate="dataRunClientApp.warehouseTransaction.submissionTime"
+            >Submission Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_submissionTime"
+              data-cy="submissionTime"
+              type="datetime-local"
+              class="form-control"
+              name="submissionTime"
+              formControlName="submissionTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_submissionId" appTranslate="dataRunClientApp.warehouseTransaction.submissionId"
+            >Submission Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="submissionId"
+            id="field_submissionId"
+            data-cy="submissionId"
+            formControlName="submissionId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deleted" appTranslate="dataRunClientApp.warehouseTransaction.deleted">Deleted</label>
+          <input type="checkbox" class="form-check" name="deleted" id="field_deleted" data-cy="deleted" formControlName="deleted" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_submissionUuid" appTranslate="dataRunClientApp.warehouseTransaction.submissionUuid"
+            >Submission Uuid</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="submissionUuid"
+            id="field_submissionUuid"
+            data-cy="submissionUuid"
+            formControlName="submissionUuid"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startEntryTime" appTranslate="dataRunClientApp.warehouseTransaction.startEntryTime"
+            >Start Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startEntryTime"
+              data-cy="startEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="startEntryTime"
+              formControlName="startEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_finishedEntryTime" appTranslate="dataRunClientApp.warehouseTransaction.finishedEntryTime"
+            >Finished Entry Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_finishedEntryTime"
+              data-cy="finishedEntryTime"
+              type="datetime-local"
+              class="form-control"
+              name="finishedEntryTime"
+              formControlName="finishedEntryTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" appTranslate="dataRunClientApp.warehouseTransaction.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'dataRunClientApp.SyncableStatus.null' | translate }}</option>
+            @for (syncableStatus of syncableStatusValues; track $index) {
+              <option [value]="syncableStatus">{{ 'dataRunClientApp.SyncableStatus.' + syncableStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_item" appTranslate="dataRunClientApp.warehouseTransaction.item">Item</label>
+          <select
+            class="form-control"
+            id="field_item"
+            data-cy="item"
+            name="item"
+            formControlName="item"
+            [compareWith]="compareWarehouseItem"
+          >
+            <option [ngValue]="null"></option>
+            @for (warehouseItemOption of warehouseItemsSharedCollection; track $index) {
+              <option [ngValue]="warehouseItemOption">{{ warehouseItemOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sourceWarehouse" appTranslate="dataRunClientApp.warehouseTransaction.sourceWarehouse"
+            >Source Warehouse</label
+          >
+          <select
+            class="form-control"
+            id="field_sourceWarehouse"
+            data-cy="sourceWarehouse"
+            name="sourceWarehouse"
+            formControlName="sourceWarehouse"
+            [compareWith]="compareWarehouse"
+          >
+            <option [ngValue]="null"></option>
+            @for (warehouseOption of warehousesSharedCollection; track $index) {
+              <option [ngValue]="warehouseOption">{{ warehouseOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_team" appTranslate="dataRunClientApp.warehouseTransaction.team">Team</label>
+          <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team" [compareWith]="compareTeam">
+            <option [ngValue]="null"></option>
+            @for (teamOption of teamsSharedCollection; track $index) {
+              <option [ngValue]="teamOption">{{ teamOption.code }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_warehouse" appTranslate="dataRunClientApp.warehouseTransaction.warehouse">Warehouse</label>
+          <select
+            class="form-control"
+            id="field_warehouse"
+            data-cy="warehouse"
+            name="warehouse"
+            formControlName="warehouse"
+            [compareWith]="compareWarehouse"
+          >
+            @if (!editForm.get('warehouse')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (warehouseOption of warehousesSharedCollection; track $index) {
+              <option [ngValue]="warehouseOption">{{ warehouseOption.name }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['warehouse'])!.invalid && (editForm.get(['warehouse'])!.dirty || editForm.get(['warehouse'])!.touched)) {
+          <div>
+            @if (editForm.get(['warehouse'])?.errors?.required) {
+              <small class="form-text text-danger" appTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_activity" appTranslate="dataRunClientApp.warehouseTransaction.activity">Activity</label>
+          <select
+            class="form-control"
+            id="field_activity"
+            data-cy="activity"
+            name="activity"
+            formControlName="activity"
+            [compareWith]="compareActivity"
+          >
+            <option [ngValue]="null"></option>
+            @for (activityOption of activitiesSharedCollection; track $index) {
+              <option [ngValue]="activityOption">{{ activityOption.code }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

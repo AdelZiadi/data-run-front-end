@@ -70,34 +70,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.reviewTeam.createdBy">Created By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="createdDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.reviewTeam.createdDate">Created Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.reviewTeam.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.reviewTeam.lastModifiedDate">Last Modified Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -111,10 +83,6 @@
               <td>{{ reviewTeam.code }}</td>
               <td>{{ reviewTeam.name }}</td>
               <td>{{ reviewTeam.user }}</td>
-              <td>{{ reviewTeam.createdBy }}</td>
-              <td>{{ reviewTeam.createdDate | formatMediumDatetime }}</td>
-              <td>{{ reviewTeam.lastModifiedBy }}</td>
-              <td>{{ reviewTeam.lastModifiedDate | formatMediumDatetime }}</td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/review-team', reviewTeam.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

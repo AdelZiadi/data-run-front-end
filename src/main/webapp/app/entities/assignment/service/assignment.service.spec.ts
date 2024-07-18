@@ -9,8 +9,6 @@ import { AssignmentService, RestAssignment } from './assignment.service';
 const requireRestSample: RestAssignment = {
   ...sampleWithRequiredData,
   startDate: sampleWithRequiredData.startDate?.toJSON(),
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('Assignment Service', () => {

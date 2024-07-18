@@ -70,34 +70,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" appSortBy="createdBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouseItem.createdBy">Created By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="createdDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouseItem.createdDate">Created Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedBy">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouseItem.lastModifiedBy">Last Modified By</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" appSortBy="lastModifiedDate">
-              <div class="d-flex">
-                <span appTranslate="dataRunClientApp.warehouseItem.lastModifiedDate">Last Modified Date</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -111,10 +83,6 @@
               <td>{{ warehouseItem.code }}</td>
               <td>{{ warehouseItem.name }}</td>
               <td>{{ warehouseItem.description }}</td>
-              <td>{{ warehouseItem.createdBy }}</td>
-              <td>{{ warehouseItem.createdDate | formatMediumDatetime }}</td>
-              <td>{{ warehouseItem.lastModifiedBy }}</td>
-              <td>{{ warehouseItem.lastModifiedDate | formatMediumDatetime }}</td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/warehouse-item', warehouseItem.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
@@ -137,6 +105,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (warehouseItems && warehouseItems.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

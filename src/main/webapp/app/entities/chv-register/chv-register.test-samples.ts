@@ -3,46 +3,52 @@ import dayjs from 'dayjs/esm';
 import { IChvRegister, NewChvRegister } from './chv-register.model';
 
 export const sampleWithRequiredData: IChvRegister = {
-  id: 22093,
-  visitDate: dayjs('2024-05-29T15:43'),
+  id: 780,
+  uid: 'criminal gr',
+  name: 'slow',
+  visitDate: dayjs('2024-05-29T11:45'),
+  status: 'COMPLETED',
 };
 
 export const sampleWithPartialData: IChvRegister = {
-  id: 9714,
-  uid: 'creolize fr',
-  code: 'drafty',
-  name: 'trout',
-  visitDate: dayjs('2024-05-28T16:49'),
-  pregnant: false,
-  detectionType: 'REACTIVE',
-  comment: 'when',
+  id: 1473,
+  uid: 'mundane sea',
+  name: 'explain pretest though',
+  visitDate: dayjs('2024-05-29T10:54'),
+  pregnant: true,
+  testResult: 'PV',
   deleted: true,
-  createdBy: 'truncate foam fat',
-  lastModifiedBy: 'at accentuate till',
+  startEntryTime: dayjs('2024-05-28T21:04'),
+  comment: 'whether',
+  status: 'COMPLETED',
 };
 
 export const sampleWithFullData: IChvRegister = {
-  id: 11878,
-  uid: 'creditor pa',
-  code: 'gosh yum',
-  name: 'export',
-  visitDate: dayjs('2024-05-29T10:11'),
+  id: 12064,
+  uid: 'other virtu',
+  code: 'topple brr',
+  name: 'kendo but drat',
+  locationName: 'extinguish interchange down',
+  age: 5198,
+  gender: 'MALE',
+  visitDate: dayjs('2024-05-28T23:14'),
   pregnant: true,
-  testResult: 'PV',
+  testResult: 'INVALID',
   detectionType: 'ACTIVE',
   severity: 'SIMPLE',
   treatment: 'TREATED',
-  comment: 'yuck',
-  startEntryTime: dayjs('2024-05-29T02:44'),
-  deleted: false,
-  createdBy: 'steamroller successfully standpoint',
-  createdDate: dayjs('2024-05-28T18:19'),
-  lastModifiedBy: 'who from',
-  lastModifiedDate: dayjs('2024-05-28T17:16'),
+  deleted: true,
+  startEntryTime: dayjs('2024-05-29T01:30'),
+  finishedEntryTime: dayjs('2024-05-29T09:35'),
+  comment: 'yippee mmm supplement',
+  status: 'ACTIVE',
 };
 
 export const sampleWithNewData: NewChvRegister = {
-  visitDate: dayjs('2024-05-28T19:34'),
+  uid: 'essence hef',
+  name: 'incidentally',
+  visitDate: dayjs('2024-05-29T06:50'),
+  status: 'COMPLETED',
   id: null,
 };
 

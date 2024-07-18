@@ -4,12 +4,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { IProgressStatus } from '../progress-status.model';
 import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../progress-status.test-samples';
 
-import { ProgressStatusService, RestProgressStatus } from './progress-status.service';
+import { ProgressStatusService } from './progress-status.service';
 
-const requireRestSample: RestProgressStatus = {
+const requireRestSample: IProgressStatus = {
   ...sampleWithRequiredData,
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('ProgressStatus Service', () => {

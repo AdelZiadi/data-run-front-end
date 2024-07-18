@@ -4,12 +4,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { IVillageLocation } from '../village-location.model';
 import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../village-location.test-samples';
 
-import { VillageLocationService, RestVillageLocation } from './village-location.service';
+import { VillageLocationService } from './village-location.service';
 
-const requireRestSample: RestVillageLocation = {
+const requireRestSample: IVillageLocation = {
   ...sampleWithRequiredData,
-  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
-  lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('VillageLocation Service', () => {

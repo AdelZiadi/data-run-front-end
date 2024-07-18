@@ -66,6 +66,31 @@ const routes: Routes = [
     data: { pageTitle: 'dataRunClientApp.chvSession.home.title' },
     loadChildren: () => import('./chv-session/chv-session.routes'),
   },
+  {
+    path: 'itns-village',
+    data: { pageTitle: 'dataRunClientApp.itnsVillage.home.title' },
+    loadChildren: () => import('./itns-village/itns-village.routes'),
+  },
+  {
+    path: 'itns-village-houses-detail',
+    data: { pageTitle: 'dataRunClientApp.itnsVillageHousesDetail.home.title' },
+    loadChildren: () => import('./itns-village-houses-detail/itns-village-houses-detail.routes'),
+  },
+  {
+    path: 'warehouse-transaction',
+    data: { pageTitle: 'dataRunClientApp.warehouseTransaction.home.title' },
+    loadChildren: () => import('./warehouse-transaction/warehouse-transaction.routes'),
+  },
+  {
+    path: 'refresh-token',
+    data: { pageTitle: 'dataRunClientApp.refreshToken.home.title' },
+    loadChildren: () => import('./refresh-token/refresh-token.routes'),
+  },
+  {
+    path: 'team-form-access',
+    data: { pageTitle: 'dataRunClientApp.teamFormAccess.home.title' },
+    loadChildren: () => import('./team-form-access/team-form-access.routes'),
+  },
   /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
 ];
 

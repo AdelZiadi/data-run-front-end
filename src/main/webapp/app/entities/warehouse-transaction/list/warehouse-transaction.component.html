@@ -1,0 +1,320 @@
+<div>
+  <h2 id="page-heading" data-cy="WarehouseTransactionHeading">
+    <span appTranslate="dataRunClientApp.warehouseTransaction.home.title">Warehouse Transactions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="dataRunClientApp.warehouseTransaction.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-warehouse-transaction"
+        [routerLink]="['/warehouse-transaction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="dataRunClientApp.warehouseTransaction.home.createLabel">Create a new Warehouse Transaction</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  @if (warehouseTransactions?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="dataRunClientApp.warehouseTransaction.home.notFound">No Warehouse Transactions found</span>
+    </div>
+  }
+
+  @if (warehouseTransactions && warehouseTransactions.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="uid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.uid">Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="imovUid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.imovUid">Imov Uid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="transactionDate">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.transactionDate">Transaction Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="phaseNo">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.phaseNo">Phase No</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="entryType">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.entryType">Entry Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="quantity">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.quantity">Quantity</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="notes">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.notes">Notes</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="personName">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.personName">Person Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="workDayId">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.workDayId">Work Day Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="submissionTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.submissionTime">Submission Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="submissionId">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.submissionId">Submission Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="deleted">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.deleted">Deleted</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="submissionUuid">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.submissionUuid">Submission Uuid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="startEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.startEntryTime">Start Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="finishedEntryTime">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.finishedEntryTime">Finished Entry Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="status">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="item.name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.item">Item</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="sourceWarehouse.name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.sourceWarehouse">Source Warehouse</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="team.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.team">Team</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="warehouse.name">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.warehouse">Warehouse</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="activity.code">
+              <div class="d-flex">
+                <span appTranslate="dataRunClientApp.warehouseTransaction.activity">Activity</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (warehouseTransaction of warehouseTransactions; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/warehouse-transaction', warehouseTransaction.id, 'view']">{{ warehouseTransaction.id }}</a>
+              </td>
+              <td>{{ warehouseTransaction.uid }}</td>
+              <td>{{ warehouseTransaction.code }}</td>
+              <td>{{ warehouseTransaction.name }}</td>
+              <td>{{ warehouseTransaction.imovUid }}</td>
+              <td>{{ warehouseTransaction.transactionDate | formatMediumDatetime }}</td>
+              <td>{{ warehouseTransaction.phaseNo }}</td>
+              <td>{{ warehouseTransaction.entryType }}</td>
+              <td>{{ warehouseTransaction.quantity }}</td>
+              <td>{{ warehouseTransaction.notes }}</td>
+              <td>{{ warehouseTransaction.personName }}</td>
+              <td>{{ warehouseTransaction.workDayId }}</td>
+              <td>{{ warehouseTransaction.submissionTime | formatMediumDatetime }}</td>
+              <td>{{ warehouseTransaction.submissionId }}</td>
+              <td>{{ warehouseTransaction.deleted }}</td>
+              <td>{{ warehouseTransaction.submissionUuid }}</td>
+              <td>{{ warehouseTransaction.startEntryTime | formatMediumDatetime }}</td>
+              <td>{{ warehouseTransaction.finishedEntryTime | formatMediumDatetime }}</td>
+              <td [appTranslate]="'dataRunClientApp.SyncableStatus.' + (warehouseTransaction.status ?? 'null')">
+                {{ { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED' }[warehouseTransaction.status ?? 'null'] }}
+              </td>
+              <td>
+                @if (warehouseTransaction.item) {
+                  <div>
+                    <a [routerLink]="['/warehouse-item', warehouseTransaction.item.id, 'view']">{{ warehouseTransaction.item.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (warehouseTransaction.sourceWarehouse) {
+                  <div>
+                    <a [routerLink]="['/warehouse', warehouseTransaction.sourceWarehouse.id, 'view']">{{
+                      warehouseTransaction.sourceWarehouse.name
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (warehouseTransaction.team) {
+                  <div>
+                    <a [routerLink]="['/team', warehouseTransaction.team.id, 'view']">{{ warehouseTransaction.team.code }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (warehouseTransaction.warehouse) {
+                  <div>
+                    <a [routerLink]="['/warehouse', warehouseTransaction.warehouse.id, 'view']">{{
+                      warehouseTransaction.warehouse.name
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (warehouseTransaction.activity) {
+                  <div>
+                    <a [routerLink]="['/activity', warehouseTransaction.activity.id, 'view']">{{ warehouseTransaction.activity.code }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/warehouse-transaction', warehouseTransaction.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/warehouse-transaction', warehouseTransaction.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(warehouseTransaction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (warehouseTransactions && warehouseTransactions.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

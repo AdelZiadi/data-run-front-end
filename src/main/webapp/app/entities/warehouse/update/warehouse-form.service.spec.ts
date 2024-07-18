@@ -27,10 +27,6 @@ describe('Warehouse Form Service', () => {
             gpsCoordinate: expect.any(Object),
             supervisor: expect.any(Object),
             supervisorMobile: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdDate: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            lastModifiedDate: expect.any(Object),
             activity: expect.any(Object),
           }),
         );
@@ -49,10 +45,6 @@ describe('Warehouse Form Service', () => {
             gpsCoordinate: expect.any(Object),
             supervisor: expect.any(Object),
             supervisorMobile: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdDate: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            lastModifiedDate: expect.any(Object),
             activity: expect.any(Object),
           }),
         );

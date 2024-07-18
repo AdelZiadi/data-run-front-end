@@ -2,47 +2,43 @@
   "dataRunClientApp": {
     "assignment": {
       "home": {
-        "title": "Assignments",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Assignment",
-        "createOrEditLabel": "Create or edit a Assignment",
-        "notFound": "No Assignments found"
+        "title": "التعيينات",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء تعيين جديد",
+        "createOrEditLabel": "إنشاء أو تحرير تعيين",
+        "notFound": "لم يتم العثور على تعيينات"
       },
-      "created": "A new Assignment is created with identifier {{ param }}",
-      "updated": "A Assignment is updated with identifier {{ param }}",
-      "deleted": "A Assignment is deleted with identifier {{ param }}",
+      "created": "تم إنشاء تعيين جديد بالمعرف {{ param }}",
+      "updated": "تم تحديث التعيين بالمعرف {{ param }}",
+      "deleted": "تم حذف التعيين بالمعرف {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Assignment {{ id }}?"
+        "question": "هل أنت متأكد أنك تريد حذف التعيين {{ id }}؟"
       },
       "detail": {
-        "title": "Assignment"
+        "title": "التعيين"
       },
-      "id": "ID",
-      "uid": "Uid",
-      "code": "Code",
-      "phaseNo": "Phase No",
-      "districtCode": "District Code",
-      "gov": "Gov",
-      "district": "District",
-      "subdistrict": "Subdistrict",
-      "village": "Village",
-      "subvillage": "Subvillage",
-      "name": "Name",
-      "dayId": "Day Id",
-      "population": "Population",
-      "itnsPlanned": "Itns Planned",
-      "targetType": "Target Type",
-      "longitude": "Longitude",
-      "latitude": "Latitude",
-      "startDate": "Start Date",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date",
-      "activity": "Activity",
-      "organisationUnit": "Organisation Unit",
-      "team": "Team",
-      "warehouse": "Warehouse"
+      "id": "المعرف",
+      "uid": "معرف المستخدم",
+      "code": "الرمز",
+      "phaseNo": "رقم المرحلة",
+      "districtCode": "رمز المنطقة",
+      "gov": "المحافظة",
+      "district": "المنطقة",
+      "subdistrict": "الناحية",
+      "village": "القرية",
+      "subvillage": "التجمع القروي",
+      "name": "الاسم",
+      "dayId": "معرف اليوم",
+      "population": "عدد السكان",
+      "itnsPlanned": "التخطيطات",
+      "targetType": "نوع الهدف",
+      "longitude": "خط الطول",
+      "latitude": "خط العرض",
+      "startDate": "تاريخ البدء",
+      "activity": "النشاط",
+      "organisationUnit": "المنطقة",
+      "team": "الفريق",
+      "warehouse": "المستودع"
     }
   }
 }

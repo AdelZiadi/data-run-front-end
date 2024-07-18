@@ -91,22 +91,6 @@
               { null: '', DISTRICT: 'DISTRICT', SUBDISTRICT: 'SUBDISTRICT', SUBVILLAGE: 'SUBVILLAGE' }[villageLocation()!.level ?? 'null']
             }}</span>
           </dd>
-          <dt><span appTranslate="dataRunClientApp.villageLocation.createdBy">Created By</span></dt>
-          <dd>
-            <span>{{ villageLocation()!.createdBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.villageLocation.createdDate">Created Date</span></dt>
-          <dd>
-            <span>{{ villageLocation()!.createdDate | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.villageLocation.lastModifiedBy">Last Modified By</span></dt>
-          <dd>
-            <span>{{ villageLocation()!.lastModifiedBy }}</span>
-          </dd>
-          <dt><span appTranslate="dataRunClientApp.villageLocation.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ villageLocation()!.lastModifiedDate | formatMediumDatetime }}</span>
-          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

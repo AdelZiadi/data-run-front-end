@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-
-import dayjs from 'dayjs/esm';
+import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -10,17 +8,6 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { ITeam, NewTeam } from '../team.model';
 
 export type PartialUpdateTeam = Partial<ITeam> & Pick<ITeam, 'id'>;
-
-type RestOf<T extends ITeam | NewTeam> = Omit<T, 'createdDate' | 'lastModifiedDate'> & {
-  createdDate?: string | null;
-  lastModifiedDate?: string | null;
-};
-
-export type RestTeam = RestOf<ITeam>;
-
-export type NewRestTeam = RestOf<NewTeam>;
-
-export type PartialUpdateRestTeam = RestOf<PartialUpdateTeam>;
 
 export type EntityResponseType = HttpResponse<ITeam>;
 export type EntityArrayResponseType = HttpResponse<ITeam[]>;
@@ -33,35 +20,24 @@ export class TeamService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/teams');
 
   create(team: NewTeam): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(team);
-    return this.http.post<RestTeam>(this.resourceUrl, copy, { observe: 'response' }).pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.post<ITeam>(this.resourceUrl, team, { observe: 'response' });
   }
 
   update(team: ITeam): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(team);
-    return this.http
-      .put<RestTeam>(`${this.resourceUrl}/${this.getTeamIdentifier(team)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.put<ITeam>(`${this.resourceUrl}/${this.getTeamIdentifier(team)}`, team, { observe: 'response' });
   }
 
   partialUpdate(team: PartialUpdateTeam): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(team);
-    return this.http
-      .patch<RestTeam>(`${this.resourceUrl}/${this.getTeamIdentifier(team)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.patch<ITeam>(`${this.resourceUrl}/${this.getTeamIdentifier(team)}`, team, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http
-      .get<RestTeam>(`${this.resourceUrl}/${id}`, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.get<ITeam>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http
-      .get<RestTeam[]>(this.resourceUrl, { params: options, observe: 'response' })
-      .pipe(map(res => this.convertResponseArrayFromServer(res)));
+    return this.http.get<ITeam[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
@@ -94,33 +70,5 @@ export class TeamService {
       return [...teamsToAdd, ...teamCollection];
     }
     return teamCollection;
-  }
-
-  protected convertDateFromClient<T extends ITeam | NewTeam | PartialUpdateTeam>(team: T): RestOf<T> {
-    return {
-      ...team,
-      createdDate: team.createdDate?.toJSON() ?? null,
-      lastModifiedDate: team.lastModifiedDate?.toJSON() ?? null,
-    };
-  }
-
-  protected convertDateFromServer(restTeam: RestTeam): ITeam {
-    return {
-      ...restTeam,
-      createdDate: restTeam.createdDate ? dayjs(restTeam.createdDate) : undefined,
-      lastModifiedDate: restTeam.lastModifiedDate ? dayjs(restTeam.lastModifiedDate) : undefined,
-    };
-  }
-
-  protected convertResponseFromServer(res: HttpResponse<RestTeam>): HttpResponse<ITeam> {
-    return res.clone({
-      body: res.body ? this.convertDateFromServer(res.body) : null,
-    });
-  }
-
-  protected convertResponseArrayFromServer(res: HttpResponse<RestTeam[]>): HttpResponse<ITeam[]> {
-    return res.clone({
-      body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
-    });
   }
 }

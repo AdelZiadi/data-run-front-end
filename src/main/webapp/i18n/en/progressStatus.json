@@ -20,11 +20,7 @@
       "id": "ID",
       "uid": "Uid",
       "code": "Code",
-      "name": "Name",
-      "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date"
+      "name": "Name"
     }
   }
 }
