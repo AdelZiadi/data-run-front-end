@@ -23,6 +23,7 @@
         <thead>
           <tr appSort [sortState]="sortState" (sortChange)="transition($event)">
             <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col" appSortBy="uid"><span appTranslate="global.field.uid">UID</span> <fa-icon icon="sort"></fa-icon></th>
             <th scope="col" appSortBy="login"><span appTranslate="userManagement.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
             <th scope="col" appSortBy="email"><span appTranslate="userManagement.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
             <th scope="col"></th>
@@ -48,6 +49,7 @@
               <td>
                 <a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a>
               </td>
+              <td>{{ user.uid }}</td>
               <td>{{ user.login }}</td>
               <td>{{ user.email }}</td>
               <td>

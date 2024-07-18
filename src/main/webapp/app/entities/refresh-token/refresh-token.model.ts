@@ -6,7 +6,7 @@ export interface IRefreshToken {
   uid?: string | null;
   token?: string | null;
   expiryDate?: dayjs.Dayjs | null;
-  user?: Pick<IUser, 'id' | 'login'> | null;
+  user?: Pick<IUser, 'id' | 'uid' | 'login'> | null;
 }
 
 export type NewRefreshToken = Omit<IRefreshToken, 'id'> & { id: null };

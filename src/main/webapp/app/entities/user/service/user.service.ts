@@ -26,15 +26,15 @@ export class UserService {
     return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  getUserIdentifier(user: Pick<IUser, 'id'>): number {
+  getUserIdentifier(user: Pick<IUser, 'id' | 'uid' >): number {
     return user.id;
   }
 
-  compareUser(o1: Pick<IUser, 'id'> | null, o2: Pick<IUser, 'id'> | null): boolean {
+  compareUser(o1: Pick<IUser, 'id' | 'uid' > | null, o2: Pick<IUser, 'id' | 'uid' > | null): boolean {
     return o1 && o2 ? this.getUserIdentifier(o1) === this.getUserIdentifier(o2) : o1 === o2;
   }
 
-  addUserToCollectionIfMissing<Type extends Pick<IUser, 'id'>>(
+  addUserToCollectionIfMissing<Type extends Pick<IUser, 'id' | 'uid' >>(
     userCollection: Type[],
     ...usersToCheck: (Type | null | undefined)[]
   ): Type[] {

@@ -19,7 +19,7 @@ export interface ITeam {
   activity?: IActivity | null;
   operationRoom?: IReviewTeam | null;
   warehouse?: IWarehouse | null;
-  userInfo?: Pick<IUser, 'id' | 'login'> | null;
+  userInfo?: Pick<IUser, 'id' | 'uid' | 'login'> | null;
 }
 
 export type NewTeam = Omit<ITeam, 'id'> & { id: null };
